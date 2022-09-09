@@ -12,15 +12,36 @@ comments: false
 ---
 
 ## Foreword
-<b><a href="https://github.com/tensorops/TransformerX">TransformerX</a></b> is a Python library for building transformer-based models.
+<b><a target="_blank" href="https://github.com/tensorops/TransformerX">TransformerX</a></b> is a Python library for building transformer-based models.
 
 [//]: # (Glad to introduce my personal blog. Possibly, I will share what I read daily about deep learning, robotics, neuroscience, mathematics etc.)
   
 ## About TransformerX
 It provides researchers, students, and professionals with building blocks needed in developing, training, and evaluating transformers and integrates smoothly into Tensorflow (we will add support for Pytorch, and JAX soon). We are actively working on adding more awesome features.
 
+---------------
+
+## Tech stack and contributions
+
+<ul>
+    <li>TensorFlow 2</li>
+    <li>Numpy</li>
+    <li>driven development (TDD)</li>
+    <li>PyTest</li>
+    <li>Sphinx</li>
+    <li>Python</li>
+
+</ul>
+
+----------------
+
 ## Installation
 <pre>$ pip install transformerx</pre>
+
+<br> 
+
+## Keywords
+Deep-learning, Machine-learning, Transformers, Attention mechanisms, Algorithms, python library
 
 [//]: # (I am holding a B.Eng. in computer eng. since 2018 and trying to learn new stuff in the mentioned areas whenever I have free time.)
 [//]: # (During the past few years I've been working on different projects both in the industry and opensource.<br>)
