@@ -2,7 +2,7 @@
 layout: about
 title: About
 permalink: /
-subtitle: Data Science, Machine Learning & Deep Learning, Open Science & Coding, Professional Development
+subtitle: Data Science, Machine Learning & Satatistcal Learning
 profile:
   align: right
   image: me.jpg
