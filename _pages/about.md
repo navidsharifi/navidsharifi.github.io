@@ -2,7 +2,7 @@
 layout: about
 title: About
 permalink: /
-subtitle: _**Data Science Enthusiast**_
+subtitle: _Data Science Enthusiast_
 profile:
   align: right
   image: me.jpg
