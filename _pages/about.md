@@ -2,7 +2,7 @@
 layout: about
 title: About
 permalink: /
-subtitle: Data Science, Machine Learning & Satatistcal Learning
+subtitle: _Data Science, Machine Learning & Statistical Learning_
 profile:
   align: right
   image: me.jpg
@@ -13,15 +13,22 @@ selected_papers: true
 social: true
 ---
 
-I'm a Master’s graduate in Data Science from Allameh Tabataba’i University in Tehran. My academic journey began with a deep exploration of mathematics, igniting a passion for data science that has guided my pursuits over the past two years. My focus has been on unraveling the complexities of data, with a particular interest in statistical learning, machine learning, and especially Bayesian methods and high-dimensional data analysis.
+Greetings, I'm a graduate with a Master's degree in Data Science from Allameh Tabataba’i University, Tehran. My academic path, rooted in mathematics, gradually steered me towards the captivating world of data science. Over the last couple of years, my interest has particularly gravitated towards statistical learning, machine learning, with a focused curiosity in Bayesian methods and the intricacies of high-dimensional data analysis.
 
-My approach to data science extends beyond academic study to the practical application of my skills in addressing real-world challenges. I have contributed to projects aimed at diagnosing health conditions and predicting the spread of infectious diseases through data analysis. In addition to my academic endeavors, I have undertaken freelance work and participated in two international projects, further enhancing the field that has greatly influenced my professional development.
+In the spirit of continuous learning and improvement, I've sought to apply statistical methods to not just understand data but to derive actionable insights that can genuinely contribute to meaningful outcomes. My toolset includes **Python** and **R**, languages in which I've gained significant experience in data analysis, ranging from data cleaning to complex modeling tasks. I've also dabbled in machine learning and deep learning frameworks, notably TensorFlow, which has been an enriching part of my learning journey.
 
-My future research direction will focus on improving the capabilities of machine learning models through:
+The opportunities I've had to work on projects, both independently and as part of international teams, have been instrumental in applying theoretical knowledge to practical challenges. These projects have spanned various domains, including health diagnostics and epidemiology, allowing me to contribute, albeit modestly, to important societal issues.
 
-- Crafting models that learn from data and make intelligent decisions, leveraging advanced statistical machine learning techniques.
-- Enhancing model reliability and performance with statistical algorithms, to ensure accuracy and efficiency in today's fast-paced world.
-- Applying statistical principles to deepen machine learning models' understanding of time series data and anomaly detection, thereby extending the frontiers of predictive analytics.
-- Integrating timeless statistical theories with contemporary machine learning approaches to deliver comprehensive and actionable data insights, effectively bridging the gap between theoretical knowledge and practical application.
+As I look to the future, my goals include:
+- Further developing models that not only learn from data but do so intelligently and efficiently, using the latest in statistical machine learning.
+- Enhancing the reliability and performance of these models to ensure they remain relevant and effective in a rapidly evolving digital landscape.
+- Deepening my understanding of specialized areas like time series analysis and anomaly detection to broaden the scope of my analytical capabilities.
+- Seeking a harmonious blend of statistical theories and machine learning practices to craft solutions that are both innovative and grounded.
 
-I am driven by a dedication to the advancement of data science, keen on exploring the transformative potential of this field to make a significant impact, one dataset at a time. Join me on this journey of discovery and innovation.
+My technical competencies encompass:
+- A strong grounding in **Bayesian inference**, **probabilistic network analysis**, and handling **high-dimensional datasets**.
+- Proficiency in Python for data-centric projects, with hands-on experience in libraries like **Pandas**, **Numpy**, **SciPy**, **Matplotlib**, and **Scikit-learn**.
+- Over two years of practical experience in **data analysis and management** using **R**, along with a knack for creating reproducible research outputs with **RStudio** and **Rmarkdown**.
+- A foundational understanding of statistical methods, complemented by familiarity with **Microsoft Office, LaTeX**, and basic **Linux** and **Shell Scripting** skills.
+
+I approach my work and research with humility, fully aware that every dataset, no matter its size, holds the potential to teach us something new. It's this belief that drives my passion for data science—a field where learning never stops, and the opportunities to make a difference are boundless. I'm eager to continue this journey, learning, growing, and hopefully contributing to our collective understanding and improvement of the world around us.
