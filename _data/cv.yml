@@ -36,10 +36,10 @@
 - title: Research Interests
   type: list
   contents:
-    - Deep learning and Machine learning
-    - Statistical learning
-    - Probabilistic Graphical Modelling
-    - Optimization
+    - • Deep learning and Machine learning
+    - • Statistical learning
+    - • Probabilistic Graphical Modelling
+    - • Optimization
 
 - title: Research Experience
   type: time_table
@@ -53,9 +53,6 @@
     - title: Nonparametric Regression Estimation under Kernel Polynomial Model
       institution: Published, Journal of Statistical Research of Iran
       year: 2022
-    - title: Predicting the Epidemic of Febrile Infectious Diseases
-      institution: In progress, Funded by INEF
-      year: 2021
 
 - title: Awards & Honors
   type: time_table
@@ -73,21 +70,15 @@
 - title: Skills
   type: list
   contents:
-    - skill: R, Python, Linux Shell Scripting, SPSS, MINITAB
-    - skill: Microsoft Office, LaTeX
-
+    - • R programming 
+    - • Python
+    - • SPSS, MINITAB
+    - • Linux Shell Scripting
 - title: Language Skills
   type: list
   contents:
-    - language: English (Upper-Intermediate)
-    - language: Kurdish (Native)
-    - language: French (In progress)
-    - language: Farsi (Fluent)
+    - • English (Upper-Intermediate)
+    - • Kurdish (Native)
+    - • French (In progress)
+    - • Farsi (Fluent)
 
-- title: References
-  type: list
-  contents:
-    - reference: Dr. Bahman Rostami-Tabar, Cardiff University, UK
-    - reference: Dr. Ayub Bokani, Central Queensland University, Australia
-    - reference: Dr. Farzad Eskandari, Allameh Tabataba’i University, Iran
-    - reference: Dr. Vahid Rezaei-Tabar, Allameh Tabataba’i University, Iran
