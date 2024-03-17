@@ -7,27 +7,30 @@
       value: Brest, France
     - name: Email
       value: naderidana@yahoo.com
-    - name: Summary of Qualifications
-      value: Data Science graduate with a passion for study and research. Skilled in machine learning, statistical learning, programming, and creative thinking.
 
 - title: Education
-  type: time_table
+  type: map
   contents:
-    - title: Master degree in Data Science
-      institution: Allameh Tabataba’i University, Tehran, Iran
+    - degree: Master degree in Data Science
       institution: Allameh Tabataba’i University, Tehran, Iran
       year: 2020 - 2023
-    - title: Bachelor degree in Mathematics
+      GPA: 4/out of 4, 17.88/ out of 20
+      thesis: "Application of Learning Dynamic Bayesian Networks in Brain-Machine Interface"
+      comments: "University Overall Average= 16.84, Faculty Overall Average= 16.32, Field Overall Average= 16.82"
+    - degree: Bachelor degree in Mathematics
       institution: Farhangian University, Tehran, Iran
       year: 2013 - 2017
+      GPA: 3.78/out of 4, 17.56/out of 20
+      comments: "University Overall Average=16.53, Field Overall Average not available."
+
 
 - title: Research Interests
   type: list
   contents:
-    - title: Deep learning and Machine learning
-    - title: Statistical learning
-    - title: Probabilistic Graphical Modelling
-    - title: Optimization
+    - interest: Deep learning and Machine learning
+    - interest: Statistical learning
+    - interest: Probabilistic Graphical Modelling
+    - interest: Optimization
 
 - title: Research Experience
   type: time_table
@@ -62,16 +65,21 @@
 - title: Skills
   type: list
   contents:
-    - title: R, Python
-    - title: SPSS, MINITAB
-    - title: Linux Shell Scripting
-    - title: Microsoft Office, LaTeX
+    - skill: R, Python, Linux Shell Scripting, SPSS, MINITAB
+    - skill: Microsoft Office, LaTeX
 
 - title: Language Skills
   type: list
   contents:
-    - title: English (Upper-Intermediate)
-    - title: Kurdish (Native)
-    - title: French (In progress)
-    - title: Farsi (Fluent)
+    - language: English (Upper-Intermediate)
+    - language: Kurdish (Native)
+    - language: French (In progress)
+    - language: Farsi (Fluent)
 
+- title: References
+  type: list
+  contents:
+    - reference: Dr. Bahman Rostami-Tabar, Cardiff University, UK
+    - reference: Dr. Ayub Bokani, Central Queensland University, Australia
+    - reference: Dr. Farzad Eskandari, Allameh Tabataba’i University, Iran
+    - reference: Dr. Vahid Rezaei-Tabar, Allameh Tabataba’i University, Iran
