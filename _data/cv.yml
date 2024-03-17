@@ -8,29 +8,38 @@
     - name: Email
       value: naderidana@yahoo.com
 
+# - title: Education
+#   type: map
+#   contents:
+#     - degree: Master degree in Data Science
+#       institution: Allameh Tabataba’i University, Tehran, Iran
+#       year: 2020 - 2023
+#       GPA: 4/out of 4, 17.88/ out of 20
+#       thesis: "Application of Learning Dynamic Bayesian Networks in Brain-Machine Interface"
+#       comments: "University Overall Average= 16.84, Faculty Overall Average= 16.32, Field Overall Average= 16.82"
+#     - degree: Bachelor degree in Mathematics
+#       institution: Farhangian University, Tehran, Iran
+#       year: 2013 - 2017
+#       GPA: 3.78/out of 4, 17.56/out of 20
+#       comments: "University Overall Average=16.53, Field Overall Average not available."
+
 - title: Education
-  type: map
+  type: time_table
   contents:
-    - degree: Master degree in Data Science
+    - title: Master degree in Data Science
       institution: Allameh Tabataba’i University, Tehran, Iran
       year: 2020 - 2023
-      GPA: 4/out of 4, 17.88/ out of 20
-      thesis: "Application of Learning Dynamic Bayesian Networks in Brain-Machine Interface"
-      comments: "University Overall Average= 16.84, Faculty Overall Average= 16.32, Field Overall Average= 16.82"
-    - degree: Bachelor degree in Mathematics
+    - title: Bachelor degree in Mathematics
       institution: Farhangian University, Tehran, Iran
       year: 2013 - 2017
-      GPA: 3.78/out of 4, 17.56/out of 20
-      comments: "University Overall Average=16.53, Field Overall Average not available."
-
-
+      
 - title: Research Interests
   type: list
   contents:
-    - name: Deep learning and Machine learning
-    - name: Statistical learning
-    - name: Probabilistic Graphical Modelling
-    - name: Optimization
+    - Deep learning and Machine learning
+    - Statistical learning
+    - Probabilistic Graphical Modelling
+    - Optimization
 
 - title: Research Experience
   type: time_table
@@ -49,12 +58,11 @@
       year: 2021
 
 - title: Awards & Honors
-  type: list
+  type: time_table
   contents:
-    - award: Campus France Excellence Scholarship
+    - title: Campus France Excellence Scholarship
+      institution: Funded by the French Ministry of Foreign Affairs for outstanding international students.
       year: 2023-2028
-      details: Funded by the French Ministry of Foreign Affairs for outstanding international students.
-
 - title: Teaching Experience
   type: time_table
   contents:
