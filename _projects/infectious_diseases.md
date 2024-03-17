@@ -2,7 +2,7 @@
 layout: page
 title: Predicting the Epidemic of Febrile Infectious Diseases Based on Pharmacy Data
 description: A joint research project focusing on forecasting the incidence of systemic febrile infectious diseases, including COVID-19, through pharmacy data analysis.
-img: assets/img/sesa_inc.jpg
+img: assets/img/infection.jpg
 importance: 1
 category: science
 ---
