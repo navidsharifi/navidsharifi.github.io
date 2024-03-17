@@ -15,6 +15,7 @@
   contents:
     - title: Master degree in Data Science
       institution: Allameh Tabataba’i University, Tehran, Iran
+      institution: Allameh Tabataba’i University, Tehran, Iran
       year: 2020 - 2023
     - title: Bachelor degree in Mathematics
       institution: Farhangian University, Tehran, Iran
@@ -23,10 +24,10 @@
 - title: Research Interests
   type: list
   contents:
-    - interest: Deep learning and Machine learning
-    - interest: Statistical learning
-    - interest: Probabilistic Graphical Modelling
-    - interest: Optimization
+    - title: Deep learning and Machine learning
+    - title: Statistical learning
+    - title: Probabilistic Graphical Modelling
+    - title: Optimization
 
 - title: Research Experience
   type: time_table
@@ -61,16 +62,16 @@
 - title: Skills
   type: list
   contents:
-    - skill: R, Python
-    - skill: SPSS, MINITAB
-    - skill: Linux Shell Scripting
-    - skill: Microsoft Office, LaTeX
+    - title: R, Python
+    - title: SPSS, MINITAB
+    - title: Linux Shell Scripting
+    - title: Microsoft Office, LaTeX
 
 - title: Language Skills
   type: list
   contents:
-    - language: English (Upper-Intermediate)
-    - language: Kurdish (Native)
-    - language: French (In progress)
-    - language: Farsi (Fluent)
+    - title: English (Upper-Intermediate)
+    - title: Kurdish (Native)
+    - title: French (In progress)
+    - title: Farsi (Fluent)
 
