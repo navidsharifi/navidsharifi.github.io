@@ -27,10 +27,10 @@
 - title: Research Interests
   type: list
   contents:
-    - interest: Deep learning and Machine learning
-    - interest: Statistical learning
-    - interest: Probabilistic Graphical Modelling
-    - interest: Optimization
+    - name: Deep learning and Machine learning
+    - name: Statistical learning
+    - name: Probabilistic Graphical Modelling
+    - name: Optimization
 
 - title: Research Experience
   type: time_table
