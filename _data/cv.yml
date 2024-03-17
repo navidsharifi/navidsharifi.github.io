@@ -36,9 +36,9 @@
 - title: Research Interests
   type: list
   contents:
-    - • Deep learning and Machine learning
-    - • Statistical learning
-    - • Probabilistic Graphical Modelling
+    - • Foundational Machine Learning Techniques
+    - • Statistical Learning and Probabilistic Modelling
+    - • Learning theory
     - • Optimization
 
 - title: Research Experience
