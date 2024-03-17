@@ -5,7 +5,7 @@ permalink: /
 subtitle: _Data Science Enthusiast_
 profile:
   align: right
-  image: me_grey.jpg
+  image: me.jpg
   image_circular: false
   address: >
 news: false
