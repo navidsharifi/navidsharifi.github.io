@@ -3,45 +3,74 @@
   contents:
     - name: Full Name
       value: Dana Naderi
-    - name: Date of Birth
-      value: 18st septembre 1995
-    - name: Languages
-      value: English, French, Kurdish <em>native</em>, Persian
+    - name: Location
+      value: Brest, France
+    - name: Email
+      value: naderidana@yahoo.com
+    - name: Summary of Qualifications
+      value: Data Science graduate with a passion for study and research. Skilled in machine learning, statistical learning, programming, and creative thinking.
 
-# - title: Experience
-#   type: time_table
-#   contents:
-#     - title: Postdoc
-#       institution: Max Planck Institute for Biological Intelligence, Germany
-#       year: 2023 - present
-#     - title: Postdoc
-#       institution: Czech University of Life Sciences Prague, Czechia
-#       year: 2017 - present  
-#     - title: Postdoc
-#       institution: Max Planck Institute for Ornithology, Germany
-#       year: 2019 - 2022
-#     - title: Postdoc
-#       institution: NIOZ Royal Netherlands Institute for Sea Research, the Netherlands
-#       year: 2016 - 2019
+- title: Education
+  type: time_table
+  contents:
+    - title: Master degree in Data Science
+      institution: Allameh Tabataba’i University, Tehran, Iran
+      year: 2020 - 2023
+    - title: Bachelor degree in Mathematics
+      institution: Farhangian University, Tehran, Iran
+      year: 2013 - 2017
 
-# - title: Education
-#   type: time_table
-#   contents:
-#     - title: PhD
-#       institution: Max Planck Institute for Ornithology, Seewiesen
-#       year: 2017
-#     - title: MSc
-#       institution: Uni. of Natural Resources & Applied Life Sciences, Vienna
-#       year: 2010
-#     - title: Mgr
-#       institution: Charles University, Prague
-#       year: 2006
-#     - title: BSc
-#       institution: State University of New York, Prague
-#       year: 2004
-#     - title: Graduation
-#       institution: Gymnasium Arabska, Prague
-#       year: 2000  
-#     - title: Graduation
-#       institution: Kendall Senior High School, United States
-#       year: 1999  
+- title: Research Interests
+  type: list
+  contents:
+    - interest: Deep learning and Machine learning
+    - interest: Statistical learning
+    - interest: Probabilistic Graphical Modelling
+    - interest: Optimization
+
+- title: Research Experience
+  type: time_table
+  contents:
+    - title: Bayesian Penalized Regression in High-Dimensional Data Analysis
+      institution: Joint work, Submitted
+      year: 2023
+    - title: Decoding Neural Signals with Computational Models
+      institution: Joint work, Submitted
+      year: 2023
+    - title: Nonparametric Regression Estimation under Kernel Polynomial Model
+      institution: Published, Journal of Statistical Research of Iran
+      year: 2022
+    - title: Predicting the Epidemic of Febrile Infectious Diseases
+      institution: In progress, Funded by INEF
+      year: 2021
+
+- title: Awards & Honors
+  type: list
+  contents:
+    - award: Campus France Excellence Scholarship
+      year: 2023-2028
+      details: Funded by the French Ministry of Foreign Affairs for outstanding international students.
+
+- title: Teaching Experience
+  type: time_table
+  contents:
+    - title: High-school Mathematics Teacher
+      institution: Education Department, Marivan, Kurdistan, Iran
+      year: 2017 - 2022
+
+- title: Skills
+  type: list
+  contents:
+    - skill: R, Python
+    - skill: SPSS, MINITAB
+    - skill: Linux Shell Scripting
+    - skill: Microsoft Office, LaTeX
+
+- title: Language Skills
+  type: list
+  contents:
+    - language: English (Upper-Intermediate)
+    - language: Kurdish (Native)
+    - language: French (In progress)
+    - language: Farsi (Fluent)
+
