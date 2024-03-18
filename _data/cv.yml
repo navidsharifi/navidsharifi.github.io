@@ -2,83 +2,83 @@
   type: map
   contents:
     - name: Full Name
-      value: Dana Naderi
+      value: Navid Sharifi
     - name: Location
-      value: Brest, France
+      value: Kurdistan, Iran
     - name: Email
-      value: naderidana@yahoo.com
+      value: navid.sharifi72@gmail.com
 
 # - title: Education
 #   type: map
 #   contents:
-#     - degree: Master degree in Data Science
-#       institution: Allameh Tabataba’i University, Tehran, Iran
-#       year: 2020 - 2023
-#       GPA: 4/out of 4, 17.88/ out of 20
-#       thesis: "Application of Learning Dynamic Bayesian Networks in Brain-Machine Interface"
+#     - degree: Master degree in Industrial Engineering
+#       institution: Shahid Beheshti University of Tehran
+#       year: 2019 - 2022
+#       GPA:  16.77/ out of 20
+#       thesis: "Sturtup success prediction using Machine learning and network analysis"
 #       comments: "University Overall Average= 16.84, Faculty Overall Average= 16.32, Field Overall Average= 16.82"
-#     - degree: Bachelor degree in Mathematics
-#       institution: Farhangian University, Tehran, Iran
+#     - degree: Bachelor degree in Industrial Engineering
+#       institution: University of Kurdistan
 #       year: 2013 - 2017
-#       GPA: 3.78/out of 4, 17.56/out of 20
-#       comments: "University Overall Average=16.53, Field Overall Average not available."
+#       GPA: 15.70/out of 20
+#       comments: "University Overall Average=, Field Overall Average not available."
 
 - title: Education
   type: time_table
   contents:
-    - title: Master degree in Data Science
-      institution: Allameh Tabataba’i University, Tehran, Iran
-      year: 2020 - 2023
-    - title: Bachelor degree in Mathematics
-      institution: Farhangian University, Tehran, Iran
+    - title: Master degree in Industrial Engineering (Information Systems)
+      institution: Shahid Beheshti University of Tehran
+      year: 2019 - 2022
+    - title: Bachelor degree in Industrial Engineering
+      institution: University of Kurdistan
       year: 2013 - 2017
       
 - title: Research Interests
   type: list
   contents:
-    - • Foundational Machine Learning Techniques
-    - • Statistical Learning and Probabilistic Modelling
-    - • Learning theory
-    - • Optimization
+    - • Advanced Project Planning
+    - • Financial Risk Management
+    - • Project Management unisg Machine Learning
+    - • Operation Research
 
 - title: Research Experience
   type: time_table
   contents:
-    - title: Bayesian Penalized Regression in High-Dimensional Data Analysis
+    - title: Network analysis for feature selection and startup success prediction
       institution: Joint work, Submitted
       year: 2023
-    - title: Decoding Neural Signals with Computational Models
-      institution: Joint work, Submitted
-      year: 2023
-    - title: Nonparametric Regression Estimation under Kernel Polynomial Model
-      institution: Published, Journal of Statistical Research of Iran
-      year: 2022
+    # - title: Decoding Neural Signals with Computational Models
+      # institution: Joint work, Submitted
+      # year: 2023
+    # - title: Nonparametric Regression Estimation under Kernel Polynomial Model
+      # institution: Published, Journal of Statistical Research of Iran
+      # year: 2022
 
 - title: Awards & Honors
   type: time_table
   contents:
-    - title: Campus France Excellence Scholarship
-      institution: Funded by the French Ministry of Foreign Affairs for outstanding international students.
-      year: 2023-2028
-- title: Teaching Experience
-  type: time_table
-  contents:
-    - title: High-school Mathematics Teacher
-      institution: Education Department, Marivan, Kurdistan, Iran
-      year: 2017 - 2022
+    - title: MIS project management for a hotel system
+      institution: University of Kurdistan - Management Information Systems
+      year: 2017
+    - title: Bologna Business School offer letter for Master of Data Science and Business Analytics
+      year: 2023
+  # type: time_table
+  # contents:
+    # - title: High-school Mathematics Teacher
+      # institution: Education Department, Marivan, Kurdistan, Iran
+      # year: 2017 - 2022
 
 - title: Skills
   type: list
   contents:
-    - • R programming 
-    - • Python
-    - • SPSS, MINITAB
-    - • Linux Shell Scripting
+    - • Power BI 
+    - • Microsoft Project
+    - • Business Process Re-engineering
+    - • Data Mining
 - title: Language Skills
   type: list
   contents:
-    - • English (Upper-Intermediate)
+    - • English (C1)
     - • Kurdish (Native)
-    - • French (In progress)
-    - • Farsi (Fluent)
+    - • Farsi (Full Proficiency)
 
