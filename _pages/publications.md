@@ -1,9 +1,9 @@
 ---
 layout: page
 permalink: /publications/
-title: publications
+title: PUBLICATIONS
 description: 
-years: [2023, 2022, 2020]
+years: [2028, 2027, 2025]
 nav: true
 nav_order: 2
 ---
