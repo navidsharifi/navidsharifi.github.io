@@ -13,20 +13,20 @@ selected_papers: true
 social: true
 ---
 
-I bring a solid background in controlling **EPC** (Engineering, Procurement, and Construction) projects, complemented by a basic understanding of **business analysis** and **process reengineering**. My experience equips me with effective management skills for large-scale site planning. My passion lies in exploring the realms of **project management**, **information systems**, and **business analytics**, seeking innovative approaches to enhance my professional journey
+<div style="text-align: justify;">
 
+<p>I bring a solid background in controlling <strong>EPC</strong> (Engineering, Procurement, and Construction) projects, complemented by a basic understanding of <strong>business analysis</strong> and <strong>process reengineering</strong>. My experience equips me with effective management skills for large-scale site planning. My passion lies in exploring the realms of <strong>project management</strong>, <strong>information systems</strong>, and <strong>business analytics</strong>, seeking innovative approaches to enhance my professional journey.</p>
 
-***Research Focus***
+<h3>Research Focus</h3>
 
-My final thesis delves into the intriguing domain of startup success prediction using **machine learning** and **network analysis**. Leveraging a dataset from crunchbase.com, I conducted a comprehensive literature review. The study’s unique contribution lies in applying network analysis techniques for feature selection. I achieved a remarkable 13% accuracy enhancement by employing machine learning algorithms.
+<p>My final thesis delves into the intriguing domain of startup success prediction using <strong>machine learning</strong> and <strong>network analysis</strong>. Leveraging a dataset from crunchbase.com, I conducted a comprehensive literature review. The study’s unique contribution lies in applying network analysis techniques for feature selection. I achieved a remarkable 13% accuracy enhancement by employing machine learning algorithms.</p>
 
+<h3>Professional Roles</h3>
 
-***Professional Roles***
+<p>As a <strong>Project Control Specialist</strong> at TAM Iran Khodro, I collaborate closely with a dedicated contractor team for the EPC <strong>crusher plant project</strong>. My daily responsibilities involve <strong>swift decision-making</strong> to track, plan, and oversee project progress. Ensuring successful project outcomes is my primary goal.</p>
 
-As a **Project Control Specialist** at TAM Iran Khodro, I collaborate closely with a dedicated contractor team for the EPC **crusher plant project**. My daily responsibilities involve **swift decision-making** to track, plan, and oversee project progress. Ensuring successful project outcomes is my primary goal.
+<p>During my tenure as a <strong>Data Analyst</strong> at Tasvir Teb, I designed and implemented dashboards, tracked <strong>KPIs</strong>, and analyzed sales data using <strong>Power BI</strong> and <strong>Python</strong>. My role extended to participating in ETL processes and reengineering business procedures. Agile methodologies guided my work, and I diligently monitored changes in patterns and KPIs.</p>
 
-During my tenure as a **Data Analyst** at Tasvir Teb, I designed and implemented dashboards, tracked **KPIs**, and analyzed sales data using **Power BI** and **Python**. My role extended to participating in ETL processes and reengineering business procedures. Agile methodologies guided my work, and I diligently monitored changes in patterns and KPIs.
+<p>I cherish every opportunity to learn and apply Project Management, aiming to make a progressive impact through comprehensive research and application.</p>
 
-
-
-I cherish every opportunity to learn and apply Project Management, aiming to make a progressive impact through comprehensive research and application.
+</div>
