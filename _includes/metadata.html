@@ -61,7 +61,7 @@
 {%- if site.serve_schema_org %}
 
     <!-- Schema.org -->
-    {%- comment -%} Social links generator for "sameAs schema" {%- endcomment %}
+<!--     {%- comment -%} Social links generator for "sameAs schema" {%- endcomment %}
     {% assign sameaslinks = "" | split: "," %}
     {%- if site.orcid_id -%}
         {%- capture link -%}https://orcid.org/{{ site.orcid_id }}{%- endcapture -%}
@@ -170,7 +170,7 @@
     {%- if sameaslinks != blank -%}
         {%- assign sameaslinks = sameaslinks | split: "" -%}
     {%- endif -%}
-
+ -->
     <script type="application/ld+json">
       {
         "author":
