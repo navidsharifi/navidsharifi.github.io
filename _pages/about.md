@@ -13,13 +13,16 @@ selected_papers: true
 social: true
 ---
 
-Greetings! I'm a graduate with a Master's degree in Data Science from Allameh Tabataba’i University, Tehran. My academic path, rooted in mathematics, gradually steered me towards the world of data science. Over the last couple of years, my interest has particularly gravitated towards **statistical learning**, **machine learning**, with a focused curiosity in **Bayesian methods** and the intricacies of **high-dimensional data analysis**.
+I bring a solid background in controlling **EPC** (Engineering, Procurement, and Construction) projects, complemented by a basic understanding of **business analysis** and **process reengineering**. My experience equips me with effective management skills for large-scale site planning. My passion lies in exploring the realms of **project management**, **information systems**, and **business analytics**, seeking innovative approaches to enhance my professional journey
 
-My experience spans using **Python** and **R** for comprehensive data analysis, and leveraging frameworks like TensorFlow for machine learning projects. I've applied these skills in various projects, contributing to areas such as health diagnostics and epidemiological studies.
+My final thesis delves into the intriguing domain of startup success prediction using **machine learning** and **network analysis**. Leveraging a dataset from crunchbase.com, I conducted a comprehensive literature review. The study’s unique contribution lies in applying network analysis techniques for feature selection. I achieved a remarkable 13% accuracy enhancement by employing machine learning algorithms.
 
-Looking ahead, I aim to:
-- Deepening my grasp of **learning theories and methodologies**.
-- Applying this knowledge to develop advanced, reliable machine learning models.
-- Exploring innovative approaches to data analysis and **problem-solving**.
+**Professional Roles**
 
-I cherish every opportunity to learn and apply data science, aiming to make a modest impact through diligent study and application.
+As a **Project Control Specialist** at TAM Iran Khodro, I collaborate closely with a dedicated contractor team for the EPC **crusher plant project**. My daily responsibilities involve **swift decision-making** to track, plan, and oversee project progress. Ensuring successful project outcomes is my primary goal.
+
+During my tenure as a **Data Analyst** at Tasvir Teb, I designed and implemented dashboards, tracked **KPIs**, and analyzed sales data using **Power BI** and **Python**. My role extended to participating in ETL processes and reengineering business procedures. Agile methodologies guided my work, and I diligently monitored changes in patterns and KPIs.
+
+
+
+I cherish every opportunity to learn and apply Project Management, aiming to make a progressive impact through comprehensive research and application.
