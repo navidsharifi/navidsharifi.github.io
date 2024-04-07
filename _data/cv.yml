@@ -11,13 +11,13 @@
 # - title: Education
 #   type: map
 #   contents:
-#     - degree: Master degree in Industrial Engineering
+#     - degree: Master's degree in Industrial Engineering
 #       institution: Shahid Beheshti University of Tehran
 #       year: 2019 - 2022
 #       GPA:  16.77/ out of 20
 #       thesis: "Sturtup success prediction using Machine learning and network analysis"
 #       comments: "University Overall Average= 16.84, Faculty Overall Average= 16.32, Field Overall Average= 16.82"
-#     - degree: Bachelor degree in Industrial Engineering
+#     - degree: Bachelor's degree in Industrial Engineering
 #       institution: University of Kurdistan
 #       year: 2013 - 2017
 #       GPA: 15.70/out of 20
@@ -26,10 +26,10 @@
 - title: Education
   type: time_table
   contents:
-    - title: Master degree in Project Management
-      institution: Teesside University - UK
+    - title: Master's degree in Project Management
+      # institution: Teesside University - UK
       year: May 2024 - Present
-    - title: Bachelor degree in Industrial Engineering
+    - title: Bachelor's degree in Industrial Engineering
       institution: University of Kurdistan
       year: 2013 - 2017
       
@@ -38,13 +38,13 @@
   contents:
     - • Advanced Project Planning
     - • Financial Risk Management
-    - • Project Management unisg Machine Learning
+    - • Project Management using Machine Learning
     - • Operation Research
 
 - title: Research Experience
   type: time_table
   contents:
-    - title: Network analysis for feature selection and startup success prediction
+    - title: Network Analysis for Feature Selection and Startup Success Prediction
       institution: Joint work, Submitted
       year: 2023
     # - title: Decoding Neural Signals with Computational Models
