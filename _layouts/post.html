@@ -81,12 +81,18 @@ post_class: post-template
                 <!-- Post Categories -->
                 <div class="after-post-cats">
                     <ul class="tags mb-4">
+                        {% if page.categories %}
+                        {% if page.categories.first %}
                         {% assign sortedCategories = page.categories | sort %}
+                        {% else %}
+                        {% assign sortedCategories = page.categories | split: " " | sort %}
+                        {% endif %}
                         {% for category in sortedCategories %}
                         <li>
                             <a class="smoothscroll" href="{{site.url}}/categories#{{ category | replace: " ","-" }}">{{ category }}</a>
                         </li>
                         {% endfor %}
+                        {% endif %}
                     </ul>
                 </div>
                 <!-- End Categories -->
@@ -94,12 +100,18 @@ post_class: post-template
                 <!-- Post Tags -->
                 <div class="after-post-tags">
                     <ul class="tags">
+                        {% if page.tags %}
+                        {% if page.tags.first %}
                         {% assign sortedTags = page.tags | sort %}
+                        {% else %}
+                        {% assign sortedTags = page.tags | split: " " | sort %}
+                        {% endif %}
                         {% for tag in sortedTags %}
                         <li>
                             <a class="smoothscroll" href="{{site.url}}/tags#{{ tag | replace: " ","-" }}">#{{ tag }}</a>
                         </li>
                         {% endfor %}
+                        {% endif %}
                     </ul>
                 </div>
                 <!-- End Tags -->
