@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Video World Models"
-author: Soran Ghaderi
-date: 2026-01-20
+title: "Stocastic Optimisation and OR"
+author: Navid Sharifi
+# date: 2024-01-20
 image: https://self-forcing.github.io/examples/movie-gen-10s/A%20dynamic%20speedboat%20speeding%20across%20a%20tranquil%20lake,%20generating%20a%20massive%20wake%20that%20churns%20the%20water-0.mp4
 featured: true
 hidden: false
