@@ -1,8 +1,8 @@
 # Site
 
 #description: "Jekyll template, Medium styled, free for bloggers."
-logo: 'images/profile.jpeg'
-favicon: 'images/profile.jpeg'
+logo: 'images/profile.jpg'
+favicon: 'images/profile.jpg'
 baseurl: '/'
 google_analytics: 'UA-46278016-1'
 #disqus: 'demowebsite'
@@ -22,9 +22,9 @@ repository: https://github.com/soran-ghaderi/soran-ghaderi.github.io
 # favicon: Directory of your favicon (eg. images/favicon.ico)(optional)
 
 # Personal info
-name: Soran Ghaderi
-title: ML Research Engineer at CoSTAR National Lab | Open to PhD Opportunities
-email: soran.gdr.cs@gmail.com
+name: Navid Sharifi
+title: Business Analyst | Open to MSc/PhD Positions
+email: navid.sharifi72@gmail.com
 #phone: Your phone number (optional)
 #website: https://soran-ghaderi.github.io
 
@@ -134,7 +134,7 @@ additional_links:
 
 # About Section
 # about_title: About Me (Use this to override about section title)
-about_profile_image: images/profile.jpeg #Directory of profile image (eg. images/profile.jpg)
+about_profile_image: images/profile.jpg #Directory of profile image (eg. images/profile.jpg)
 about_content: | # this will include new lines to allow paragraphs
   
   <section>
