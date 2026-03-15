@@ -1,29 +1,47 @@
 - layout: left
-  company: CoSTAR National Lab
-  job_title: ML Research Engineer
-  dates: Feb 2026 - Present
-  description: |
-    Generative video and world models for virtual production.
-
-- layout: left
-  company: UIUC Blender Lab
-  link: blender.cs.illinois.edu
-  job_title: Research Intern
-  dates: Jul 2025 - Jan 2026
-  description: |
-    Energy-based transformers for image/video generation. Investigating mode collapse, inference-time compute scaling, and fast sampling strategies.
-
-- layout: left
-  company: University of Essex
-  job_title: Postgraduate Researcher
+  company: Varo Dynamics
+  job_title: Project Manager
   dates: Apr 2024 - Oct 2024
   description: |
-    Developed <a href="https://soran-ghaderi.github.io/nir/">NIR</a> framework for integrating iterative reasoning into LLM hidden states without fine-tuning.
+    Led the implementation of a fleet management and inventory control system for a carrier and storage tanks. Oversaw data collection and analysis to develop key performance indicators and guide decision-making processes. Applied system analytics methods, conducted Business Process Re-engineering, and followed PMBOK guidelines.
+
+    - Fleet Management project implementation using Trello
+    - Mathematical modelling for the carrier's cost functions using GAMS
+    - System Analytics and BPR using Process Maker
+    - EOQ inventory control system development using VBA in Excel
+    - Fleet data analysis and KPI monitoring using Power BI
+    - Project planning and controlling using Primavera P6
+    - Contract and Claim Management
+
+    <em>Tools: Microsoft Project, Primavera P6, PMBOK, Trello, Excel, Visio, BPMN2, GAMS</em>
 
 - layout: left
-  company: Open Source
-  link: github.com/soran-ghaderi
-  job_title: Developer & Maintainer
-  dates: 2019 - Present
+  company: TAM Iran Khodro
+  job_title: Project Control Specialist
+  dates: Mar 2020 - Aug 2022
   description: |
-    TorchEBM (8K+ downloads), cuRBLAS, TransformerX, Emgraph, Bigraph, TASE. See Projects section.
+    Project Control Specialist for the EPC crusher plant project, working with a dedicated contractor team for Foolad Mobarake of Isfahan.
+
+    - Arranged project plans, executed control measures, and delivered weekly reports to the project owner and management team
+    - Strategically replanned actions for outstanding and delayed tasks in alignment with the project's S-Curve
+    - Presented weekly on-site meetings with the project owner and consulting team to track critical issues
+    - Implemented PMBOK standards, tracked deviations, and formulated daily corrective measures
+    - Conducted project delay analysis and managed claims based on the project charter
+    - Communicated with vendors and subcontractors during procurement and construction phases
+
+    <em>Tools: Microsoft Project, Microsoft Office, Power BI, PMBOK, Trello, Primavera P6</em>
+
+- layout: left
+  company: Tasvir Teb Humerz (Sina Hospital)
+  job_title: Data Analyst
+  dates: Sep 2018 - Dec 2019
+  description: |
+    Responsible for the design and implementation of dashboards, tracked KPIs, and analysed sales data using Power BI and Python. Participated in ETL processes and the reengineering of business procedures using Agile methodologies.
+
+    - Monitoring KPIs and extracting patterns
+    - Development of dynamic and interactive dashboards
+    - Execution of ETL processes and reengineering of business procedures
+    - Conducting data preprocessing, feature engineering, and data mining
+    - Designing decision-making lists to facilitate informed choices
+
+    <em>Tools: Power BI, Python, SQL Server, Microsoft Office, Scrum methodology</em>

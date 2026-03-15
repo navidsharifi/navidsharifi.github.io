@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Neural Integration of Iterative Reasoning: A Technical Deep Dive into Context-Aware Code Generation"
-author: Soran Ghaderi
+author: Navid Sharifi
 image: images/nir.png
 featured: true
 hidden: false

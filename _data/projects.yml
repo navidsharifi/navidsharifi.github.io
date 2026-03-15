@@ -9,108 +9,31 @@
 #    Description about the work on/with the project
 
 - layout: left
-  name: Taleb EBM 🍓
-  # badge: <span class="badge badge-pinned badge-pulse">pinned</span>
-  # link: github.com/soran-ghaderi/torchebm
-  github: soran-ghaderi/torchebm
+  name: Fleet Management & Inventory Control System
   description: >
-    <b><i class="fas fa-crown flagship-crown"></i> Flagship</b> <span class="badge badge-accent">Featured</span><br>
-    <b>PyTorch library for energy-based models, diffusion, and flow matching.</b> Implements samplers, score/flow/contrastive objectives, SDE/ODE integrators, interpolants, and mixed-precision training.<br>
-    <span style="color:#888">PyTorch · CUDA</span> <a href="/2025/02/19/torchebm.html" style="text-decoration: none;"> <span class="badge badge-accent badge-pulse">Read more</span></a><br>
-    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/soran-ghaderi/torchebm?style=social">
-    <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/torchebm">
-    <img alt="Downloads" src="https://static.pepy.tech/badge/torchebm?style=flat-square">
+    <b>End-to-end fleet management and inventory control system for a carrier and storage tanks.</b> Implemented fleet tracking, mathematical modelling for cost functions, EOQ inventory control, and KPI dashboards.<br>
+    <span style="color:#888">Primavera P6 · GAMS · Power BI · Excel VBA · Trello</span>
 
 - layout: left
-  name: cuRBLAS 🍒
-  link: https://github.com/soran-ghaderi/cuRBLAS
-  github: soran-ghaderi/cuRBLAS
+  name: EPC Crusher Plant Project Control
   description: >
-    <b>GPU-accelerated randomized linear algebra.</b> CUDA kernels for Hutchinson trace estimation, randomized SVD, and probabilistic matrix operations—useful for sliced score matching and large-scale ML.<br>
-    <span style="color:#888">C++ · CUDA · Python</span><br>
-    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/soran-ghaderi/curblas?style=social">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/soran-ghaderi/curblas">
+    <b>Project control for large-scale EPC crusher plant project.</b> Delivered weekly progress reports, managed S-Curve tracking, PMBOK compliance, delay analysis, and claim management for Foolad Mobarake of Isfahan.<br>
+    <span style="color:#888">Microsoft Project · Power BI · PMBOK · Primavera P6</span>
 
 - layout: left
-  name: TransformerX
-  link: github.com/tensorops/TransformerX
-  github: tensorops/TransformerX
+  name: Sina Hospital Data Analytics
   description: >
-    <b>Modular transformer research library.</b> Composable attention mechanisms, positional encodings, and architecture variants for rapid prototyping.<br>
-    <span style="color:#888">TensorFlow</span><br>
-    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/tensorops/transformerx?style=social">
+    <b>Design and implementation of interactive BI dashboards.</b> KPI monitoring, sales data analysis, ETL processes, data preprocessing, feature engineering, and data mining for healthcare analytics.<br>
+    <span style="color:#888">Power BI · Python · SQL Server · Scrum</span>
 
 - layout: left
-  name: Emgraph
-  link: github.com/bi-graph/emgraph
-  github: bi-graph/emgraph
+  name: Startup Success Prediction
   description: >
-    <b>Knowledge graph embedding library.</b> Train and evaluate TransE, DistMult, ComplEx, and other relational models on link prediction tasks.<br>
-    <span style="color:#888">TensorFlow 2</span><br>
-    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/bi-graph/emgraph?style=social">
-    <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/emgraph">
-
-
-#    <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/bi-graph/emgraph">
-
-#  description: | # this will include new lines to allow paragraphs
-#    Designed the architecture and led the development of an opensource python library named <b>Emgraph</b> with TensorFlow 2 as its backend. It is used to develop, train, and
-#    evaluate Knowledge graph representation learning models.
-#
-#    It is worth mentioning that the Emgraph was initially a part of the Bigraph, that later we
-#    decided to seperate it from the parent library to keep the API more structured.<br>
-#
-#    Features:
-#    <b>Support for CPU/GPU (CUDA cores)</b>, <b>Standard API</b>, <b>Dataset preprocessor</b>,
-#    <b>Data loader</b>, <b>Scalable</b>, <b>Abstarction</b>,
-#    <b>Open source</b>, <b>Easy-to-use</b>, <b>Documentation</b><br>
-#
-#    Tech Stack/Environment: <mark>TensorFlow 2</mark> - <mark>Numpy</mark> - <mark>Pandas</mark> - <mark>Scikit learn</mark> - <mark>TensorBoard</mark> - <mark>SQLite</mark> - <mark>driven development (TDD)</mark> - <mark>
-#    PyTest</mark> - <mark>Sphinx</mark> - <mark>Python</mark><br><br>
-    
+    <b>BSc thesis — predicting startup success using machine learning and network analysis.</b> Leveraged crunchbase.com data, applied network analysis for feature selection, achieving 13% accuracy improvement.<br>
+    <span style="color:#888">Machine Learning · Network Analysis · Python</span>
 
 - layout: left
-  name: Bigraph
-  link: github.com/bi-graph/bigraph
-  github: bi-graph/bigraph
+  name: Newroz Hotel MIS
   description: >
-    <b>Bipartite graph link prediction.</b> Implements Jaccard, Adamic-Adar, Common Neighbors, Preferential Attachment, and Katz similarity for two-mode networks.<br>
-    <span style="color:#888">NetworkX · NumPy</span><br>
-    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/bi-graph/bigraph?style=social">
-    <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/bigraph">
-#    <img alt="PyPI - Implementation" src="https://img.shields.io/pypi/implementation/bigraph">
-#  description: | # this will include new lines to allow paragraphs
-#    <b>Bigraph</b> is a Python package for Link prediction in bipartite networks. Currently, it encompasses
-#    <i>Jaccard, Adamic adar, Common neighbors, Preferential attachment,
-#    Katz similarity</i> methods. <br>
-#    Features:
-#    <b>Documentation</b>, <b>Open source</b>, <b>Easy-to-use</b><br>
-#    Tech Stack/Environment: <mark>Networkx</mark> - <mark>Numpy</mark> - <mark>Pandas</mark> - <mark>Scikit learn</mark> -
-#    <mark>matplotlib</mark> - <mark>Sphinx</mark> - <mark>Python</mark><br><br>
-    
-
-- layout: left
-  name: TASE
-  link: github.com/appheap/TASE
-  github: appheap/TASE
-  description: >
-    <b>Large-scale audio search engine.</b> Scalable indexing and retrieval with Elasticsearch, ArangoDB, and Redis for real-time multimodal search.<br>
-    <span style="color:#888">Elasticsearch · Python</span><br>
-    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/appheap/TASE?style=social">
-#    <img alt="PyPI - Implementation" src="https://img.shields.io/pypi/implementation/bigraph">
-#  description: | # this will include new lines to allow paragraphs
-#    <b>TASE</b> allows users to quickly and easily find information that is of genuine interest
-#    or value, without the need to wade through numerous irrelevant Telegram channels. It provides users with search
-#    results that lead to relevant information on high-quality channels.<br>
-#
-#    Features: <b>Search engine</b>, direct bot search, search from groups and private chats, Real-time, Search based on
-#    file-name, performer name, audio-name, and lyrics, High accuracy and relevance, Multilingual search, Returns
-#    reference, <b>Indexing features</b>, Optimistic crawling, Scoring channel quality, banning-proof, ID hashing,
-#    Interactive indexing, Fast indexing, <b>User controlling features</b>, <b>User interface</b>, <b>Playlists</b>,
-#    <b>Admin features</b>, <b>Developer features</b>, <b>Documentation</b>, Exception safe, Extremely fast,
-#    Monitoring logs, Handles RTL langues smoothly
-#    <br>
-#
-#    Tech Stack/Environment: <mark>Elasticsearch</mark> - <mark>Multi processing</mark> - <mark>Multi threading</mark> -
-#    <mark>Pyrogram</mark> - <mark>ArangoDB</mark> - <mark>Celery</mark> - <mark>Sphinx</mark> - <mark>Python</mark><br>
-#
+    <b>Management Information System development for Newroz Hotel.</b> Database design, process modelling, and reporting dashboards.<br>
+    <span style="color:#888">Microsoft Access · Visio · Power BI · Process Maker</span>
