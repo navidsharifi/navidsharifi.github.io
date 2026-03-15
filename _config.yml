@@ -55,6 +55,8 @@ darkmode: true
 #   - "coral"         : #f97316  (Orange-red, warm)
 #   - "rose"          : #e11d48  (Pink-red, modern)
 #   - "ruby"          : #be123c  (Dark red, sophisticated)
+#   - "yellow"        : #eab308  (Standard yellow, vibrant)
+#   - "purple"         : #800080  (Purple, vibrant)
 #
 # NAVBAR STYLE OPTIONS:
 #   - "dark"          : Dark navbar (Default - #0f0f0f, matches dark mode)
@@ -86,9 +88,9 @@ darkmode: true
 # // =========================================================================
   
 palette:
-  dark_bg: "near-black"      # Dark mode background
+  dark_bg: "slate"      # Dark mode background
   light_bg: "white"          # Light mode background  
-  accent: "crimson"        # Accent color (used for highlights, links hover, etc.)
+  accent: "yellow"        # Accent color (used for highlights, links hover, etc.)
   navbar: "darker"             # Navbar style
 
 # Social links

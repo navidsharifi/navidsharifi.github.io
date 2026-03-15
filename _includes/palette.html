@@ -23,6 +23,7 @@
     coral       : #f97316  (Orange-red, warm)
     rose        : #e11d48  (Pink-red, modern)
     ruby        : #be123c  (Dark red, sophisticated)
+    yellow      : #eab308  (Standard yellow, vibrant)
   
   NAVBAR STYLES:
     dark        : #1a202c  (Default dark)
@@ -68,6 +69,22 @@
       /* Link colors use accent */
       --link-color: #be123c;
       --link-hover: #9f1239;
+    {% when "yellow" %}
+      --accent-color: #eab308;
+      --accent-hover: #ca8a04;
+      --accent-light: #fef9c3;
+      --accent-rgb: 234, 179, 8;
+      /* Link colors use accent */
+      --link-color: #eab308;
+      --link-hover: #ca8a04;
+    {% when "purple" %}
+      --accent-color: #800080;
+      --accent-hover: #800080;
+      --accent-light: ##800080;
+      --accent-rgb: 234, 179, 8;
+      /* Link colors use accent */
+      --link-color: #eab308;
+      --link-hover: #ca8a04;
     {% else %}
       /* vivid-red (default) */
       --accent-color: #ef4444;
@@ -185,6 +202,13 @@ body.dark {
       --accent-rgb: 190, 18, 60;
       --link-color: #be123c;
       --link-hover: #e11d48;
+    {% when "yellow" %}
+      --accent-color: #eab308;
+      --accent-hover: #facc15;
+      --accent-light: #fef9c3;
+      --accent-rgb: 234, 179, 8;
+      --link-color: #eab308;
+      --link-hover: #facc15;
     {% else %}
       /* vivid-red (default) */
       --accent-color: #ef4444;
