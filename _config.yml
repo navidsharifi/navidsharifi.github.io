@@ -18,15 +18,15 @@ include:
 
 # --------------------------------------------------------------------------------------
 
-repository: https://github.com/soran-ghaderi/soran-ghaderi.github.io
+repository: https://github.com/navidsharifi/navidsharifi.github.io
 # favicon: Directory of your favicon (eg. images/favicon.ico)(optional)
 
 # Personal info
 name: Navid Sharifi
-title: Business Analyst | Open to MSc/PhD Positions
+title: Business Analyst | Project Management & Data Analytics
 email: navid.sharifi72@gmail.com
-#phone: Your phone number (optional)
-#website: https://soran-ghaderi.github.io
+phone: "+44 739 135 6796"
+#website: https://navidsharifi.github.io
 
 # Dark Mode (true/false/never)
 darkmode: true
@@ -94,34 +94,23 @@ palette:
   navbar: "darker"             # Navbar style
 
 # Social links
-twitter_username: soranghadri
-github_username: soran-ghaderi
-#medium_username: soran-ghaderi
-#stackoverflow_username: "00000001"
-#dribbble_username: jekyll
-#facebook_username: jekyll
-#flickr_username: jekyll
-#instagram_username: jekyll
-linkedin_username: soran-ghaderi
-#xing_username: jekyll
-#pinterest_username: jekyll
-#youtube_username: jekyll
-# googleplus_username: +jekyll
-orcid_username: 0009-0004-6564-4517
-#googlescholar_username: -2N2iKcAAAAJ
+#twitter_username:
+#github_username:
+#medium_username:
+#stackoverflow_username:
+linkedin_username: navid-sharifi
+#xing_username:
+#pinterest_username:
+#youtube_username:
+#orcid_username:
+#googlescholar_username:
 
 
 # Additional icon links
-additional_links:
-  - title: Google Scholar
-    icon: fab fa-google-scholar
-    url: https://scholar.google.com/citations?user=-2N2iKcAAAAJ&hl=en&authuser=5
-  - title: ResearchGate
-    icon: fab fa-researchgate
-    url: https://www.researchgate.net/profile/Soran-Ghaderi
-  # - title: kaggle
-    # icon: fab fa-kaggle
-    # url: https://www.kaggle.com/soranghadri
+#additional_links:
+  # - title: Google Scholar
+  #   icon: fab fa-google-scholar
+  #   url:
 
 
 #- title: another link
@@ -142,72 +131,41 @@ about_content: | # this will include new lines to allow paragraphs
   <section>
     <h3>About</h3>
   <p>
-  ML Research Engineer at <a href="https://www.costarnetwork.co.uk/">CoSTAR National Lab</a> working on video and world models for virtual production.
-  Previously research intern at UIUC Blender Lab (energy-based models). 
-  MSc AI (Distinction) from the University of Essex, supervised by 
-  <a href="https://www.essex.ac.uk/people/CITIL35902/Luca Citi">Prof. Luca Citi</a>.
+  With a strong background in controlling EPC projects for large-scale initiatives, I have developed extensive project management expertise.
+  My experience in business and system analysis, coupled with process re-engineering, has equipped me with the ability to effectively manage IT and business analytics projects.
+  Through hands-on experience in the field, I have gained a practical understanding of complex project environments, preparing me for advanced studies in business analytics and project management.
   </p>
   </section>
   
   <section>
-    <h3>Research Interests</h3>
-  <p>My ultimate objective is to study the cognitive mechanisms underlying intelligence and develop embodied agents able to reason and interact with the real world.
-  </p>
-  <p>
-  I work on differentiable approaches for iterative reasoning and planning in uncertain environments. 
-  Building more capable, efficient, and generalizable AI systems, particularly at the intersection of deep learning, 
-  statistical mechanics, probabilistic modeling, and geometric methods.In a wider context, I am interested in developing a network of specialized networks such as memory and rapid learning, goal-driven planning, spatial reasoning, and error detection and conflict monitoring that operate collaboratively to consistently make good decisions within a complex environment. 
-  </p>
-  
+    <h3>Key Expertise</h3>
   <details>
-  <summary><strong>▸ Key areas <span class="badge badge-soon">Click to expand</span></strong></summary>
+  <summary><strong>▸ Areas of expertise <span class="badge badge-soon">Click to expand</span></strong></summary>
   <br>
   <ul>
-    <li><strong>Generative Modeling</strong>: Energy-Based Models, Diffusion/Score-Based Models, Normalizing Flows, Optimal Transport, Consistency Models. Mathematical tools: ODEs, PDEs (Fokker-Planck), SDEs, Itô Calculus, OT theory. Also language models and autoregressive generation.</li>
-    <li><strong>Generalisation, Reasoning & Planning</strong>: Robust OOD performance for complex decision-making.</li>
-    <li><strong>Geometric & Mathematical Foundations</strong>: Differential geometry (Riemannian manifolds), metric learning, Hamiltonian & Lagrangian formulations for efficient learning algorithms.</li>
-    <li><strong>Efficient Architectures</strong>: Transformers & attention mechanisms.</li>
-    <li><strong>MPC, RL, Agents & Embodied Intelligence</strong></li>
-    <li><strong>Applications</strong>: World Models, robotics, AI for science, LLMs.</li>
+    <li><strong>Project Management</strong>: PMBOK standards, project planning & control, claim management, Primavera P6, Microsoft Project</li>
+    <li><strong>Business Analytics</strong>: Power BI & DAX, KPI analysis & monitoring, data mining, mathematical modelling & optimisation</li>
+    <li><strong>Business Process Re-engineering</strong>: System analytics, BPR, process mining, change management</li>
+    <li><strong>Data Analysis</strong>: Python, SQL Server, ETL processes, feature engineering, clustering</li>
+    <li><strong>Optimisation & Modelling</strong>: GAMS, Excel VBA, cost function modelling, EOQ inventory control</li>
   </ul>
   </details>
-  
-  <p style="margin-top: 1em;">
-  <strong>Current Focus</strong>: Unifying diffusion, flow-based, and energy-based models through statistical mechanics and differential geometry, toward agents capable of fast generation, reasoning (as optimisation), and robust planning under uncertainty.
-  </p>
-  
-  <h4>Research Highlights</h4>
-  <ul>
-      <li><strong>Reasoning & Planning</strong>: Agents that reason, plan, and adapt to novel environments</li>
-      <li><strong>Representation Learning</strong>: Learning the geometry of parameters and data distributions</li>
-      <li><strong>OOD Generalisation</strong>: Robust behaviour beyond training distribution</li>
-      <li><strong>Embodied Intelligence</strong>: Systems that learn through interaction with the world</li>
-  </ul>
   </section>
   
   <section>
-    <h3>Writing</h3>
-    <p>
-      <span class="badge badge-new badge-pulse">New</span>
-      <a href="/blog/video-world-models/" style="font-weight: 500;">Video World Models</a> — 
-      <span style="color: var(--text-muted);">From slow bidirectional diffusion to real-time autoregressive world simulators. 
-      Causality, self-forcing, attention sinks, and the path to interactive video generation.</span>
-    </p>
-  </section>
-  
-  <section>
-    <h3>News</h3>
+    <h3>Interests</h3>
     <ul>
-        <li><span class="badge badge-new badge-pulse">New</span> Joined CoSTAR National Lab as ML Research Engineer - Feb. 2026</li>
-        <li>Research Collaboration with UIUC Blender Lab - Jul. 2025</li>
-        <li>MSc defended at Essex (<a href="https://soran-ghaderi.github.io/nir/">NIR thesis</a>) - Oct. 2024</li>
+        <li>Business Analytics and AI</li>
+        <li>Generative Models for Business Analytics</li>
+        <li>Startup Success Prediction using LLMs</li>
     </ul>
   </section>
   
   <section>
-    <h3>Awards</h3>
+    <h3>Languages</h3>
     <ul>
-        <li>Full scholarship for MSc AI, University of Essex</li>
+        <li><strong>English</strong>: IELTS Academic 6.0</li>
+        <li><strong>Kurdish</strong>: Native</li>
     </ul>
   </section>
   

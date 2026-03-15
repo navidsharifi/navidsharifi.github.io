@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "TransformerX"
-author: Soran Ghaderi
+author: Navid Sharifi
 
 [//]: # (categories: [ library, python, machine learning, deep learning, transformers ])
 

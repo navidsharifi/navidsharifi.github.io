@@ -1,15 +1,12 @@
 - layout: left
-  name: University of Essex 
-  dates: 2023 - 2024
-  qualification: MSc Artificial Intelligence (Distinction)
-  description: |
-    Dissertation: <a href="https://soran-ghaderi.github.io/nir/">NIR</a> — Neural Integration of Iterative Reasoning in LLMs for Code Generation
-    
-    🥇 1st place, Inter-Departmental Neural Network Challenge (100+ participants)
-
-- layout: left
   name: University of Kurdistan
-  dates: 2014 - 2018
-  qualification: BEng Computer Engineering
+  dates: 2013 - 2018
+  qualification: BSc Industrial Engineering
   description: |
-    Thesis: <a href="https://github.com/soran-ghaderi/EfficientCoF">EfficientCoF</a> — Subspace clustering for collaborative filtering
+    Last Two-year GPA: 15.70 / 20
+
+    Thesis: Startup Success Prediction Using Machine Learning And Network Analysis — leveraging crunchbase.com data and network analysis for feature selection, achieving 13% accuracy improvement.
+
+    Projects:
+    - Management information system development for Newroz Hotel (Tools: Microsoft Access, Visio, Power BI, Process Maker)
+    - Work and time evaluation project at Iran Alumin Company (Tools: Microsoft Excel, Visio, FPC)

@@ -1,123 +1,95 @@
 # _data/skills.yml
 
-#    - name: Python
-#      description: Experienced in machine learning, deep learning, and software development
-#    - name: C++
-#      description: Intermediate knowledge with experience in algorithm implementation and briefly for computer vision
-#
-
 # Professional Skills - Clean and organized structure
 
 - layout: left-skill
   type: technical
   items:
-    - category: Core Programming
+    - category: Project Management
+      items:
+        - name: PMBOK Standardisation
+          tool-type: Methodology
+          notes: Project planning, control, and standardised project management practices
+
+        - name: Microsoft Project & Primavera P6
+          tool-type: Tools
+          notes: Project scheduling, resource allocation, and progress tracking
+
+        - name: Business Process Re-engineering
+          tool-type: Methodology
+          notes: System analytics, BPR, and change management models
+
+        - name: Claim Management
+          tool-type: Skills
+          notes: Project delay analysis, contract management, and claim resolution
+
+        - name: Reporting & Monitoring
+          tool-type: Skills
+          notes: Weekly reporting, S-Curve tracking, and corrective action planning
+
+        - name: Procurement & Contract Strategies
+          tool-type: Skills
+          notes: Vendor communication, subcontractor management, and procurement oversight
+
+    - category: Business Analytics
+      items:
+        - name: Power BI & DAX
+          tool-type: BI Tools
+          notes: Dynamic dashboards, KPI monitoring, and interactive data visualisation
+
+        - name: Data Analysis using Excel
+          tool-type: Tools
+          notes: VBA development, EOQ inventory control, and data modelling
+
+        - name: Data Mining Algorithms
+          tool-type: Analytics
+          notes: Clustering, feature engineering, and pattern extraction
+
+        - name: Mathematical Modelling & Optimisation
+          tool-type: Analytics
+          notes: GAMS, cost function modelling, and resource optimisation
+
+        - name: Business Process Mining
+          tool-type: Analytics
+          notes: Process analysis, ETL processes, and procedure reengineering
+
+        - name: Statistics & Probability Distributions
+          tool-type: Mathematics
+          notes: Statistical analysis, probability theory, and data-driven decision making
+
+        - name: KPI Analysis & Monitoring
+          tool-type: Analytics
+          notes: Key performance indicator definition, tracking, and trend analysis
+
+        - name: Feasibility Study & Market Analysis
+          tool-type: Analytics
+          notes: Market research and feasibility assessment for business decisions
+
+    - category: Software & Tools
       items:
         - name: Python
-          tool-type: Languages
-          notes: Expert level - Machine learning, deep learning, and software development with 6+ years experience
-          projects:
-            - name: Multiple ML Libraries
-              link: https://github.com/soran-ghaderi/
+          tool-type: Programming
+          notes: Data analysis, data preprocessing, and scripting
 
-        - name: C++
-          tool-type: Languages  
-          notes: Intermediate - Algorithm implementation and computer vision applications
+        - name: SQL Server
+          tool-type: Database
+          notes: Database querying and data management
 
-        - name: JavaScript
-          tool-type: Languages
-          notes: Working knowledge - Web development and front-end applications
+        - name: Microsoft Office Suite
+          tool-type: Productivity
+          notes: Excel (advanced), Word, PowerPoint, Access, Visio
 
-    - category: Machine Learning & AI
-      items:
-        - name: PyTorch
-          tool-type: Deep Learning Frameworks
-          notes: Expert level - Custom implementations, multi-GPU training, library development
-          projects:
-            - name: TorchEBM
-              link: https://github.com/soran-ghaderi/torchebm
-            - name: NIR Framework
-              link: https://soran-ghaderi.github.io/nir/
+        - name: Trello
+          tool-type: Project Management
+          notes: Task tracking and team collaboration
 
-        - name: TensorFlow/Keras
-          tool-type: Deep Learning Frameworks
-          notes: Advanced - Model development, deployment, and research applications
-          projects:
-            - name: TransformerX
-              link: https://github.com/tensorops/TransformerX
-            - name: Emgraph
-              link: https://github.com/bi-graph/emgraph
+        - name: Process Maker & BPMN2
+          tool-type: BPR Tools
+          notes: Business process modelling and automation
 
-        - name: JAX
-          tool-type: Deep Learning Frameworks
-          notes: Intermediate - Numerical computing and research applications
-
-        - name: Hugging Face
-          tool-type: ML Tools
-          notes: Advanced - Transformers, datasets, and model hub integration
-
-        - name: Large Language Models
-          tool-type: Specialized AI
-          notes: Expert level - LLM training, fine-tuning (PEFT, SFT, DPO, RLHF), and evaluation
-
-        - name: Generative Models
-          tool-type: Specialized AI
-          notes: Advanced - Diffusion models, energy-based models, VAEs, normalizing flows
-
-    - category: Data Science & Analytics
-      items:
-        - name: Scientific Computing
-          tool-type: Data Analysis
-          notes: NumPy, Pandas, SciPy, Matplotlib for data processing and visualization
-
-        - name: Mathematical Foundations
-          tool-type: Mathematics
-          notes: Linear algebra, calculus, probability theory, optimization, differential geometry
-
-        - name: Numerical Methods
-          tool-type: Computational Mathematics
-          notes: ODE solvers, MCMC methods, gradient-based optimization
-
-    - category: Software Engineering
-      items:
-        - name: Development Tools
-          tool-type: DevOps & Tools
-          notes: Git/GitHub, Docker, CI/CD pipelines, test-driven development
-
-        - name: Database Systems
-          tool-type: Data Infrastructure
-          notes: Elasticsearch, Redis, ArangoDB, PostgreSQL for large-scale data processing
-
-        - name: Distributed Systems
-          tool-type: Architecture
-          notes: RabbitMQ, Celery, microservices architecture, API development
-
-        - name: High-Performance Computing
-          tool-type: Performance Optimization
-          notes: Multi-GPU systems, distributed training, CUDA fundamentals
-
-- layout: left-skill
-  type: research
-  items:
-    - category: Research & Communication
-      items:
-        - name: Technical Writing
-          tool-type: Communication
-          notes: Published articles with 50,000+ views on Medium and Towards Data Science
-          projects:
-            - name: "Hamiltonian Mechanics for Generative Modeling"
-              link: https://towardsdatascience.com/from-physics-to-probability-hamiltonian-mechanics-for-generative-modeling-and-mcmc/
-            - name: "The Map Of Transformers"
-              link: https://medium.com/towards-data-science/the-map-of-transformers-e14952226398
-
-        - name: Open Source Development
-          tool-type: Community
-          notes: Developed and maintained multiple PyPI libraries with comprehensive documentation
-          projects:
-            - name: TorchEBM Library
-              link: https://github.com/soran-ghaderi/torchebm
-            - name: TASE Search Engine
-              link: https://github.com/soran-ghaderi/TASE
+        - name: Scrum & Agile
+          tool-type: Methodology
+          notes: Agile methodologies for BI system development
 
         - name: Academic Research
           tool-type: Research Skills
