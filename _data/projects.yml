@@ -9,9 +9,9 @@
 #    Description about the work on/with the project
 
 - layout: left
-  name: TorchEBM 🍓
+  name: Taleb EBM 🍓
   # badge: <span class="badge badge-pinned badge-pulse">pinned</span>
-  link: github.com/soran-ghaderi/torchebm
+  # link: github.com/soran-ghaderi/torchebm
   github: soran-ghaderi/torchebm
   description: >
     <b><i class="fas fa-crown flagship-crown"></i> Flagship</b> <span class="badge badge-accent">Featured</span><br>
