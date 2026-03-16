@@ -94,8 +94,8 @@ palette:
   navbar: "darker"             # Navbar style
 
 # Social links
-#twitter_username:
-#github_username:
+twitter_username: navidsharifi
+github_username: navidsharifi
 #medium_username:
 #stackoverflow_username:
 linkedin_username: navid-sharifi-22647b100
@@ -107,10 +107,10 @@ linkedin_username: navid-sharifi-22647b100
 
 
 # Additional icon links
-#additional_links:
-  # - title: Google Scholar
-  #   icon: fab fa-google-scholar
-  #   url:
+additional_links:
+  - title: Google Scholar
+    icon: fab fa-google-scholar
+    url: https://scholar.google.com/
 
 
 #- title: another link
