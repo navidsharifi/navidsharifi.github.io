@@ -107,10 +107,10 @@ linkedin_username: navid-sharifi-22647b100
 
 
 # Additional icon links
-additional_links:
-  - title: Google Scholar
-    icon: fab fa-google-scholar
-    url: https://scholar.google.com/
+#additional_links:
+#  - title: Google Scholar
+#    icon: fab fa-google-scholar
+#    url: https://scholar.google.com/
 
 
 #- title: another link
