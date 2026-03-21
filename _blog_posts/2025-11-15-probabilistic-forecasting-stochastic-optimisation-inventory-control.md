@@ -24,7 +24,7 @@ Throughout, I will try to connect these developments. The recurring theme is tha
 
 ## Why Point Forecasts Fail Inventory Systems
 
-Suppose two models have similar MAE on a holdout set. If one underestimates upper-tail demand, stockouts surge whenever a promotion or a seasonality shock occurs. Inventory policies are fundamentally asymmetric: under-forecasting and over-forecasting do not carry equal costs. A shortage penalty of \$50 per unit and a holding cost of \$2 per unit create a 25:1 asymmetry. A symmetric loss function like MSE is blind to this.
+Suppose two models have similar MAE on a holdout set. If one underestimates upper-tail demand, stockouts surge whenever a promotion or a seasonality shock occurs. Inventory policies are fundamentally asymmetric: under-forecasting and over-forecasting do not carry equal costs. A shortage penalty of <span>$</span>50 per unit and a holding cost of <span>$</span>2 per unit create a 25:1 asymmetry. A symmetric loss function like MSE is blind to this.
 
 The problem deepens when we consider that most replenishment rules consume a single number. A base-stock policy sets the order-up-to level at the forecast plus some multiple of forecast error. But the "forecast error" is typically a symmetric standard deviation. If the true demand distribution is skewed, heavy-tailed, or multimodal, the symmetric safety-stock formula breaks down.
 
