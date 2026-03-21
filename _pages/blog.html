@@ -10,7 +10,11 @@ comments: false
 
     <!-- Featured Posts Section (both internal and external) -->
     {% assign featured_internal = site.blog_posts | where: "featured", true | sort: "date" | reverse %}
+    {% if site.data.blog_posts %}
     {% assign featured_external = site.data.blog_posts | where: "featured", true | sort: "date" | reverse %}
+    {% else %}
+    {% assign featured_external = "" | split: "" %}
+    {% endif %}
     {% assign has_featured = false %}
     {% if featured_internal.size > 0 or featured_external.size > 0 %}
         {% assign has_featured = true %}
@@ -139,7 +143,11 @@ comments: false
             {% endfor %}
 
             <!-- External posts sorted by date (most recent first) -->
+            {% if site.data.blog_posts %}
             {% assign external_posts = site.data.blog_posts | sort: "date" | reverse %}
+            {% else %}
+            {% assign external_posts = "" | split: "" %}
+            {% endif %}
             {% for post in external_posts %}
             <!-- External Blog Post -->
             <article class="blog-card blog-card-external">
