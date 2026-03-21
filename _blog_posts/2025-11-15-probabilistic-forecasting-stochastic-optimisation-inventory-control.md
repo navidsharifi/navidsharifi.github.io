@@ -2,7 +2,7 @@
 layout: post
 title: "Probabilistic Demand Forecasting + Stochastic Optimisation for Inventory Control"
 author: Navid Sharifi
-image: images/transformerx.png
+image: assets/images/figure2-blog1.jpg
 featured: true
 hidden: false
 comments: true
@@ -20,7 +20,7 @@ We begin with the problem of forecasting demand as a full probability distributi
 
 Throughout, I will try to connect these developments. The recurring theme is that *a forecast is only as good as the decisions it enables*, and different modelling choices make different tradeoffs in this conversion.
 
-LaTeX source for this article: [Download .tex](/probabilistic-forecasting-stochastic-optimisation-inventory-control.tex)
+
 
 ## Why Point Forecasts Fail Inventory Systems
 
@@ -69,7 +69,7 @@ This loss penalises underestimation and overestimation asymmetrically, with the 
 A proper scoring rule has a key property: it is uniquely minimised when the forecaster reports the true conditional distribution <cite data-key="gneiting_raftery_2007"></cite>. This prevents a common failure mode where a model produces sharp but miscalibrated predictions. Sharpness without calibration is dangerous in inventory control, because it creates false confidence in safety-stock calculations.
 
 <figure class="academic-figure" id="fig-calibration" style="text-align: center; margin: 2rem auto; display: block;">
-<img src="images/fig3-calibration-curve.png" alt="Calibration curve: predicted quantile level versus empirical coverage" style="max-width: 80%; display: block; margin: 0 auto;">
+<img src="{{ '/images/fig3-calibration-curve.svg' | relative_url }}" alt="Calibration curve: predicted quantile level versus empirical coverage" style="max-width: 80%; display: block; margin: 0 auto;">
 <figcaption data-caption="Calibration diagnostics. The x-axis is the nominal quantile level and the y-axis is the empirical coverage. A well-calibrated model lies on the diagonal. Deviations above the diagonal indicate underconfidence; below indicates overconfidence."></figcaption>
 </figure>
 
@@ -88,7 +88,7 @@ For interpretable multi-horizon forecasting, the **Temporal Fusion Transformer (
 For **intermittent demand**, where the series consists mostly of zeros with occasional positive values, **Deep Renewal Processes** <cite data-key="deep_renewal_2019"></cite> model the demand process as a marked point process. The model jointly predicts when the next non-zero demand will occur and how large it will be. This avoids the pathological behaviour of continuous-distribution models on zero-inflated data.
 
 <figure class="academic-figure" id="fig-fan-chart" style="text-align: center; margin: 2rem auto; display: block;">
-<img src="images/fig2-fan-chart.png" alt="Quantile fan chart showing P10, P50, P90 demand trajectories" style="max-width: 85%; display: block; margin: 0 auto;">
+<img src="{{ '/images/fig2-fan-chart.svg' | relative_url }}" alt="Quantile fan chart showing P10, P50, P90 demand trajectories" style="max-width: 85%; display: block; margin: 0 auto;">
 <figcaption data-caption="Quantile fan chart showing demand uncertainty widening with forecast horizon. The dark band is the P25–P75 interval; the light band is P10–P90. The black line is realised demand. Where actuals frequently fall outside the P10–P90 band, the model underestimates uncertainty."></figcaption>
 </figure>
 
@@ -167,7 +167,7 @@ $$q^*_{\text{DRO}} = \mu + \sigma \sqrt{\frac{c_u}{c_o}}$$
 This is a **Scarf-type bound** <cite data-key="scarf_1958"></cite>. It provides a distribution-free guarantee: the expected cost under *any* demand distribution with the given mean and variance is bounded. When the true distribution is far from the assumed one (heavy tails, skewness, regime changes), the distributionally robust solution can dramatically outperform the nominal newsvendor.
 
 <figure class="academic-figure" id="fig-frontier" style="text-align: center; margin: 2rem auto; display: block;">
-<img src="images/fig4-cost-service-frontier.png" alt="Cost-service frontier across policy-model combinations" style="max-width: 85%; display: block; margin: 0 auto;">
+<img src="{{ '/images/fig4-cost-service-frontier.svg' | relative_url }}" alt="Cost-service frontier across policy-model combinations" style="max-width: 85%; display: block; margin: 0 auto;">
 <figcaption data-caption="Trade-off frontier between service level and total expected cost. Each point represents a different combination of forecasting model and inventory policy. The Pareto-efficient frontier reveals which combinations dominate. Distributionally robust policies tend to occupy the high-service, moderate-cost region."></figcaption>
 </figure>
 
@@ -182,7 +182,7 @@ The mechanism is straightforward. Point error metrics like RMSE compress the ful
 This disconnect has practical consequences. If you select models by RMSE, you may be choosing the wrong model for your inventory system. **Decision-aware evaluation**—ranking models by the operational cost they induce—preserves the asymmetry that matters.
 
 <figure class="academic-figure" id="fig-kpi-boxplots" style="text-align: center; margin: 2rem auto; display: block;">
-<img src="images/fig5-kpi-boxplots.png" alt="KPI boxplots from Monte Carlo simulation" style="max-width: 88%; display: block; margin: 0 auto;">
+<img src="{{ '/images/fig5-kpi-boxplots.svg' | relative_url }}" alt="KPI boxplots from Monte Carlo simulation" style="max-width: 88%; display: block; margin: 0 auto;">
 <figcaption data-caption="Distribution of inventory KPIs from Monte Carlo policy simulation. Each boxplot shows stockout rate, holding cost, and total cost across 1,000 demand scenarios. The model with lower RMSE (left group) produces higher total cost due to poor upper-tail calibration."></figcaption>
 </figure>
 
