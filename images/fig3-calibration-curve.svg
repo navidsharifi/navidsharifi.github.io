@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 500" width="520" height="500" style="font-family:'Segoe UI',Arial,sans-serif;background:#fff">
+
+    <line x1="65" y1="445" x2="490" y2="445" stroke="#e8e8e8" stroke-width="0.5"/><line x1="65" y1="30" x2="65" y2="445" stroke="#e8e8e8" stroke-width="0.5"/><text x="57" y="449" text-anchor="end" font-size="11" fill="#555">0.0</text><text x="65" y="463" text-anchor="middle" font-size="11" fill="#555">0.0</text><line x1="65" y1="362" x2="490" y2="362" stroke="#e8e8e8" stroke-width="0.5"/><line x1="150" y1="30" x2="150" y2="445" stroke="#e8e8e8" stroke-width="0.5"/><text x="57" y="366" text-anchor="end" font-size="11" fill="#555">0.2</text><text x="150" y="463" text-anchor="middle" font-size="11" fill="#555">0.2</text><line x1="65" y1="279" x2="490" y2="279" stroke="#e8e8e8" stroke-width="0.5"/><line x1="235" y1="30" x2="235" y2="445" stroke="#e8e8e8" stroke-width="0.5"/><text x="57" y="283" text-anchor="end" font-size="11" fill="#555">0.4</text><text x="235" y="463" text-anchor="middle" font-size="11" fill="#555">0.4</text><line x1="65" y1="195.99999999999997" x2="490" y2="195.99999999999997" stroke="#e8e8e8" stroke-width="0.5"/><line x1="320" y1="30" x2="320" y2="445" stroke="#e8e8e8" stroke-width="0.5"/><text x="57" y="199.99999999999997" text-anchor="end" font-size="11" fill="#555">0.6</text><text x="320" y="463" text-anchor="middle" font-size="11" fill="#555">0.6</text><line x1="65" y1="113" x2="490" y2="113" stroke="#e8e8e8" stroke-width="0.5"/><line x1="405" y1="30" x2="405" y2="445" stroke="#e8e8e8" stroke-width="0.5"/><text x="57" y="117" text-anchor="end" font-size="11" fill="#555">0.8</text><text x="405" y="463" text-anchor="middle" font-size="11" fill="#555">0.8</text><line x1="65" y1="30" x2="490" y2="30" stroke="#e8e8e8" stroke-width="0.5"/><line x1="490" y1="30" x2="490" y2="445" stroke="#e8e8e8" stroke-width="0.5"/><text x="57" y="34" text-anchor="end" font-size="11" fill="#555">1.0</text><text x="490" y="463" text-anchor="middle" font-size="11" fill="#555">1.0</text>
+    <!-- Confidence band -->
+    <path d="M65.0,424.3 L69.3,420.1 L73.5,415.9 L77.8,411.8 L82.0,407.6 L86.3,403.5 L90.5,399.4 L94.8,395.2 L99.0,391.1 L103.3,386.9 L107.5,382.8 L111.8,378.6 L116.0,374.4 L120.3,370.3 L124.5,366.1 L128.8,362.0 L133.0,357.9 L137.3,353.7 L141.5,349.5 L145.8,345.4 L150.0,341.3 L154.3,337.1 L158.5,332.9 L162.8,328.8 L167.0,324.6 L171.3,320.5 L175.5,316.3 L179.8,312.2 L184.0,308.0 L188.3,303.9 L192.5,299.8 L196.8,295.6 L201.0,291.4 L205.3,287.3 L209.5,283.1 L213.8,279.0 L218.0,274.8 L222.3,270.7 L226.5,266.5 L230.8,262.4 L235.0,258.2 L239.3,254.1 L243.5,249.9 L247.8,245.8 L252.0,241.6 L256.3,237.5 L260.5,233.3 L264.8,229.2 L269.0,225.0 L273.3,220.9 L277.5,216.7 L281.8,212.6 L286.0,208.4 L290.3,204.3 L294.5,200.1 L298.8,196.0 L303.0,191.8 L307.3,187.7 L311.5,183.5 L315.8,179.4 L320.0,175.2 L324.3,171.1 L328.5,166.9 L332.8,162.8 L337.0,158.6 L341.3,154.5 L345.5,150.3 L349.8,146.2 L354.0,142.0 L358.3,137.9 L362.5,133.7 L366.8,129.6 L371.0,125.4 L375.3,121.3 L379.5,117.1 L383.8,113.0 L388.0,108.8 L392.3,104.7 L396.5,100.5 L400.8,96.4 L405.0,92.2 L409.3,88.1 L413.5,83.9 L417.8,79.8 L422.0,75.6 L426.3,71.5 L430.5,67.3 L434.8,63.2 L439.0,59.0 L443.3,54.9 L447.5,50.7 L451.8,46.6 L456.0,42.4 L460.3,38.3 L464.5,34.1 L468.8,30.0 L473.0,30.0 L477.3,30.0 L481.5,30.0 L485.8,30.0 L490.0,50.8 L485.8,54.9 L481.5,59.1 L477.3,63.2 L473.0,67.4 L468.8,71.5 L464.5,75.7 L460.3,79.8 L456.0,84.0 L451.7,88.1 L447.5,92.3 L443.2,96.4 L439.0,100.6 L434.7,104.7 L430.5,108.9 L426.2,113.0 L422.0,117.2 L417.7,121.3 L413.5,125.5 L409.2,129.6 L405.0,133.8 L400.7,137.9 L396.5,142.1 L392.2,146.2 L388.0,150.4 L383.7,154.5 L379.5,158.7 L375.2,162.8 L371.0,167.0 L366.7,171.1 L362.5,175.3 L358.2,179.4 L354.0,183.6 L349.7,187.7 L345.5,191.9 L341.2,196.0 L337.0,200.2 L332.7,204.3 L328.5,208.5 L324.2,212.6 L320.0,216.8 L315.7,220.9 L311.5,225.1 L307.2,229.2 L303.0,233.4 L298.7,237.5 L294.5,241.7 L290.2,245.8 L286.0,250.0 L281.7,254.1 L277.5,258.3 L273.2,262.4 L269.0,266.6 L264.7,270.7 L260.5,274.9 L256.2,279.0 L252.0,283.2 L247.7,287.3 L243.5,291.5 L239.2,295.6 L235.0,299.8 L230.7,303.9 L226.5,308.1 L222.2,312.2 L218.0,316.4 L213.7,320.5 L209.5,324.7 L205.2,328.8 L201.0,333.0 L196.7,337.1 L192.5,341.3 L188.2,345.4 L184.0,349.6 L179.7,353.7 L175.5,357.9 L171.2,362.0 L167.0,366.2 L162.7,370.3 L158.5,374.5 L154.2,378.6 L150.0,382.8 L145.7,386.9 L141.5,391.1 L137.2,395.2 L133.0,399.4 L128.7,403.5 L124.5,407.7 L120.2,411.8 L116.0,416.0 L111.7,420.1 L107.5,424.3 L103.2,428.4 L99.0,432.6 L94.7,436.7 L90.5,440.9 L86.2,445.0 L82.0,445.0 L77.7,445.0 L73.5,445.0 L69.2,445.0 Z" fill="#aaa" fill-opacity="0.1" stroke="none"/>
+    <!-- Diagonal (perfect calibration) -->
+    <path d="M65.0,445.0 L490.0,30.0" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="6,4"/>
+    <!-- Model A (well-calibrated) -->
+    <path d="M86.3,420.7 L107.5,397.0 L128.8,386.0 L150.0,358.1 L171.3,329.1 L192.5,318.6 L213.8,297.4 L235.0,289.4 L256.3,254.8 L277.5,238.1 L298.8,211.9 L320.0,207.5 L341.3,176.4 L362.5,145.8 L383.8,124.9 L405.0,112.4 L426.3,91.8 L447.5,68.2 L468.8,44.1" fill="none" stroke="#2563eb" stroke-width="2.2"/>
+    <circle cx="86.3" cy="420.7" r="3.5" fill="#2563eb"/>
+<circle cx="107.5" cy="397.0" r="3.5" fill="#2563eb"/>
+<circle cx="128.8" cy="386.0" r="3.5" fill="#2563eb"/>
+<circle cx="150.0" cy="358.1" r="3.5" fill="#2563eb"/>
+<circle cx="171.3" cy="329.1" r="3.5" fill="#2563eb"/>
+<circle cx="192.5" cy="318.6" r="3.5" fill="#2563eb"/>
+<circle cx="213.8" cy="297.4" r="3.5" fill="#2563eb"/>
+<circle cx="235.0" cy="289.4" r="3.5" fill="#2563eb"/>
+<circle cx="256.3" cy="254.8" r="3.5" fill="#2563eb"/>
+<circle cx="277.5" cy="238.1" r="3.5" fill="#2563eb"/>
+<circle cx="298.8" cy="211.9" r="3.5" fill="#2563eb"/>
+<circle cx="320.0" cy="207.5" r="3.5" fill="#2563eb"/>
+<circle cx="341.3" cy="176.4" r="3.5" fill="#2563eb"/>
+<circle cx="362.5" cy="145.8" r="3.5" fill="#2563eb"/>
+<circle cx="383.8" cy="124.9" r="3.5" fill="#2563eb"/>
+<circle cx="405.0" cy="112.4" r="3.5" fill="#2563eb"/>
+<circle cx="426.3" cy="91.8" r="3.5" fill="#2563eb"/>
+<circle cx="447.5" cy="68.2" r="3.5" fill="#2563eb"/>
+<circle cx="468.8" cy="44.1" r="3.5" fill="#2563eb"/>
+    <!-- Model B (overconfident) -->
+    <path d="M86.3,414.8 L107.5,399.3 L128.8,386.9 L150.0,358.7 L171.3,337.1 L192.5,314.1 L213.8,297.9 L235.0,274.7 L256.3,249.7 L277.5,233.4 L298.8,211.6 L320.0,203.4 L341.3,172.1 L362.5,157.3 L383.8,136.7 L405.0,121.6 L426.3,85.4 L447.5,74.4 L468.8,57.7" fill="none" stroke="#e74c3c" stroke-width="2.2"/>
+    <circle cx="86.3" cy="414.8" r="3.5" fill="#e74c3c"/>
+<circle cx="107.5" cy="399.3" r="3.5" fill="#e74c3c"/>
+<circle cx="128.8" cy="386.9" r="3.5" fill="#e74c3c"/>
+<circle cx="150.0" cy="358.7" r="3.5" fill="#e74c3c"/>
+<circle cx="171.3" cy="337.1" r="3.5" fill="#e74c3c"/>
+<circle cx="192.5" cy="314.1" r="3.5" fill="#e74c3c"/>
+<circle cx="213.8" cy="297.9" r="3.5" fill="#e74c3c"/>
+<circle cx="235.0" cy="274.7" r="3.5" fill="#e74c3c"/>
+<circle cx="256.3" cy="249.7" r="3.5" fill="#e74c3c"/>
+<circle cx="277.5" cy="233.4" r="3.5" fill="#e74c3c"/>
+<circle cx="298.8" cy="211.6" r="3.5" fill="#e74c3c"/>
+<circle cx="320.0" cy="203.4" r="3.5" fill="#e74c3c"/>
+<circle cx="341.3" cy="172.1" r="3.5" fill="#e74c3c"/>
+<circle cx="362.5" cy="157.3" r="3.5" fill="#e74c3c"/>
+<circle cx="383.8" cy="136.7" r="3.5" fill="#e74c3c"/>
+<circle cx="405.0" cy="121.6" r="3.5" fill="#e74c3c"/>
+<circle cx="426.3" cy="85.4" r="3.5" fill="#e74c3c"/>
+<circle cx="447.5" cy="74.4" r="3.5" fill="#e74c3c"/>
+<circle cx="468.8" cy="57.7" r="3.5" fill="#e74c3c"/>
+    <!-- Axes -->
+    <line x1="65" y1="30" x2="65" y2="445" stroke="#333" stroke-width="1.2"/>
+    <line x1="65" y1="445" x2="490" y2="445" stroke="#333" stroke-width="1.2"/>
+    <!-- Labels -->
+    <text x="277.5" y="492" text-anchor="middle" font-size="13" fill="#333">Nominal Quantile Level</text>
+    <text x="16" y="237.5" text-anchor="middle" font-size="13" fill="#333" transform="rotate(-90,16,237.5)">Empirical Coverage</text>
+    <!-- Annotations -->
+    <text x="184" y="270.70000000000005" font-size="11" fill="#888" transform="rotate(-38,184,270.70000000000005)">Underconfident</text>
+    <text x="298.75" y="287.3" font-size="11" fill="#888" transform="rotate(-38,298.75,287.3)">Overconfident</text>
+    <!-- Legend -->
+    <rect x="73" y="36" width="175" height="55" rx="4" fill="white" fill-opacity="0.92" stroke="#ccc"/>
+    <line x1="83" y1="52" x2="105" y2="52" stroke="#2563eb" stroke-width="2.2"/>
+    <circle cx="94" cy="52" r="3.5" fill="#2563eb"/>
+    <text x="111" y="56" font-size="11" fill="#333">Well-calibrated model</text>
+    <line x1="83" y1="72" x2="105" y2="72" stroke="#e74c3c" stroke-width="2.2"/>
+    <circle cx="94" cy="72" r="3.5" fill="#e74c3c"/>
+    <text x="111" y="76" font-size="11" fill="#333">Overconfident model</text>
+    <line x1="83" y1="86" x2="105" y2="86" stroke="#999" stroke-width="1" stroke-dasharray="6,4"/>
+    <text x="111" y="89" font-size="10" fill="#888">Perfect calibration</text>
+  
+</svg>
