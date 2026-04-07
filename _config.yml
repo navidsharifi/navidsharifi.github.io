@@ -161,14 +161,6 @@ about_content: | # this will include new lines to allow paragraphs
     </ul>
   </section>
   
-  <section>
-    <h3>Languages</h3>
-    <ul>
-        <li><strong>English</strong>: IELTS Academic 7.0</li>
-        <li><strong>Kurdish</strong>: Native</li>
-    </ul>
-  </section>
-  
 #        I am a Master's student pursuing a specialization in Artificial Intelligence at the University of Essex.
 #      With over three years of hands-on experience, my passion lies in the realm of deep learning and autonomous agents.
 #
