@@ -154,10 +154,14 @@ about_content: | # this will include new lines to allow paragraphs
   
   <section>
     <h3>Interests</h3>
+    <p>
+      I am particularly interested in simulation-based optimisation approaches, where analytical models and simulation are combined to address complex and uncertain decision problems.
+    </p>
     <ul>
-        <li>Business Analytics and AI</li>
-        <li>Generative Models for Business Analytics</li>
-        <li>Startup Success Prediction using LLMs</li>
+      <li>Supply chain operations optimisation (discrete-event simulation)</li>
+      <li>Queue systems modelling in logistics networks</li>
+      <li>Simulation-based analysis of resource allocation</li>
+      <li>Simulation approaches for operational decision-making problems</li>
     </ul>
   </section>
   
