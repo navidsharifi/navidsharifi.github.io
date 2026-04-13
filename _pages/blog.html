@@ -9,7 +9,7 @@ comments: false
     <h3 class="section-title">{{ site.blog_title | default: "Blog" }}</h3>
 
     <!-- Featured Posts Section (both internal and external) -->
-    {% assign featured_internal = site.blog_posts | where: "featured", true | sort: "date" | reverse %}
+    {% assign featured_internal = site.blog_posts | where_exp: "post", "post.hidden != true" | where: "featured", true | sort: "date" | reverse %}
     {% if site.data.blog_posts %}
     {% assign featured_external = site.data.blog_posts | where: "featured", true | sort: "date" | reverse %}
     {% else %}
@@ -96,7 +96,7 @@ comments: false
         <div class="blog-posts-list">
 
             <!-- Internal posts sorted by date (most recent first) -->
-            {% assign internal_posts = site.blog_posts | sort: "date" | reverse %}
+            {% assign internal_posts = site.blog_posts | where_exp: "post", "post.hidden != true" | sort: "date" | reverse %}
             {% for post in internal_posts %}
             <!-- Internal Blog Post -->
             <a href="{{ post.url }}" class="blog-card-link">
