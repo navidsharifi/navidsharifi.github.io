@@ -131,9 +131,9 @@ about_content: | # this will include new lines to allow paragraphs
   <section>
     <h3>About</h3>
   <p>
-  With a strong background in controlling EPC projects for large-scale initiatives, I have developed extensive project management expertise.
-  My experience in business and system analysis, coupled with process re-engineering, has equipped me with the ability to effectively manage IT and business analytics projects.
-  Through hands-on experience in the field, I have gained a practical understanding of complex project environments, preparing me for advanced studies in business analytics and project management.
+  With a background in project management, I am experienced in controlling EPC projects for large-scale initiatives. During the project, I developed practical skills in managing complex systems, coordinating different stakeholders, and understanding how decisions affect project performance in real-world environments.
+  Alongside this, Building experience in business and system analysis, as well as process re-engineering, was me further step. How data and analytical methods can be used to improve business operations and support better decision-making is what I am working on. I am learning simulation models, such as discrete-event simulation, to analyse system performance and explore ways to improve efficiency under uncertainty.
+  Combining my PM experience with analytical and modelling approaches to better understand and improve operational systems further develops my theoretical knowledge.
   </p>
   </section>
   
@@ -143,11 +143,11 @@ about_content: | # this will include new lines to allow paragraphs
   <summary><strong>▸ Areas of expertise <span class="badge badge-soon">Click to expand</span></strong></summary>
   <br>
   <ul>
-    <li><strong>Project Management</strong>: PMBOK standards, project planning & control, claim management, Primavera P6, Microsoft Project</li>
-    <li><strong>Business Analytics</strong>: Power BI & DAX, KPI analysis & monitoring, data mining, mathematical modelling & optimisation</li>
-    <li><strong>Business Process Re-engineering</strong>: System analytics, BPR, process mining, change management</li>
-    <li><strong>Data Analysis</strong>: Python, SQL Server, ETL processes, feature engineering, clustering</li>
-    <li><strong>Optimisation & Modelling</strong>: GAMS, Excel VBA, cost function modelling, EOQ inventory control</li>
+    <li><strong>Project Management &amp; Operations</strong>: Project planning and control based on PMBOK standards, with experience in EPC project environments. Skilled in project life-cycle management and knowledge areas, specifically scheduling and resource management.</li>
+    <li><strong>Business Analytics &amp; Decision Support</strong>: Experience in data-driven decision-making, including KPI development, performance monitoring, and dashboard design.</li>
+    <li><strong>Operational Research &amp; Modelling</strong>: Strong interest in optimisation and modelling, including mathematical modelling, cost function analysis, and inventory control systems.</li>
+    <li><strong>Data Analysis &amp; ML</strong>: Familiar with Python and SQL Server for data analysis and manipulation. Experience with ETL processes, feature engineering, and ML supervised and unsupervised algorithms.</li>
+    <li><strong>Business Process Improvement</strong>: Background in business process re-engineering, including system analysis, process mining, evaluation, and modelling.</li>
   </ul>
   </details>
   </section>
