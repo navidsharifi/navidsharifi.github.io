@@ -139,7 +139,9 @@ comments: false
     <div class="row">
 
         {% for post in site.posts %}
+        {% unless post.hidden %}
         {% include postbox.html %}
+        {% endunless %}
 
         {% endfor %}
 
