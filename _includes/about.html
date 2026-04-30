@@ -1,3 +1,19 @@
+<style>
+  .intro-content section + section {
+    margin-top: 3.2rem;
+  }
+
+  .intro-content section h3 {
+    margin-bottom: 1.4rem;
+  }
+
+  .intro-content section p:last-child,
+  .intro-content section ul:last-child,
+  .intro-content section details:last-child {
+    margin-bottom: 0;
+  }
+</style>
+
 <div class="container intro-container">
   <!-- <h2 class="section-title">{{ site.about_title | default: "About Me" }}</h2> -->
   <div class="row clearfix">
@@ -6,7 +22,7 @@
         <img class="profile-img" src="{{ site.about_profile_image | relative_url }}" alt="{{ site.name | default: 'Profile photo' }}">
       </div>
     {%- endif -%}
-    <div class="{{ 'col-xs-12 ' }}{%- if site.about_profile_image -%}col-sm-8 col-md-9 col-print-12{%- endif -%}">
+    <div class="intro-content {{ 'col-xs-12 ' }}{%- if site.about_profile_image -%}col-sm-8 col-md-9 col-print-12{%- endif -%}">
       {{ site.about_content | strip | markdownify }}
     </div>
   </div>
