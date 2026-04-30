@@ -1,0 +1,52 @@
+Research project collaborator at Cardiff University
+Advisor: Proff. Bahman Rostami-Tabar
+
+Understanding Input-Output-Performance Relationships in Immunisation Supply Chain
+
+# Why This Research Matters
+
+Every year, millions of children in low- and middle-income countries miss out on vaccines
+that could protect them from measles, polio, tetanus, and other preventable diseases. In
+2024, 14.3 million children received no vaccinations at all. Many of these children live
+in places where vaccines exist — the problem is not that vaccines were not produced or
+purchased. The problem is that the supply chain that was supposed to deliver them to those
+children failed.
+
+Immunisation supply chains are complex. A vaccine produced at a factory in Europe or India
+must travel through a national store, a regional warehouse, a district health office, and
+finally to a health centre where a nurse gives the injection. Along the entire journey, the
+vaccine must be kept within a specific temperature range — usually between 2°C and 8°C for
+most vaccines, and below −15°C for some. It must arrive before its expiry date. It must be
+the right vaccine, in the right quantity, at the right time. If any link in this chain fails,
+the vaccine may be wasted, damaged, or simply unavailable when a child needs it.
+
+Governments, international organisations like WHO and UNICEF, and donors like GAVI invest
+enormous resources in trying to fix these supply chains. They pay for refrigerators, vehicles,
+training programmes, information systems, and management procedures. Despite this investment,
+supply chain failures remain stubbornly common. Vaccines are still damaged by heat. Stock-outs
+still occur. Forecasts are still inaccurate. Waste is still disposed of unsafely.
+
+This raises a fundamental question: **why does investment in supply chain inputs not reliably
+translate into better supply chain performance?**
+
+This research sets out to answer that question.
+
+
+# The EVM Framework: A Unique Window into Supply Chain Operations
+
+## What EVM Is
+
+The Effective Vaccine Management (EVM) framework is a standardised assessment tool developed
+by WHO and UNICEF and deployed in more than 80 countries. It is used to evaluate how well
+health facilities — from national stores to small rural health centres — are managing their
+immunisation supply chains.
+
+What makes EVM unusual, and what makes it so valuable for research, is that it does not just
+ask "is this facility performing well?" It asks three separate questions simultaneously:
+
+1. Does the facility have the right **functions/resources**?
+2. Is the facility **doing** the right things with those resources/fucntions?
+3. Is the facility **achieving** the right results?
+
+These three questions correspond to three types of requirements in the EVM framework, which
+we call **Inputs**, **Outputs**, and **Performance**.

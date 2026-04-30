@@ -2,7 +2,7 @@
 
 #description: "Jekyll template, Medium styled, free for bloggers."
 logo: 'images/profile.jpg'
-favicon: 'images/profile.jpg'
+favicon: 'images/profile.png'
 baseurl: '/'
 google_analytics: 'UA-46278016-1'
 #disqus: 'demowebsite'
@@ -132,7 +132,7 @@ about_content: | # this will include new lines to allow paragraphs
     <h3>About</h3>
   <p>
   With a background in project management, I am experienced in controlling EPC projects for large-scale initiatives. During the project, I developed practical skills in managing complex systems, coordinating different stakeholders, and understanding how decisions affect project performance in real-world environments.
-  Alongside this, Building experience in business and system analysis, as well as process re-engineering, was me further step. How data and analytical methods can be used to improve business operations and support better decision-making is what I am working on. I am learning simulation models, such as discrete-event simulation, to analyse system performance and explore ways to improve efficiency under uncertainty.
+  Alongside this, building experience in business and system analysis, as well as process re-engineering, was my next step. How data and analytical methods can be used to improve business operations and support better decision-making is what I am working on. I am learning simulation models, such as discrete-event simulation, to analyse system performance and explore ways to improve efficiency under uncertainty.
   Combining my PM experience with analytical and modelling approaches to better understand and improve operational systems further develops my theoretical knowledge.
   </p>
   </section>
@@ -153,7 +153,7 @@ about_content: | # this will include new lines to allow paragraphs
   </section>
   
   <section>
-    <h3>Interests</h3>
+    <h3>Research Interest</h3>
     <p>
       I am particularly interested in simulation-based optimisation approaches, where analytical models and simulation are combined to address complex and uncertain decision problems.
     </p>

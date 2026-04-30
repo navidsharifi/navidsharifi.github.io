@@ -1,5 +1,16 @@
 
 - layout: left-projects-page
+  name: Understanding Input-Output-Performance Relationships in Immunisation Supply Chain
+  year: 2026
+  featured: true
+  link: /projects/evm-immunisation-supply-chain/
+  description: >
+    Research project collaborator at Cardiff University (Advisor: Prof. Bahman Rostami-Tabar). This project studies why investments in immunisation supply chains do not always improve real-world outcomes.<br>
+    Using the WHO-UNICEF Effective Vaccine Management (EVM) framework, the research links three dimensions of facility performance: <b>Inputs</b> (resources/functions), <b>Outputs</b> (process execution), and <b>Performance</b> (service outcomes).<br>
+    Focus areas include cold-chain reliability, stock-out risk, forecast quality, vaccine wastage, and last-mile delivery performance in low- and middle-income countries.<br>
+    <b>Keywords</b> -- Immunisation Supply Chain, EVM, Health Systems, Vaccine Logistics, LMICs, Data-Driven Performance Analysis<br>
+
+- layout: left-projects-page
   name: Fleet Management & Inventory Control System
   description: >
     2024<br>

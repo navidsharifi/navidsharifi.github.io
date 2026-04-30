@@ -8,6 +8,19 @@
   {%- include menubar.html -%}
   {%- include header.html -%}
 
+  <style>
+    body.dark .page-content .intro-content section h3,
+    body.dark .page-content .education-container > .section-title,
+    body.dark .page-content .experience-container > .section-title,
+    body.dark .page-content .projects-container > .section-title,
+    body:not(.dark) .page-content .intro-content section h3,
+    body:not(.dark) .page-content .education-container > .section-title,
+    body:not(.dark) .page-content .experience-container > .section-title,
+    body:not(.dark) .page-content .projects-container > .section-title {
+      color: #eab308 !important;
+    }
+  </style>
+
   <main class="page-content" aria-label="Content">
     <div class="wrapper">
       {%- if jekyll.environment == 'production' and site.gtm -%}

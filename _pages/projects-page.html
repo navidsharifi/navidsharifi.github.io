@@ -110,43 +110,64 @@ comments: false
 
 </style>
 
-{% if page.url == "/projects-page" %}
+{% assign featured_projects = site.data["projects-page"] | where: "featured", true %}
+{% assign all_projects = site.data["projects-page"] %}
 
-<!-- Featured
-================================================== -->
-<section class="container featured-posts">
+{% if featured_projects.size > 0 %}
+<section class="container featured-posts blog-listing-container">
     <h3 class="section-title">Featured</h3>
-    <div class="row">
-        {% for post in site.posts %}
-
-        {% if post.featured == true %}
-        {% include featuredbox.html %}
+    <div class="blog-featured-grid">
+        {% for project in featured_projects %}
+        {% if project.link %}
+        <a href="{{ project.link }}" class="blog-featured-card-link">
         {% endif %}
-
+        <article class="blog-featured-card blog-featured-card-external">
+            <div class="blog-featured-content">
+                <h5 class="blog-featured-title">{{ project.name }}</h5>
+                <p class="blog-featured-excerpt">{{ project.description | strip_html | truncatewords: 35 }}</p>
+                {% if project.year %}
+                <div class="blog-featured-meta">
+                    <span class="blog-post-date">{{ project.year }}</span>
+                </div>
+                {% endif %}
+            </div>
+        </article>
+        {% if project.link %}
+        </a>
+        {% endif %}
         {% endfor %}
-
     </div>
 </section>
-
 {% endif %}
 
-<!-- Posts Index
-================================================== -->
-<div class="container recent-posts">
-
+<div class="container recent-posts blog-listing-container">
     <h3 class="section-title">All Projects</h3>
-
-    <div class="row">
-
-        {% for post in site.posts %}
-        {% unless post.hidden %}
-        {% include postbox.html %}
-        {% endunless %}
-
+    <div class="blog-posts-list">
+        {% for project in all_projects %}
+        {% if project.link %}
+        <a href="{{ project.link }}" class="blog-card-link">
+        {% endif %}
+        <article class="blog-card blog-card-external">
+            <div class="blog-card-image blog-card-image-placeholder">
+                <i class="fa fa-code-branch"></i>
+            </div>
+            <div class="blog-card-content">
+                <div class="blog-card-header">
+                    <h5 class="blog-card-title">{{ project.name }}</h5>
+                </div>
+                <p class="blog-card-excerpt">{{ project.description | strip_html | truncatewords: 55 }}</p>
+                {% if project.link %}
+                <div class="blog-card-footer">
+                    <span class="blog-read-more">Open project <i class="fa fa-arrow-right"></i></span>
+                </div>
+                {% endif %}
+            </div>
+        </article>
+        {% if project.link %}
+        </a>
+        {% endif %}
         {% endfor %}
-
     </div>
-
 </div>
 
 <!-- Pagination

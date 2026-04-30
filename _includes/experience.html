@@ -1,3 +1,13 @@
+<style>
+  .experience-container .layout.layout-left {
+    margin-bottom: 3rem;
+  }
+
+  .experience-container .layout.layout-left:last-child {
+    margin-bottom: 0;
+  }
+</style>
+
 <div class="container experience-container">
   <h3 class="section-title">{{ site.experience_title | default: "Experience" }}</h3>
   {% for experience in site.data.experience %}
