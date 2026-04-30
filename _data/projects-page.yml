@@ -35,6 +35,7 @@
 
 - layout: left-projects-page
   name: Startup Success Prediction (BSc Thesis)
+  image: /images/startup_thumb.jpg
   description: >
     2017-2018<br>
     <b>Predicting startup success using ML and network analysis.</b> Leveraged crunchbase.com data, network-based feature selection, 13% accuracy improvement.<br>
