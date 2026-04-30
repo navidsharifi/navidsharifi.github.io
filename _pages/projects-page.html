@@ -122,6 +122,11 @@ comments: false
         <a href="{{ project.link }}" class="blog-featured-card-link">
         {% endif %}
         <article class="blog-featured-card blog-featured-card-external">
+            {% if project.image %}
+            <div class="blog-featured-image">
+                <img src="{% if project.image contains '://' %}{{ project.image }}{% else %}{{ project.image | relative_url }}{% endif %}" alt="{{ project.name }}" loading="lazy" decoding="async">
+            </div>
+            {% endif %}
             <div class="blog-featured-content">
                 <h5 class="blog-featured-title">{{ project.name }}</h5>
                 <p class="blog-featured-excerpt">{{ project.description | strip_html | truncatewords: 35 }}</p>
@@ -148,9 +153,15 @@ comments: false
         <a href="{{ project.link }}" class="blog-card-link">
         {% endif %}
         <article class="blog-card blog-card-external">
+            {% if project.image %}
+            <div class="blog-card-image">
+                <img src="{% if project.image contains '://' %}{{ project.image }}{% else %}{{ project.image | relative_url }}{% endif %}" alt="{{ project.name }}" loading="lazy" decoding="async">
+            </div>
+            {% else %}
             <div class="blog-card-image blog-card-image-placeholder">
                 <i class="fa fa-code-branch"></i>
             </div>
+            {% endif %}
             <div class="blog-card-content">
                 <div class="blog-card-header">
                     <h5 class="blog-card-title">{{ project.name }}</h5>
