@@ -1,5 +1,9 @@
 <div class="container education-container">
-  <h3 class="section-title">{{ site.education_title | default: "Education" }}</h3>
+  <div class="row clearfix">
+    <div class="col-xs-12 col-sm-offset-4 col-sm-8 col-md-offset-3 col-md-9 col-print-12">
+      <h3 class="section-title">{{ site.education_title | default: "Education" }}</h3>
+    </div>
+  </div>
   {% for education in site.data.education %}
     {% include {{ education.layout | default: 'left' | append: ".html" }} item=education %}
   {% endfor %}

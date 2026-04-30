@@ -3,6 +3,13 @@
     margin-top: 3.2rem;
   }
 
+  .intro-content section p,
+  .intro-content section ul,
+  .intro-content section ol {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
   .intro-content section h3 {
     margin-bottom: 1.4rem;
   }
@@ -14,7 +21,7 @@
   }
 </style>
 
-<div class="container intro-container">
+<div class="container intro-container{% if site.about_profile_image %} has-profile{% endif %}">
   <!-- <h2 class="section-title">{{ site.about_title | default: "About Me" }}</h2> -->
   <div class="row clearfix">
     {%- if site.about_profile_image -%}
