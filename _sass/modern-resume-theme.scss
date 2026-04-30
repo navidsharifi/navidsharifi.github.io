@@ -1054,6 +1054,13 @@
   }
 }
 
+.projects-container .layout-left .details .left-meta-text,
+.experience-container .layout-left .details .left-meta-text,
+.education-container .layout-left .details .left-meta-text {
+  font-style: italic;
+  font-size: 0.9em;
+}
+
 // Skills Section Styling - Professional and Theme-Consistent
 .skills-container {
   background-color: var(--bg-color);
