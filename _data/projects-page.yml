@@ -4,6 +4,7 @@
   year: 2026
   featured: true
   link: /projects/evm-immunisation-supply-chain/
+  image: /images/evm_thumb.jpg
   description: >
     Research project collaborator at Cardiff University (Advisor: Prof. Bahman Rostami-Tabar). This project studies why investments in immunisation supply chains do not always improve real-world outcomes.<br>
     Using the WHO-UNICEF Effective Vaccine Management (EVM) framework, the research links three dimensions of facility performance: <b>Inputs</b> (resources/functions), <b>Outputs</b> (process execution), and <b>Performance</b> (service outcomes).<br>
@@ -12,6 +13,7 @@
 
 - layout: left-projects-page
   name: Fleet Management & Inventory Control System
+  image: /images/Fleet_management_thumb.jpg
   description: >
     2024<br>
     <b>End-to-end fleet management and inventory control system.</b> Fleet tracking, cost function modelling (GAMS), EOQ inventory control (VBA), KPI dashboards (Power BI).<br>
