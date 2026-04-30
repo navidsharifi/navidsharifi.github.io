@@ -1,7 +1,7 @@
 <div class="row clearfix layout layout-left">
     <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 details">
-      {%- if include.item.name -%}<h3>{{ include.item.name }}{% if include.item.badge %} {{ include.item.badge }}{% endif %}</h3>{%- endif -%}
-      {%- if include.item.company -%}<h3>{{ include.item.company }}{% if include.item.badge %} {{ include.item.badge }}{% endif %}</h3>{%- endif -%}
+  {%- if include.item.name -%}<h3 class="left-meta-text">{{ include.item.name }}{% if include.item.badge %} {{ include.item.badge }}{% endif %}</h3>{%- endif -%}
+  {%- if include.item.company -%}<h3 class="left-meta-text">{{ include.item.company }}{% if include.item.badge %} {{ include.item.badge }}{% endif %}</h3>{%- endif -%}
 
       {%- if include.item.link -%}
         {%- if include.item.github -%}
@@ -13,12 +13,12 @@
 
         {%- endif -%}
       {%- endif -%}
-      {%- if include.item.job_title -%}<h4>{{ include.item.job_title }}</h4>{%- endif -%}
-      {%- if include.item.qualification -%}<h4>{{ include.item.qualification }}</h4>{%- endif -%}
-      {%- if include.item.dates -%}<p>{{ include.item.dates }}</p>{%- endif -%}
+      {%- if include.item.job_title -%}<h4 class="left-meta-text">{{ include.item.job_title }}</h4>{%- endif -%}
+      {%- if include.item.qualification -%}<h4 class="left-meta-text">{{ include.item.qualification }}</h4>{%- endif -%}
+      {%- if include.item.dates -%}<p class="left-meta-text">{{ include.item.dates }}</p>{%- endif -%}
       {% for job in include.item.jobs %}
-        <h4>{{ job.title }}</h4>
-        <p>{{ job.dates }}</p>
+        <h4 class="left-meta-text">{{ job.title }}</h4>
+        <p class="left-meta-text">{{ job.dates }}</p>
       {% endfor %}
     </div>
     <div class="col-xs-12 col-sm-8 col-md-9 col-print-12">
