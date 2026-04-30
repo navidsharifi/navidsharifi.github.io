@@ -1,5 +1,9 @@
 <div class="container projects-container">
-  <h3 class="section-title">{{ site.projects_title | default: "Projects" }}</h3>
+  <div class="row clearfix">
+    <div class="col-xs-12 col-sm-offset-4 col-sm-8 col-md-offset-3 col-md-9 col-print-12">
+      <h3 class="section-title">{{ site.projects_title | default: "Projects" }}</h3>
+    </div>
+  </div>
   {% for project in site.data.projects %}
     {% include {{ project.layout | default: 'left' | append: ".html" }} item=project %}
   {% endfor %}
