@@ -29,6 +29,7 @@
 
 - layout: left-projects-page
   name: Sina Hospital Data Analytics
+  image: /images/sinahospital_thumb.jpg
   description: >
     2018-2019<br>
     <b>Interactive BI dashboards and healthcare analytics.</b> KPI monitoring, sales data analysis, ETL, data preprocessing, feature engineering, clustering.<br>
