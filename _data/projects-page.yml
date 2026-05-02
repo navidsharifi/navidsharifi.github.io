@@ -21,6 +21,7 @@
 
 - layout: left-projects-page
   name: EPC Crusher Plant Project Control
+  image: /images/epc_thumb.jpg
   description: >
     2020-2022<br>
     <b>Project control for large-scale EPC project.</b> Weekly progress reports, S-Curve tracking, PMBOK compliance, delay analysis, and claim management.<br>
@@ -43,6 +44,7 @@
 
 - layout: left-projects-page
   name: Newroz Hotel MIS
+  image: /images/mis_thumb.jpg
   description: >
     2016-2017<br>
     <b>Management Information System for Newroz Hotel.</b> Database design, process modelling, reporting dashboards.<br>
