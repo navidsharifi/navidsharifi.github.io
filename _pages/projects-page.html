@@ -108,6 +108,13 @@ comments: false
     }
 }
 
+/* Optora logo is a wide banner - contain instead of crop so the full mark is visible */
+.blog-card-image img[alt="Optora"],
+.blog-featured-image img[alt="Optora"] {
+    object-fit: contain;
+    background: #000;
+    padding: 0.75rem;
+}
 </style>
 
 {% assign featured_projects = site.data["projects-page"] | where: "featured", true %}
