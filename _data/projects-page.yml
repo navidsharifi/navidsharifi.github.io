@@ -2,6 +2,7 @@
 - layout: left-projects-page
   name: Optora
   link: /optora/
+  image: /images/Optora_logo.jpeg
   description: >
     Apr 2026 - Present<br>
     <b>GPU-first PyTorch library for distributionally robust optimization (DRO).</b> Five ambiguity sets (KL, phi-divergence, chi-square, total variation, Wasserstein) behind one composable API, with convex-dual and closed-form solvers verified against known mathematics.<br>
