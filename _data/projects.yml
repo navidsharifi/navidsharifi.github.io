@@ -9,6 +9,15 @@
 #    Description about the work on/with the project
 
 - layout: left
+  name: Optora
+  link: https://navidsharifi.github.io/optora/
+  github: navidsharifi/optora
+  dates: Apr 2026 - Present
+  description: >
+    <b>GPU-first PyTorch library for distributionally robust optimization (DRO).</b> Provides five ambiguity sets (KL, phi-divergence, chi-square, total variation, Wasserstein) behind one `AmbiguitySet` contract, with convex-dual and closed-form solvers verified against known mathematics.<br>
+    <span style="color:#888">PyTorch · Distributionally Robust Optimization · Convex Optimization · Python</span>
+
+- layout: left
   name: Fleet Management & Inventory Control System
   description: >
     <b>End-to-end fleet management and inventory control system for a carrier and storage tanks.</b> Implemented fleet tracking, mathematical modelling for cost functions, EOQ inventory control, and KPI dashboards.<br>
