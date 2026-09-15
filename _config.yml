@@ -131,38 +131,18 @@ about_content: | # this will include new lines to allow paragraphs
   <section>
     <h3>About</h3>
   <p>
-  With a background in project management, I am experienced in controlling EPC projects for large-scale initiatives. During the project, I developed practical skills in managing complex systems, coordinating different stakeholders, and understanding how decisions affect project performance in real-world environments.
-  Alongside this, building experience in business and system analysis, as well as process re-engineering, was my next step. How data and analytical methods can be used to improve business operations and support better decision-making is what I am working on. I am learning simulation models, such as discrete-event simulation, to analyse system performance and explore ways to improve efficiency under uncertainty.
-  Combining my PM experience with analytical and modelling approaches to better understand and improve operational systems further develops my theoretical knowledge.
+  With a background in <strong>industrial engineering</strong>, I bring hands-on experience in <strong>EPC project management for large-scale industrial systems</strong>, <strong>business and system analysis in fleet management projects</strong>, and <strong>IT project management using agile methodology</strong>, alongside a growing focus on how data-driven and analytical methods can improve business operations and support better decision-making — combining practical project management experience with rigorous analytical and modelling techniques to bridge theory and real-world operational challenges.
   </p>
   </section>
   
   <section>
-    <h3>Key Expertise</h3>
-  <details>
-  <summary><strong>▸ Areas of expertise <span class="badge badge-soon">Click to expand</span></strong></summary>
-  <br>
-  <ul>
-    <li><strong>Project Management &amp; Operations</strong>: Project planning and control based on PMBOK standards, with experience in EPC project environments. Skilled in project life-cycle management and knowledge areas, specifically scheduling and resource management.</li>
-    <li><strong>Business Analytics &amp; Decision Support</strong>: Experience in data-driven decision-making, including KPI development, performance monitoring, and dashboard design.</li>
-    <li><strong>Operational Research &amp; Modelling</strong>: Strong interest in optimisation and modelling, including mathematical modelling, cost function analysis, and inventory control systems.</li>
-    <li><strong>Data Analysis &amp; ML</strong>: Familiar with Python and SQL Server for data analysis and manipulation. Experience with ETL processes, feature engineering, and ML supervised and unsupervised algorithms.</li>
-    <li><strong>Business Process Improvement</strong>: Background in business process re-engineering, including system analysis, process mining, evaluation, and modelling.</li>
-  </ul>
-  </details>
-  </section>
-  
-  <section>
-    <h3>Research Interest</h3>
+    <h3>Research Interests</h3>
     <p>
-      I am particularly interested in simulation-based optimisation approaches, where analytical models and simulation are combined to address complex and uncertain decision problems.
+      I work on robust decision-making under distributional uncertainty, where the interesting part is not the nominal model but the ambiguity around it. I use distributionally robust optimization (DRO) with &phi;-divergence and Wasserstein ambiguity sets, optimal transport and Sinkhorn divergences as the geometric backbone, convex duality for tractable worst-case reformulations, and minimax/saddle-point methods to solve the resulting robust-adversarial games at scale.
     </p>
-    <ul>
-      <li>Supply chain operations optimisation (discrete-event simulation)</li>
-      <li>Queue systems modelling in logistics networks</li>
-      <li>Simulation-based analysis of resource allocation</li>
-      <li>Simulation approaches for operational decision-making problems</li>
-    </ul>
+    <p>
+      <strong>Current focus:</strong> A unified, GPU-native treatment of Wasserstein-based DRO as a differentiable optimization layer &mdash; connecting convex duality, saddle-point solvers, and optimal transport geometry into a single scalable framework for decision-making that stays reliable when the data-generating distribution shifts.
+    </p>
   </section>
   
 #        I am a Master's student pursuing a specialization in Artificial Intelligence at the University of Essex.
