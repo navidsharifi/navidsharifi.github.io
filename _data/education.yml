@@ -1,4 +1,9 @@
 - layout: left
+  name: University of Essex
+  qualification: MSC Business Analytics
+  dates: 2026 - 2027
+
+- layout: left
   name: University of Kurdistan
   dates: 2013 - 2018
   qualification: BSc Industrial Engineering
@@ -9,8 +14,3 @@
     Projects:
     - Management information system development — database design, process modelling, and reporting dashboards.
     - Work and time evaluation project — data analysis, process optimisation, and reporting.
-
-- layout: left
-  name: University of Essex
-  qualification: MSC Business Analytics
-  dates: 2026 - 2027
