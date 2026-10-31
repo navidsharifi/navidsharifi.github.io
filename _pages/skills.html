@@ -4,8 +4,56 @@ title: Technical Expertise
 permalink: /skills
 comments: false
 ---
-<div class="container skills-container">
-    {%- if site.data.skills.size > 0 -%}
-    {%- include skill.html -%}
-    {%- endif -%}
+
+<header class="container page-header">
+  <p class="eyebrow" data-reveal><span class="dot" aria-hidden="true"></span>Toolkit</p>
+  <h1 data-reveal>{{ site.skills_title | default: "Skills" }}</h1>
+</header>
+
+<div class="container listing">
+  {%- for skill in site.data.skills %}
+    {%- if skill.type == 'technical' or skill.type == 'research' %}
+      {%- for category in skill.items %}
+      <section class="skills-group" data-reveal>
+        <h3>{{ category.category }}</h3>
+        <div>
+          {%- assign tool_types = category.items | map: "tool-type" | uniq | compact %}
+          {%- for tool_type in tool_types %}
+          {%- assign type_items = category.items | where: "tool-type", tool_type %}
+          <div class="skill-type">
+            <p class="skill-type-label">{{ tool_type }}</p>
+            <ul class="skill-list">
+              {%- for item in type_items %}
+              <li><strong>{{ item.name }}</strong>{% if item.notes %}<em>{{ item.notes }}</em>{% endif %}</li>
+              {%- endfor %}
+            </ul>
+          </div>
+          {%- endfor %}
+          {%- assign no_type_items = category.items | where_exp: "item", "item.tool-type == nil" %}
+          {%- if no_type_items.size > 0 %}
+          <ul class="skill-list">
+            {%- for item in no_type_items %}
+            <li><strong>{{ item.name }}</strong>{% if item.notes %}<em>{{ item.notes }}</em>{% endif %}</li>
+            {%- endfor %}
+          </ul>
+          {%- endif %}
+        </div>
+      </section>
+      {%- endfor %}
+    {%- elsif skill.type == 'language' %}
+      <section class="skills-group" data-reveal>
+        <h3>Languages</h3>
+        <ul class="skill-list">
+          {%- for language in skill.items %}
+          <li><strong>{{ language.name }}</strong><em>{{ language.proficiency }}</em></li>
+          {%- endfor %}
+        </ul>
+      </section>
+    {%- elsif skill.type == 'interest' %}
+      <section class="skills-group" data-reveal>
+        <h3>Interests</h3>
+        <div class="prose">{%- for interest in skill.items %}{{ interest.notes | markdownify }}{%- endfor %}</div>
+      </section>
+    {%- endif %}
+  {%- endfor %}
 </div>

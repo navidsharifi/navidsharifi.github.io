@@ -1,0 +1,160 @@
+/* =====================================================
+   DESIGN TOKENS
+   Single source of truth for colour, type and spacing.
+   Accent colours are injected by _includes/palette.html
+   (configured in _config.yml → palette.accent).
+   ===================================================== */
+
+:root {
+  /* Typography */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: 'Instrument Serif', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+  --font-body: var(--font-sans);
+  --code-font-family: var(--font-mono);
+  --base-font-size: 1.0625rem;
+  --code-font-size: 0.875rem;
+  --math-font-size: 1.05em;
+
+  /* Layout */
+  --max-w: 1120px;
+  --max-w-prose: 720px;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --nav-h: 64px;
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur: 0.25s;
+
+  /* Light palette */
+  --bg: #ffffff;
+  --bg-elev: #fafafa;
+  --surface: #f4f4f5;
+  --surface-2: #e8e8ea;
+  --border: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.16);
+  --text: #0a0a0a;
+  --text-2: #4a4a4a;
+  --text-3: #8a8a8a;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 10px 30px -14px rgba(0, 0, 0, 0.18);
+  --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.04), 0 24px 48px -20px rgba(0, 0, 0, 0.22);
+  --glow: rgba(var(--accent-rgb), 0.16);
+  --nav-bg: rgba(255, 255, 255, 0.72);
+
+  /* Accent fallbacks (overridden by palette.html) */
+  --accent-color: #ca8a04;
+  --accent-hover: #a16207;
+  --accent-rgb: 202, 138, 4;
+  --accent-soft: rgba(var(--accent-rgb), 0.12);
+
+  /* Compatibility aliases used by article, syntax and academic styles */
+  --bg-color: var(--bg);
+  --intro-bg: var(--surface);
+  --card-border: var(--border);
+  --text-color: var(--text);
+  --text-strong: var(--text);
+  --text-muted: var(--text-2);
+  --heading-color: var(--text);
+  --link-color: var(--accent-color);
+  --link-hover: var(--accent-hover);
+  --icon-color: var(--text-2);
+  --icon-hover: var(--text);
+
+  --code-bg: rgba(0, 0, 0, 0.06);
+  --code-color: #b42318;
+  --pre-bg: #f6f8fa;
+  --pre-border: var(--border);
+  --pre-code-color: #24292f;
+
+  --syntax-text: #24292f;
+  --syntax-comment: #6a737d;
+  --syntax-string: #032f62;
+  --syntax-number: #005cc5;
+  --syntax-keyword: #d73a49;
+  --syntax-function: #6f42c1;
+  --syntax-class: #005cc5;
+  --syntax-punctuation: #24292f;
+  --syntax-deleted: #d73a49;
+  --syntax-inserted: #22863a;
+
+  --blockquote-bg: var(--surface);
+  --table-border: var(--border);
+  --table-header-bg: var(--surface);
+  --table-row-hover: rgba(0, 0, 0, 0.025);
+  --table-row-alt: rgba(0, 0, 0, 0.015);
+  --hr-color: var(--border);
+  --toc-bg: var(--surface);
+  --kbd-bg: var(--surface);
+  --kbd-border: var(--border-strong);
+  --kbd-shadow: rgba(0, 0, 0, 0.2);
+  --details-bg: var(--surface);
+  --details-border: var(--border);
+  --tag-bg: var(--surface);
+
+  --badge-text: #374151;
+  --badge-border: #e5e7eb;
+  --badge-bg: #f9fafb;
+  --badge-dot-new: #16a34a;
+  --badge-dot-hot: #ef4444;
+  --badge-dot-update: #0284c7;
+  --badge-dot-pinned: #7c3aed;
+  --badge-dot-muted: #6b7280;
+}
+
+/* Dark palette: true black */
+html.dark {
+  color-scheme: dark;
+
+  --bg: #000000;
+  --bg-elev: #0a0a0a;
+  --surface: #101010;
+  --surface-2: #181818;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.2);
+  --text: #ededed;
+  --text-2: #a3a3a3;
+  --text-3: #6e6e6e;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.6), 0 12px 32px -14px rgba(0, 0, 0, 0.9);
+  --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.6), 0 30px 60px -24px rgba(0, 0, 0, 0.95);
+  --glow: rgba(var(--accent-rgb), 0.14);
+  --nav-bg: rgba(0, 0, 0, 0.7);
+
+  --accent-color: #eab308;
+  --accent-hover: #facc15;
+  --accent-rgb: 234, 179, 8;
+  --accent-soft: rgba(var(--accent-rgb), 0.14);
+
+  --code-bg: rgba(255, 255, 255, 0.08);
+  --code-color: #f0f0f0;
+  --pre-bg: #0a0a0a;
+  --pre-border: var(--border);
+  --pre-code-color: #d4d4d4;
+
+  --syntax-text: #e1e4e8;
+  --syntax-comment: #6a737d;
+  --syntax-string: #9ecbff;
+  --syntax-number: #79b8ff;
+  --syntax-keyword: #f97583;
+  --syntax-function: #b392f0;
+  --syntax-class: #79b8ff;
+  --syntax-punctuation: #e1e4e8;
+  --syntax-deleted: #f97583;
+  --syntax-inserted: #85e89d;
+
+  --table-row-hover: rgba(255, 255, 255, 0.03);
+  --table-row-alt: rgba(255, 255, 255, 0.02);
+  --kbd-shadow: rgba(0, 0, 0, 0.8);
+
+  --badge-text: #f3f4f6;
+  --badge-border: #3f3f46;
+  --badge-bg: rgba(39, 39, 42, 0.6);
+  --badge-dot-new: #4ade80;
+  --badge-dot-hot: #f87171;
+  --badge-dot-update: #38bdf8;
+  --badge-dot-pinned: #a78bfa;
+  --badge-dot-muted: #9ca3af;
+}

@@ -1,61 +1,35 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
-
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}" class="dark">
 {%- include head.html -%}
-
-
-<body class="{% if site.darkmode == true and site.darkmode != 'never' %}dark{% endif %}">
+<body class="is-home">
+  {%- include icons.html -%}
   {%- include menubar.html -%}
-  {%- include header.html -%}
 
-  <style>
-    body.dark .page-content .intro-content section h3,
-    body:not(.dark) .page-content .intro-content section h3 {
-      color: var(--link-hover) !important;
-      text-align: left !important;
-    }
+  <main class="page-content" id="main" aria-label="Content">
+    {%- if jekyll.environment == 'production' and site.gtm -%}
+    {%- include gtm_body.html -%}
+    {%- endif -%}
 
-    body.dark .page-content .education-container .section-title,
-    body.dark .page-content .experience-container .section-title,
-    body.dark .page-content .projects-container .section-title,
-    body:not(.dark) .page-content .education-container .section-title,
-    body:not(.dark) .page-content .experience-container .section-title,
-    body:not(.dark) .page-content .projects-container .section-title {
-      color: #eab308 !important;
-      text-align: left !important;
-    }
-  </style>
+    {%- include header.html -%}
+    {%- include about.html -%}
 
-  <main class="page-content" aria-label="Content">
-    <div class="wrapper">
-      {%- if jekyll.environment == 'production' and site.gtm -%}
-        {%- include gtm_body.html -%}
-      {%- endif -%}
+    {%- if site.data.education.size > 0 -%}
+    {%- include education.html -%}
+    {%- endif -%}
 
+    {%- if site.data.experience.size > 0 -%}
+    {%- include experience.html -%}
+    {%- endif -%}
 
-      {%- include about.html -%}
+    {%- if site.data.projects.size > 0 -%}
+    {%- include projects.html -%}
+    {%- endif -%}
 
-      {%- if site.data.education.size > 0 -%}
-      {%- include education.html -%}
-      {%- endif -%}
-
-      {%- if site.data.experience.size > 0 -%}
-        {%- include experience.html -%}
-      {%- endif -%}
-
-      {%- if site.data.projects.size > 0 -%}
-      {%- include projects.html -%}
-      {%- endif -%}
-
-<!--      {%- if site.more_content -%}-->
-<!--        {%- include more.html -%}-->
-<!--      {%- endif -%}-->
-
-    </div>
+    {{ content }}
   </main>
 
   {%- include footer.html -%}
-  <script src="{{ '/assets/js/index.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/lazy-media.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/index.js' | relative_url }}" defer></script>
 </body>
-
 </html>

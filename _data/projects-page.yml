@@ -1,60 +1,55 @@
+# Projects listing page (/projects-page).
+# Fields: name, link (optional; internal "/optora/" or external URL), image, contain (true = show whole logo, no crop),
+#         year, featured (true = large card at top), description (plain text / HTML), tags (list)
 
-- layout: left-projects-page
-  name: Optora
+- name: Optora
   link: /optora/
   image: /images/Optora_logo.jpeg
+  contain: true
+  year: Apr 2026 - Present
+  featured: true
   description: >
-    Apr 2026 - Present<br>
-    <b>GPU-first PyTorch library for distributionally robust optimization (DRO).</b> Five ambiguity sets (KL, phi-divergence, chi-square, total variation, Wasserstein) behind one composable API, with convex-dual and closed-form solvers verified against known mathematics.<br>
-    <b>Keywords</b> -- Distributionally Robust Optimization, Ambiguity Sets, PyTorch, Wasserstein, Convex Optimization<br>
+    GPU-first PyTorch library for distributionally robust optimization (DRO). Five ambiguity sets
+    (KL, phi-divergence, chi-square, total variation, Wasserstein) behind one composable API, with
+    convex-dual and closed-form solvers verified against known mathematics.
+  tags: [DRO, PyTorch, Wasserstein, Convex Optimization]
 
-- layout: left-projects-page
-  name: Fleet Management & Inventory Control System
+- name: Fleet Management & Inventory Control System
   image: /images/Fleet_management_thumb.jpg
+  year: 2024
   description: >
-    2024<br>
-    <b>End-to-end fleet management and inventory control system.</b> Fleet tracking, cost function modelling (GAMS), EOQ inventory control (VBA), KPI dashboards (Power BI).<br>
-    <b>Keywords</b> -- Fleet Management, Inventory Control, GAMS, Power BI, VBA, PMBOK<br>
+    End-to-end fleet management and inventory control system. Fleet tracking, cost function
+    modelling (GAMS), EOQ inventory control (VBA), KPI dashboards (Power BI).
+  tags: [Fleet Management, Inventory Control, GAMS, Power BI, PMBOK]
 
-- layout: left-projects-page
-  name: EPC Crusher Plant Project Control
+- name: EPC Crusher Plant Project Control
   image: /images/epc_thumb.jpg
+  year: 2020 - 2022
   description: >
-    2020-2022<br>
-    <b>Project control for large-scale EPC project.</b> Weekly progress reports, S-Curve tracking, PMBOK compliance, delay analysis, and claim management.<br>
-    <b>Keywords</b> -- EPC, Project Control, PMBOK, Primavera P6, Microsoft Project<br>
+    Project control for a large-scale EPC project. Weekly progress reports, S-Curve tracking,
+    PMBOK compliance, delay analysis, and claim management.
+  tags: [EPC, Project Control, PMBOK, Primavera P6]
 
-- layout: left-projects-page
-  name: Sina Hospital Data Analytics
+- name: Sina Hospital Data Analytics
   image: /images/sinahospital_thumb.jpg
+  year: 2018 - 2019
   description: >
-    2018-2019<br>
-    <b>Interactive BI dashboards and healthcare analytics.</b> KPI monitoring, sales data analysis, ETL, data preprocessing, feature engineering, clustering.<br>
-    <b>Keywords</b> -- Power BI, Python, SQL Server, ETL, Data Mining, Healthcare Analytics<br>
+    Interactive BI dashboards and healthcare analytics. KPI monitoring, sales data analysis, ETL,
+    data preprocessing, feature engineering, clustering.
+  tags: [Power BI, Python, SQL Server, Data Mining]
 
-- layout: left-projects-page
-  name: Startup Success Prediction (BSc Thesis)
+- name: Startup Success Prediction (BSc Thesis)
   image: /images/startup_thumb.jpg
+  year: 2017 - 2018
   description: >
-    2017-2018<br>
-    <b>Predicting startup success using ML and network analysis.</b> Leveraged crunchbase.com data, network-based feature selection, 13% accuracy improvement.<br>
-    <b>Keywords</b> -- Machine Learning, Network Analysis, Feature Selection, Prediction<br>
+    Predicting startup success using ML and network analysis. Leveraged crunchbase.com data,
+    network-based feature selection, 13% accuracy improvement.
+  tags: [Machine Learning, Network Analysis, Feature Selection]
 
-- layout: left-projects-page
-  name: Newroz Hotel MIS
+- name: Newroz Hotel MIS
   image: /images/mis_thumb.jpg
+  year: 2016 - 2017
   description: >
-    2016-2017<br>
-    <b>Management Information System for Newroz Hotel.</b> Database design, process modelling, reporting dashboards.<br>
-    <b>Keywords</b> -- MIS, Microsoft Access, Visio, Power BI, Process Maker<br>
-#    Features: <b>Search engine</b>, direct bot search, search from groups and private chats, Real-time, Search based on
-#    file-name, performer name, audio-name, and lyrics, High accuracy and relevance, Multilingual search, Returns
-#    reference, <b>Indexing features</b>, Optimistic crawling, Scoring channel quality, banning-proof, ID hashing,
-#    Interactive indexing, Fast indexing, <b>User controlling features</b>, <b>User interface</b>, <b>Playlists</b>,
-#    <b>Admin features</b>, <b>Developer features</b>, <b>Documentation</b>, Exception safe, Extremely fast,
-#    Monitoring logs, Handles RTL langues smoothly
-#    <br>
-#
-#    Tech Stack/Environment: <mark>Elasticsearch</mark> - <mark>Multi processing</mark> - <mark>Multi threading</mark> -
-#    <mark>Pyrogram</mark> - <mark>ArangoDB</mark> - <mark>Celery</mark> - <mark>Sphinx</mark> - <mark>Python</mark><br>
-#
+    Management Information System for Newroz Hotel. Database design, process modelling,
+    reporting dashboards.
+  tags: [MIS, Microsoft Access, Visio, Power BI]

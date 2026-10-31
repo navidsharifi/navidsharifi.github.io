@@ -1,713 +1,387 @@
 /* =====================================================
-   GLOBAL FONT & STYLE IMPORTS
-   Centralized font loading for consistency across site
+   BASE — reset, typography, layout primitives
    ===================================================== */
 
-// Fonts are loaded via head.html with Google Fonts for better performance
-// Roboto: Body text, headings
-// Fira Code: Code blocks, inline code
-
-// NOTE: Bootstrap and Font Awesome are loaded via <link> tags in head.html
-// Do NOT use @import url() here as it causes issues with GitHub Pages SCSS compilation
-
-/* =====================================================
-   BOOTSTRAP RESET FOR SHIKI
-   Bootstrap 3.3.5 sets: pre { background-color: #f5f5f5 }
-   We use 'all: unset' in _syntax.scss to fully reset.
-   This is just a safety fallback.
-   ===================================================== */
-
-/* =====================================================
-   CSS CUSTOM PROPERTIES - CENTRALIZED COLOR SCHEME
-   All colors defined in one place for easy theming
-   Light mode is the default, dark mode overrides these
-   ===================================================== */
-
-:root {
-  // Font families (centralized)
-  --font-body: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-  --code-font-family: 'Fira Code', 'Monaco', 'Consolas', 'Ubuntu Mono', 'Liberation Mono', monospace;
-  
-  // Base font size (change this to scale all typography)
-  --base-font-size: 1.6rem;
-  --code-font-size: calc(var(--base-font-size) * 0.9);  // Derived from base font size (90%)
-  --math-font-size: calc(var(--base-font-size) * 1.2);              // Math equations use base font size
-  
-  // =====================================================
-  // LIGHT MODE COLORS (default)
-  // =====================================================
-  
-  // Main text colors
-  --text-color: #1a202c;                    // Dark text for high contrast
-  --text-strong: #0d1117;                   // Near-black for headings/strong text
-  --text-muted: #4a5568;                    // Darker muted for better readability
-  --heading-color: #0d1117;                 // Near-black for headers
-  
-  // Links - uses accent color from _config.yml palette.accent
-  // Values are overridden by palette.html injection
-  --link-color: var(--accent-color);        // Uses accent color for links
-  --link-hover: var(--accent-hover);        // Uses accent hover for link hover
-  
-  // Accent color - configured via _config.yml palette.accent
-  // These are fallbacks; actual values injected by palette.html
-  --accent-color: #ef4444;                  // Default: vivid-red
-  --accent-hover: #dc2626;                  // Hover state
-  --accent-rgb: 239, 68, 68;                // RGB for rgba() usage
-  --accent-light: #fecaca;                  // Light accent for backgrounds
-
-  // Backgrounds - configured via _config.yml palette.light_bg
-  // These are fallbacks; actual values injected by palette.html  
-  --bg-color: #ffffff;                      // Default: white
-  --intro-bg: #f7fafc;                      // Section backgrounds
-  --card-border: rgba(0, 0, 0, 0.06);       // Card borders (light mode)
-  
-  // Navigation - configured via _config.yml palette.navbar
-  // These are fallbacks; actual values injected by palette.html
-  --nav-bg: #0f0f0f;                        // Default: matches dark mode bg
-  --nav-text: #f7fafc;
-  --nav-border: #1a1a1a;
-  
-  // Social media icons
-  --icon-color: #2d3748;                    // Dark icons
-  --icon-hover: #1a202c;                    // Darker on hover
-  
-  // Article/Blog specific colors
-  --code-bg: rgba(175, 184, 193, 0.2);      // Light gray for inline code
-  --code-color: #c72d4a;                    // Reddish text for inline code (matches dark mode style)
-  --pre-bg: #f6f8fa;                        // Subtle gray to distinguish code blocks from page
-  --pre-border: #d0d7de;                    // Border for code blocks
-  --pre-code-color: #24292f;                // Fallback text for non-Shiki code blocks
-  
-  // Syntax highlighting colors (GitHub Light theme)
-  --syntax-text: #24292f;                   // Default text
-  --syntax-comment: #6a737d;                // Comments
-  --syntax-string: #032f62;                 // Strings
-  --syntax-number: #005cc5;                 // Numbers
-  --syntax-keyword: #d73a49;                // Keywords, operators
-  --syntax-function: #6f42c1;               // Function names
-  --syntax-class: #005cc5;                  // Class names, builtins
-  --syntax-punctuation: #24292f;            // Punctuation
-  --syntax-deleted: #d73a49;                // Deleted text (diff)
-  --syntax-inserted: #22863a;               // Inserted text (diff)
-  
-  --blockquote-bg: rgba(45, 55, 72, 0.05);  // Light background for blockquotes
-  --table-border: #d0d7de;                  // Table borders
-  --table-header-bg: rgba(45, 55, 72, 0.05);// Table header background
-  --table-row-hover: rgba(45, 55, 72, 0.03);// Table row hover
-  --table-row-alt: rgba(45, 55, 72, 0.02);  // Alternating table row background
-  --hr-color: #d0d7de;                      // Horizontal rule color
-  --toc-bg: rgba(45, 55, 72, 0.05);         // TOC background
-  --kbd-bg: #f6f8fa;                        // Keyboard input background
-  --kbd-border: #d0d7de;                    // Keyboard input border
-  --kbd-shadow: #afb8c1;                    // Keyboard input shadow
-  --details-bg: rgba(45, 55, 72, 0.05);     // Details/summary background
-  --details-border: #d0d7de;                // Details/summary border
-  
-  --badge-text: #374151;                    // Dark gray text
-  --badge-border: #e5e7eb;                  // Light gray border
-  --badge-bg: #f9fafb;                      // Very light gray bg
-  --badge-dot-new: #92ca0e;                // NEON SPRING GREEN (super bright lime)
-  --badge-dot-hot: #f84727;                // Tomato - glows on dark
-  --badge-dot-update: #00bfff;              // DeepSkyBlue - electric
-  --badge-dot-pinned: #9333ea;              // Vivid purple
-  --badge-dot-muted: #6b7280;               // Gray
-  
-  // Navigation colors (always dark - matches dark mode bg)
-  --nav-bg: #0f0f0f;
-  --nav-text: #f7fafc;
-  --nav-border: #1a1a1a;
-  
-  // Profile image shadow
-  --profile-shadow: rgba(255, 255, 255, 0.8);  // White shadow for light bg
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
-
-/* =====================================================
-   DARK MODE CSS VARIABLES
-   Background & accent colors configured via _config.yml
-   These values are overridden by palette.html injection
-   ===================================================== */
-.dark,
-html.dark,
-body.dark {
-  // Main text colors  
-  --text-color: #e2e8f0;                   // Light gray text
-  --text-strong: #f7fafc;                  // White for headings/strong text
-  --text-muted: #a0aec0;                   // Muted light gray for secondary text
-  --heading-color: #f7fafc;                // White for headers
-  
-  // Links - uses accent color from _config.yml palette.accent
-  // Values are overridden by palette.html injection
-  --link-color: var(--accent-color);       // Uses accent color for links
-  --link-hover: var(--accent-hover);       // Uses accent hover for link hover
-  
-  // Accent & Background colors are injected by palette.html
-  // from _config.yml settings (palette.dark_bg, palette.accent)
-  // Fallback values below:
-  --accent-color: #ef4444;
-  --accent-hover: #f87171;
-  --accent-rgb: 239, 68, 68;
-  --accent-light: #fecaca;
-  --bg-color: #0f0f0f;
-  --intro-bg: #1a1a1a;
-  --card-border: rgba(255, 255, 255, 0.1);  // Visible borders on dark bg
-  
-  // Social media icons
-  --icon-color: #e2e8f0;                   // Light gray icons
-  --icon-hover: #f7fafc;                   // White on hover
-  
-  // Article/Blog specific colors (dark mode)
-  --code-bg: rgba(110, 118, 129, 0.4);     // Subtle gray for inline code
-  --code-color: #e2e8f0;                   // Light text for inline code
-  --pre-bg: #1e1e1e;                       // Fallback for non-Shiki code blocks (Shiki derives bg from theme)
-  --pre-border: #3c3c3c;                   // VS Code border
-  --pre-code-color: #d4d4d4;               // Fallback text for non-Shiki code blocks
-  
-  // Syntax highlighting colors (GitHub Dark theme)
-  --syntax-text: #e1e4e8;                  // Default text
-  --syntax-comment: #6a737d;               // Comments
-  --syntax-string: #9ecbff;                // Strings
-  --syntax-number: #79b8ff;                // Numbers
-  --syntax-keyword: #f97583;               // Keywords, operators
-  --syntax-function: #b392f0;              // Function names
-  --syntax-class: #79b8ff;                 // Class names, builtins
-  --syntax-punctuation: #e1e4e8;           // Punctuation
-  --syntax-deleted: #f97583;               // Deleted text (diff)
-  --syntax-inserted: #85e89d;              // Inserted text (diff)
-  
-  --blockquote-bg: rgba(45, 55, 72, 0.3);  // Dark background for blockquotes
-  --table-border: #4a5568;                 // Table borders
-  --table-header-bg: rgba(45, 55, 72, 0.5);// Table header background
-  --table-row-hover: rgba(45, 55, 72, 0.3);// Table row hover
-  --table-row-alt: rgba(45, 55, 72, 0.2);  // Alternating table row background
-  --hr-color: #4a5568;                     // Horizontal rule color
-  --toc-bg: rgba(45, 55, 72, 0.5);         // TOC background
-  --kbd-bg: #2d3748;                       // Keyboard input background
-  --kbd-border: #4a5568;                   // Keyboard input border
-  --kbd-shadow: #1a202c;                   // Keyboard input shadow
-  --details-bg: rgba(45, 55, 72, 0.5);     // Details/summary background
-  --details-border: #4a5568;               // Details/summary border
-  
-  // Profile image shadow
-  --profile-shadow: rgba(0, 0, 0, 0.6);    // Dark shadow for dark bg
-  
-  // Badge colors (dark mode - neon vibrant)
-  --badge-text: #f3f4f6;                   // Light text
-  --badge-border: #4b5563;                 // Medium gray border
-  --badge-bg: rgba(55, 65, 81, 0.6);       // Translucent dark bg
-  --badge-dot-new: #92ca0e;                // NEON SPRING GREEN (super bright lime)
-  --badge-dot-hot: #f84727;                // Tomato - glows on dark
-  --badge-dot-update: #00e5ff;             // Neon cyan
-  --badge-dot-pinned: #a855f7;             // Bright violet
-  --badge-dot-muted: #9ca3af;              // Cool gray
-}
-
-/* =====================================================
-   LIGHT MODE CSS VARIABLES - Higher specificity override
-   When html has .light class, force light mode colors
-   ===================================================== */
-html.light,
-html.light body,
-html.light body.dark {
-  // Main text colors
-  --text-color: #1a202c !important;
-  --text-strong: #0d1117 !important;
-  --text-muted: #4a5568 !important;
-  --heading-color: #0d1117 !important;
-  
-  // Links - uses accent color
-  --link-color: var(--accent-color) !important;
-  --link-hover: var(--accent-hover) !important;
-  
-  // Backgrounds
-  --bg-color: #ffffff !important;
-  --intro-bg: #f7fafc !important;
-  
-  // Icons
-  --icon-color: #2d3748 !important;
-  --icon-hover: #1a202c !important;
-  
-  // Article/Blog specific
-  --code-bg: rgba(175, 184, 193, 0.2) !important;
-  --code-color: #c72d4a !important;
-  --pre-bg: #f6f8fa !important;
-  --pre-border: #d0d7de !important;
-  --pre-code-color: #24292f !important;
-  --blockquote-bg: rgba(45, 55, 72, 0.05) !important;
-  --table-border: #d0d7de !important;
-  --table-header-bg: rgba(45, 55, 72, 0.05) !important;
-  --table-row-hover: rgba(45, 55, 72, 0.03) !important;
-  --hr-color: #d0d7de !important;
-  --toc-bg: rgba(45, 55, 72, 0.05) !important;
-  --kbd-bg: #f6f8fa !important;
-  --kbd-border: #d0d7de !important;
-  --kbd-shadow: #afb8c1 !important;
-  --details-bg: rgba(45, 55, 72, 0.05) !important;
-  --details-border: #d0d7de !important;
-}
-
-button, input[type="button"], input[type="reset"], input[type="submit"] {
-  appearance: none;
-  background-color: var(--accent-color, #38a169);
-  border: 0;
-  border-radius: 3px;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  font-family: "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
-  font-size: 1rem;
-  -webkit-font-smoothing: antialiased;
-  font-weight: 600;
-  line-height: 1;
-  padding: 0.75rem 1.5rem;
-  text-decoration: none;
-  transition: all 150ms ease;
-  user-select: none;
-  vertical-align: middle;
-  white-space: nowrap; }
-  button:hover,
-  button:focus, input[type="button"]:hover,
-  input[type="button"]:focus, input[type="reset"]:hover,
-  input[type="reset"]:focus, input[type="submit"]:hover,
-  input[type="submit"]:focus {
-    background-color: var(--accent-hover, #2f855a);
-    color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(229, 62, 62, 0.3); }
-  button:disabled, input[type="button"]:disabled, input[type="reset"]:disabled, input[type="submit"]:disabled {
-    cursor: not-allowed;
-    opacity: 0.5; }
-    button:disabled:hover, input[type="button"]:disabled:hover, input[type="reset"]:disabled:hover, input[type="submit"]:disabled:hover {
-      background-color: var(--accent-color, #38a169);
-      transform: none;
-      box-shadow: none; }
-
-fieldset {
-  background-color: #f7f7f7;
-  border: 1px solid #ddd;
-  margin: 0 0 0.75rem;
-  padding: 1.5rem; }
-
-input,
-label,
-select {
-  display: block;
-  font-family: "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
-  font-size: 1rem; }
-
-label {
-  font-weight: 600;
-  margin-bottom: 0.375rem; }
-  label.required::after {
-    content: "*"; }
-  label abbr {
-    display: none; }
-
-select {
-  margin-bottom: 1.5rem;
-  max-width: 100%;
-  width: auto; }
-
-dl {
-  margin-bottom: 0.75rem; }
-  dl dt {
-    font-weight: bold;
-    margin-top: 0.75rem; }
-  dl dd {
-    margin: 0; }
-
-table {
-  border-collapse: collapse;
-  font-feature-settings: "kern", "liga", "tnum";
-  margin: 0.75rem 0;
-  table-layout: fixed;
-  width: 100%; }
-
-/* Exclude code highlight tables from general table styling */
-.highlight table.rouge-table {
-  margin: 0;
-  table-layout: fixed;
-  border-collapse: collapse;
-  
-  tr, td, th {
-    vertical-align: top;
-    border: none;
-  }
-  
-  td {
-    padding: 0;
-    border-bottom: none;
-  }
-}
-
-th {
-  border-bottom: 1px solid #a6a6a6;
-  font-weight: 600;
-  padding: 0.75rem 0;
-  text-align: left; }
-
-td {
-  border-bottom: 1px solid #ddd;
-  padding: 0.75rem 0; }
-
-tr,
-td,
-th {
-  vertical-align: middle; }
-
-hr {
-  border-bottom: 1px solid #ddd;
-  border-left: 0;
-  border-right: 0;
-  border-top: 0;
-  margin: 1.5rem 0; }
-
-img,
-picture {
-  margin: 0;
-  max-width: 100%; }
 
 html {
-  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 1.5rem);
   overflow-x: hidden;
 }
 
-*,
-*::after,
-*::before {
-  box-sizing: inherit;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
 }
 
 body {
-  background: var(--bg-color);
-  color: var(--text-color);
-  font-family: Roboto, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  width: 100%;
-  max-width: 100%;
+  margin: 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--base-font-size);
+  line-height: 1.65;
+  font-feature-settings: 'cv11', 'ss01', 'liga', 'kern';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+main.page-content {
+  flex: 1 0 auto;
+  padding-top: var(--nav-h);
+}
+
+::selection {
+  background: rgba(var(--accent-rgb), 0.3);
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+img,
+video,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease), opacity var(--dur) var(--ease);
+}
+
+p {
+  margin: 0 0 1.1em;
+}
+
+h1, h2, h3, h4, h5, h6 {
   margin: 0;
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+strong, b {
+  font-weight: 600;
+  color: var(--text);
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+code, kbd, pre, samp {
+  font-family: var(--font-mono);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
   padding: 0;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
 }
 
-/* =====================================================
-   LIGHT MODE STYLES - body:not(.dark) / body.light / html.light
-   Explicit light mode styling for theme toggle
-   Uses CSS variables defined in :root
-   ===================================================== */
-html.light,
-html.light body,
-body:not(.dark),
-body.light {
-  background-color: var(--bg-color) !important;
-  color: var(--text-color) !important;
-  
-  h1, h2, h3, h4, h5, h6 {
-    color: var(--heading-color) !important;
-  }
-  
-  p, li, span, div:not(.highlight):not(.rouge-code):not(.main-navigation):not(.main-navigation *) {
-    color: var(--text-color);
-  }
-  
-  a:not(.main-navigation a):not(.navbar-nav a) {
-    color: var(--link-color);
-    
-    &:hover {
-      color: var(--link-hover);
-    }
-  }
-  
-  .container:not(.main-navigation .container) {
-    background-color: var(--bg-color) !important;
-  }
-  
-  .section-title {
-    color: var(--heading-color);
-    border-bottom-color: #e2e8f0;
-  }
-  
-  // Cards and intro sections
-  .intro-container,
-  .skills-intro {
-    background-color: var(--intro-bg) !important;
-    color: var(--text-color) !important;
-    
-    .lead {
-      color: var(--text-muted) !important;
-    }
-  }
-  
-  // All main containers
-  .education-container,
-  .experience-container,
-  .projects-container,
-  .publications-container,
-  .skills-container {
-    background-color: var(--bg-color) !important;
-    color: var(--text-color);
-  }
-  
-  // Footer
-  .footer {
-    background-color: var(--intro-bg) !important;
-    color: var(--text-color) !important;
-    border-top-color: #e2e8f0 !important;
-  }
-  
-  // Forms
-  input:not(.main-navigation input), 
-  textarea, 
-  select {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    border-color: #e2e8f0;
-  }
-  
-  // Social icons
-  .icons a,
-  .social-icons a {
-    color: var(--icon-color);
-    
-    &:hover {
-      color: var(--icon-hover);
-    }
-  }
-  
-  // Profile image - white shadow for light background
-  .profile-img {
-    box-shadow: 0 0 20px var(--profile-shadow);
-  }
-  
-  // Skills section
-  .skills-container {
-    .skill-group > p > strong {
-      color: var(--heading-color) !important;
-    }
-    
-    .skill-list li {
-      color: var(--text-color) !important;
-      
-      strong {
-        color: var(--text-strong) !important;
-      }
-      
-      em {
-        color: var(--text-muted) !important;
-      }
-      
-      a {
-        color: var(--link-color) !important;
-        
-        &:hover {
-          color: var(--link-hover) !important;
-        }
-      }
-    }
-  }
-  
-  // Article/Blog specific light mode
-  .article-post {
-    p {
-      color: var(--text-color);
-    }
-    
-    h1, h2, h3, h4, h5 {
-      color: var(--heading-color);
-    }
-    
-    h6 {
-      color: var(--text-muted);
-    }
-    
-    strong, b {
-      color: var(--text-strong);
-    }
-    
-    a {
-      color: var(--link-color);
-      
-      &:hover {
-        color: var(--link-hover);
-      }
-    }
-    
-    :not(pre) > code {
-      background-color: var(--code-bg);
-      color: var(--code-color);
-    }
-    
-    blockquote {
-      background-color: var(--blockquote-bg);
-      
-      p {
-        color: var(--text-muted);
-      }
-    }
-    
-    table {
-      th, td {
-        border-bottom-color: var(--table-border);
-      }
-      
-      th {
-        background-color: var(--table-header-bg);
-        color: var(--heading-color);
-      }
-      
-      tr:hover {
-        background-color: var(--table-row-hover);
-      }
-    }
-    
-    hr {
-      border-top-color: var(--hr-color);
-    }
-    
-    kbd {
-      background-color: var(--kbd-bg);
-      border-color: var(--kbd-border);
-      box-shadow: inset 0 -1px 0 var(--kbd-shadow);
-    }
-    
-    details {
-      background-color: var(--details-bg);
-      border-color: var(--details-border);
-      
-      summary {
-        color: var(--heading-color);
-      }
-    }
-  }
-  
-  // TOC
-  .toc {
-    background-color: var(--toc-bg);
-    
-    h3 {
-      color: var(--heading-color);
-    }
-    
-    ul li a {
-      color: var(--link-color);
-      
-      &:hover {
-        color: var(--link-hover);
-      }
-    }
-  }
-  
-  // Post title
-  .posttitle {
-    color: var(--heading-color);
-  }
-  
-  // Layout sections
-  .layout-left,
-  .layout-right,
-  .layout-top {
-    .details {
-      h3 {
-        color: var(--heading-color) !important;
-      }
-      
-      p, span {
-        color: var(--text-color) !important;
-      }
-    }
-  }
-}
-
-.center-text {
-  text-align: center; }
-
+/* Layout */
 .container {
-  margin-top:30px;
-  background: var(--bg-color);
-  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: calc(var(--max-w) + var(--gutter) * 2);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
 
-  @media print {
-    margin-top: 20px;
+.container--narrow {
+  max-width: calc(880px + var(--gutter) * 2);
+}
+
+/* Small typographic utilities */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.eyebrow .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+.muted {
+  color: var(--text-2);
+}
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.link-arrow svg {
+  width: 1em;
+  height: 1em;
+  transition: transform var(--dur) var(--ease);
+}
+
+.link-arrow:hover svg {
+  transform: translateX(3px);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 42px;
+  padding: 0 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  color: var(--text);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease), transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
+
+  svg {
+    width: 1.05em;
+    height: 1.05em;
+  }
+
+  &:hover {
+    border-color: var(--text);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 }
 
-.header-contianer {
-  margin-top:50px;
-}
+.btn--primary {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
 
-.header-right {
-  text-align: right;
-}
-
-.header-left {
-  margin-top: 30px;
-
-  @media print {
-    margin-top: 0px;
+  &:hover {
+    background: var(--text);
+    color: var(--bg);
+    opacity: 0.88;
   }
 }
 
-.header-right p {
-  font-size: 1.6rem;
-  text-align: right;
+.btn--icon {
+  width: 42px;
+  padding: 0;
 }
 
+/* Chips (tags) */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-2);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+/* Scroll reveal */
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  will-change: opacity, transform;
+}
+
+html.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Scrollbar (WebKit) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0.5rem;
+  z-index: 1000;
+  padding: 0.5rem 0.9rem;
+  background: var(--text);
+  color: var(--bg);
+  border-radius: 6px;
+
+  &:focus {
+    left: 0.5rem;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Badges (kept from previous theme; usable inside data files) */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--badge-border);
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  line-height: 1.4;
+
+  &::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--badge-dot-muted);
+  }
+}
+
+.badge-minimal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85em;
+  color: var(--text-2);
+
+  &::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--badge-dot-muted);
+  }
+}
+
+.badge-new::before { background: var(--badge-dot-new); }
+.badge-hot::before { background: var(--badge-dot-hot); }
+.badge-update::before { background: var(--badge-dot-update); }
+.badge-pinned::before { background: var(--badge-dot-pinned); }
+.badge-soon::before { background: var(--badge-dot-muted); }
+.badge-accent::before { background: var(--accent-color); }
+
+.badge-pulse::before {
+  animation: dot-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes dot-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.8); }
+}
+
+/* Print */
 @media print {
-  a[href]:after {
-    content: none !important;
-  }
-
-  img[src]:after {
-    content: none !important;
-  }
-
-  .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
-    float: left;
-  }
-  .col-sm-12 {
-    width: 100%;
-  }
-  .col-sm-11 {
-    width: 91.66666667%;
-  }
-  .col-sm-10 {
-    width: 83.33333333%;
-  }
-  .col-sm-9 {
-    width: 75%;
-  }
-  .col-sm-8 {
-    width: 66.66666667%;
-  }
-  .col-sm-7 {
-    width: 58.33333333%;
-  }
-  .col-sm-6 {
-    width: 50%;
-  }
-  .col-sm-5 {
-    width: 41.66666667%;
-  }
-  .col-sm-4 {
-    width: 33.33333333%;
-  }
-  .col-sm-3 {
-    width: 25%;
-  }
-  .col-sm-2 {
-    width: 16.66666667%;
-  }
-  .col-sm-1 {
-    width:8.33333333%;
-  }
-  .col-print-12 {
-    width: 100%;
-  }
-
-  .no-print, .no-print * {
+  .site-header,
+  .site-footer,
+  .hero-bg,
+  .no-print {
     display: none !important;
+  }
+  main.page-content {
+    padding-top: 0;
+  }
+  body {
+    background: #fff;
+    color: #000;
   }
 }

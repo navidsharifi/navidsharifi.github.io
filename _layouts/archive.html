@@ -3,17 +3,18 @@ layout: default
 title: Archive
 ---
 
-<!-- Begin List Posts
-================================================== -->
-<section class="recent-posts">
-    <h3 class="section-title">Archive of posts with {{ page.type }} '{{ page.title }}'</h3>
-<div class="row listrecent">
+<header class="container page-header">
+  <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Archive</p>
+  <h1>{{ page.title }}</h1>
+  <p>Posts with {{ page.type }} “{{ page.title }}”</p>
+</header>
 
-{% for post in page.posts %}
-
-    {% include postbox.html %}
-
-{% endfor %}
-
+<div class="container listing">
+  <div class="list-cards">
+    {%- for post in page.posts -%}
+    {%- assign _excerpt = post.excerpt | strip_html | truncatewords: 40 -%}
+    {%- assign _date = post.date | date: "%b %-d, %Y" -%}
+    {%- include card.html variant="list" title=post.title url=post.url image=post.image excerpt=_excerpt date=_date tags=post.categories cta="Read" -%}
+    {%- endfor -%}
+  </div>
 </div>
-</section>

@@ -4,20 +4,26 @@ layout: default
 permalink: "/tags.html"
 ---
 
-<div class="row listrecent">
-{% for tag in site.tags %}
-<div class="section-title col-md-12 mt-4">
-<h2 id="{{ tag[0] | replace: " ","-" }}">Tag <span class="text-capitalize">{{ tag[0] }}</span></h2>
-</div>
-{% assign pages_list = tag[1] %}
-{% for post in pages_list %}
-{% if post.title != null %}
-{% if group == null or group == post.group %}
-{% include postbox.html %}
-{% endif %}
-{% endif %}
-{% endfor %}
-{% assign pages_list = nil %}
-{% assign group = nil %}
-{% endfor %}
+<header class="container page-header">
+  <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Browse</p>
+  <h1>Tags</h1>
+</header>
+
+<div class="container listing">
+  {%- assign all_posts = site.blog_posts | concat: site.posts | concat: site.pages | where_exp: "post", "post.hidden != true" | where_exp: "post", "post.tags.size > 0" -%}
+  {%- assign tags = all_posts | map: "tags" | join: "," | split: "," | uniq | sort -%}
+  {%- for tag in tags -%}
+  {%- if tag == "" -%}{%- continue -%}{%- endif -%}
+  {%- assign posts_in = all_posts | where_exp: "post", "post.tags contains tag" | sort: "date" | reverse -%}
+  <section class="listing-section" id="{{ tag | replace: ' ', '-' }}">
+    <h2 class="listing-title">#{{ tag }}</h2>
+    <div class="list-cards">
+      {%- for post in posts_in -%}
+      {%- assign _excerpt = post.excerpt | strip_html | truncatewords: 40 -%}
+      {%- assign _date = post.date | date: "%b %-d, %Y" -%}
+      {%- include card.html variant="list" title=post.title url=post.url image=post.image excerpt=_excerpt date=_date tags=post.tags cta="Read" -%}
+      {%- endfor -%}
+    </div>
+  </section>
+  {%- endfor -%}
 </div>

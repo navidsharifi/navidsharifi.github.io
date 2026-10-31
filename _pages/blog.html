@@ -1,201 +1,68 @@
 ---
 layout: default
 title: Blog
-permalink: /blog
+permalink: /blog/
 comments: false
 ---
 
-<div class="container blog-listing-container">
-    <h3 class="section-title">{{ site.blog_title | default: "Blog" }}</h3>
+{%- assign internal_posts = site.blog_posts | where_exp: "post", "post.hidden != true" | sort: "date" | reverse -%}
+{%- if site.data.blog_posts -%}
+{%- assign external_posts = site.data.blog_posts | sort: "date" | reverse -%}
+{%- else -%}
+{%- assign external_posts = "" | split: "" -%}
+{%- endif -%}
+{%- assign featured_internal = internal_posts | where: "featured", true -%}
+{%- assign featured_external = external_posts | where: "featured", true -%}
+{%- assign featured_count = featured_internal.size | plus: featured_external.size -%}
+{%- assign total_count = internal_posts.size | plus: external_posts.size -%}
 
-    <!-- Featured Posts Section (both internal and external) -->
-    {% assign featured_internal = site.blog_posts | where_exp: "post", "post.hidden != true" | where: "featured", true | sort: "date" | reverse %}
-    {% if site.data.blog_posts %}
-    {% assign featured_external = site.data.blog_posts | where: "featured", true | sort: "date" | reverse %}
-    {% else %}
-    {% assign featured_external = "" | split: "" %}
-    {% endif %}
-    {% assign has_featured = false %}
-    {% if featured_internal.size > 0 or featured_external.size > 0 %}
-        {% assign has_featured = true %}
-    {% endif %}
-    
-    {% if has_featured %}
-    <section class="blog-featured-section">
-        <h4 class="blog-subsection-title">Featured</h4>
-        <div class="blog-featured-grid">
-            {% for post in featured_internal limit:3 %}
-            <!-- Featured Internal Post -->
-            <a href="{{ post.url }}" class="blog-featured-card-link">
-                <article class="blog-featured-card">
-                    {% if post.image %}
-                    <div class="blog-featured-image">
-                        {% if post.image contains '.mp4' or post.image contains '.webm' %}
-                        <video class="lazy-video" loop muted playsinline data-autoplay preload="none">
-                            <source data-src="{% if post.image contains '://' %}{{ post.image }}{% else %}{{ site.baseurl }}{{ post.image }}{% endif %}" type="video/mp4">
-                        </video>
-                        {% else %}
-                        <img src="{% if post.image contains '://' %}{{ post.image }}{% else %}{{ site.baseurl }}{{ post.image }}{% endif %}" alt="{{ post.title }}" loading="lazy" decoding="async">
-                        {% endif %}
-                    </div>
-                    {% endif %}
-                    <div class="blog-featured-content">
-                        <h5 class="blog-featured-title">{{ post.title }}</h5>
-                        <p class="blog-featured-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
-                        <div class="blog-featured-meta">
-                            <span class="blog-post-date">{{ post.date | date: "%b %d, %Y" }}</span>
-                            {% if post.categories.size > 0 %}
-                            <span class="blog-post-category">{{ post.categories | first }}</span>
-                            {% endif %}
-                        </div>
-                    </div>
-                </article>
-            </a>
-            {% endfor %}
-            {% for post in featured_external limit:3 %}
-            <!-- Featured External Post -->
-            <article class="blog-featured-card blog-featured-card-external">
-                {% if post.image %}
-                <div class="blog-featured-image">
-                    {% if post.image contains '.mp4' or post.image contains '.webm' %}
-                    <video class="lazy-video" loop muted playsinline data-autoplay preload="none">
-                        <source data-src="{{ post.image }}" type="video/mp4">
-                    </video>
-                    {% else %}
-                    <img src="{{ post.image }}" alt="{{ post.title }}" loading="lazy" decoding="async">
-                    {% endif %}
-                </div>
-                {% endif %}
-                <div class="blog-featured-content">
-                    <h5 class="blog-featured-title">{{ post.title }}</h5>
-                    <p class="blog-featured-excerpt">{{ post.description | truncatewords: 20 }}</p>
-                    <div class="blog-featured-meta">
-                        <span class="blog-post-date">{{ post.display_date | default: post.date | date: "%b %Y" }}</span>
-                        {% if post.categories %}
-                        {% assign cats = post.categories | split: ", " %}
-                        <span class="blog-post-category">{{ cats | first }}</span>
-                        {% endif %}
-                    </div>
-                    <div class="blog-featured-links">
-                        {% for link in post.links limit:2 %}
-                        <a href="{{ link.url }}" target="_blank" rel="noopener" class="blog-external-link-sm">
-                            {{ link.platform }} <i class="fa fa-external-link-alt"></i>
-                        </a>
-                        {% endfor %}
-                    </div>
-                </div>
-            </article>
-            {% endfor %}
-        </div>
-    </section>
-    {% endif %}
+<header class="container page-header">
+  <p class="eyebrow" data-reveal><span class="dot" aria-hidden="true"></span>Writing</p>
+  <h1 data-reveal>{{ site.blog_title | default: "Blog" }}</h1>
+  <p data-reveal>{{ site.blog_description | default: "Notes on optimisation, forecasting and decision-making under uncertainty." }}</p>
+</header>
 
-    <!-- All Posts Section -->
-    <section class="blog-posts-section">
-        <h4 class="blog-subsection-title">All Posts</h4>
-        <div class="blog-posts-list">
+<div class="container listing">
 
-            <!-- Internal posts sorted by date (most recent first) -->
-            {% assign internal_posts = site.blog_posts | where_exp: "post", "post.hidden != true" | sort: "date" | reverse %}
-            {% for post in internal_posts %}
-            <!-- Internal Blog Post -->
-            <a href="{{ post.url }}" class="blog-card-link">
-                <article class="blog-card">
-                    {% if post.image %}
-                    <div class="blog-card-image">
-                        {% if post.image contains '.mp4' or post.image contains '.webm' %}
-                        <video class="lazy-video" loop muted playsinline data-autoplay preload="none">
-                            <source data-src="{% if post.image contains '://' %}{{ post.image }}{% else %}{{ site.baseurl }}{{ post.image }}{% endif %}" type="video/mp4">
-                        </video>
-                        {% else %}
-                        <img src="{% if post.image contains '://' %}{{ post.image }}{% else %}{{ site.baseurl }}{{ post.image }}{% endif %}" alt="{{ post.title }}" loading="lazy" decoding="async">
-                        {% endif %}
-                    </div>
-                    {% else %}
-                    <div class="blog-card-image blog-card-image-placeholder">
-                        <i class="fa fa-file-alt"></i>
-                    </div>
-                    {% endif %}
-                    <div class="blog-card-content">
-                        <div class="blog-card-header">
-                            <h5 class="blog-card-title">{{ post.title }}</h5>
-                            <div class="blog-card-meta">
-                                <span class="blog-post-date">{{ post.date | date: "%b %d, %Y" }}</span>
-                                {% if post.author %}
-                                <span class="blog-post-author">{{ post.author }}</span>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <p class="blog-card-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
-                        <div class="blog-card-footer">
-                            {% if post.categories.size > 0 %}
-                            <div class="blog-card-categories">
-                                {% for category in post.categories limit:2 %}
-                                <span class="blog-category-badge">{{ category }}</span>
-                                {% endfor %}
-                            </div>
-                            {% endif %}
-                            <span class="blog-read-more">Read more <i class="fa fa-arrow-right"></i></span>
-                        </div>
-                    </div>
-                </article>
-            </a>
-            {% endfor %}
+  {%- if featured_count > 0 %}
+  <section class="listing-section" aria-labelledby="featured-title">
+    <h2 class="listing-title" id="featured-title">Featured</h2>
+    <div class="featured-grid">
+      {%- for post in featured_internal limit:3 %}
+      {%- assign kicker = post.categories | first -%}
+      {%- assign _date = post.date | date: "%b %Y" -%}
+      {%- include card.html variant="feature" title=post.title url=post.url image=post.image excerpt=post.excerpt date=_date kicker=kicker cta="Read" -%}
+      {%- endfor %}
+      {%- for post in featured_external limit:3 %}
+      {%- assign cats = post.categories | split: ", " -%}{%- assign kicker = cats | first -%}
+      {%- assign first_link = post.links | first -%}
+      {%- include card.html variant="feature" title=post.title url=first_link.url external=true image=post.image excerpt=post.description date=post.display_date kicker=kicker links=post.links cta="Open" -%}
+      {%- endfor %}
+    </div>
+  </section>
+  {%- endif %}
 
-            <!-- External posts sorted by date (most recent first) -->
-            {% if site.data.blog_posts %}
-            {% assign external_posts = site.data.blog_posts | sort: "date" | reverse %}
-            {% else %}
-            {% assign external_posts = "" | split: "" %}
-            {% endif %}
-            {% for post in external_posts %}
-            <!-- External Blog Post -->
-            <article class="blog-card blog-card-external">
-                {% if post.image %}
-                <div class="blog-card-image">
-                    {% if post.image contains '.mp4' or post.image contains '.webm' %}
-                    <video class="lazy-video" loop muted playsinline data-autoplay preload="none">
-                        <source data-src="{{ post.image }}" type="video/mp4">
-                    </video>
-                    {% else %}
-                    <img src="{{ post.image }}" alt="{{ post.title }}" loading="lazy">
-                    {% endif %}
-                </div>
-                {% else %}
-                <div class="blog-card-image blog-card-image-placeholder">
-                    <i class="fa fa-external-link-alt"></i>
-                </div>
-                {% endif %}
-                <div class="blog-card-content">
-                    <div class="blog-card-header">
-                        <h5 class="blog-card-title">{{ post.title }}</h5>
-                        <div class="blog-card-meta">
-                            <span class="blog-post-date">{{ post.display_date | default: post.date | date: "%b %Y" }}</span>
-                        </div>
-                    </div>
-                    <p class="blog-card-excerpt">{{ post.description }}</p>
-                    <div class="blog-card-footer">
-                        {% if post.categories %}
-                        <div class="blog-card-categories">
-                            {% assign cats = post.categories | split: ", " %}
-                            {% for category in cats limit:2 %}
-                            <span class="blog-category-badge">{{ category }}</span>
-                            {% endfor %}
-                        </div>
-                        {% endif %}
-                        <div class="blog-card-links">
-                            {% for link in post.links %}
-                            <a href="{{ link.url }}" target="_blank" rel="noopener" class="blog-external-link">
-                                {{ link.platform }} <i class="fa fa-external-link-alt"></i>
-                            </a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </article>
-            {% endfor %}
-
-        </div>
-    </section>
+  <section class="listing-section" aria-labelledby="all-posts-title">
+    <h2 class="listing-title" id="all-posts-title">All posts</h2>
+    {%- if total_count > 0 %}
+    <div class="list-cards">
+      {%- for post in internal_posts %}
+      {%- assign _excerpt = post.excerpt | strip_html | truncatewords: 40 -%}
+      {%- assign _date = post.date | date: "%b %-d, %Y" -%}
+      {%- include card.html variant="list" title=post.title url=post.url image=post.image excerpt=_excerpt date=_date tags=post.categories cta="Read" -%}
+      {%- endfor %}
+      {%- for post in external_posts %}
+      {%- assign cats = post.categories | split: ", " -%}{%- assign kicker = cats | first -%}
+      {%- assign first_link = post.links | first -%}
+      {%- include card.html variant="list" title=post.title url=first_link.url external=true image=post.image excerpt=post.description date=post.display_date links=post.links cta="Open" icon="i-external" -%}
+      {%- endfor %}
+    </div>
+    {%- else %}
+    <div class="empty-state">
+      <h3>Nothing published yet</h3>
+      <p>New posts will appear here.</p>
+    </div>
+    {%- endif %}
+  </section>
 
 </div>

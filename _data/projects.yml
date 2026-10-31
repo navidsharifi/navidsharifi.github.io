@@ -1,48 +1,49 @@
-# Project template
-#- layout: top-middle
-#  name: Project name
-#  link: Link to project (eg. sproogen.github.io/modern-resume-theme)(optional)
-#  github: Github page for project (eg. sproogen/modern-resume-theme)(optional)
-#  quote: >
-#    Short overview of the project (optional)
-#  description: | # this will include new lines to allow paragraphs
-#    Description about the work on/with the project
+# Projects shown on the home page (section 05).
+# Fields: name, link (optional), github (optional, "user/repo"), dates, featured (true = full-width card),
+#         description (markdown), tags (list of short labels)
 
-- layout: left
-  name: Optora
+- name: Optora
   link: https://navidsharifi.github.io/optora/
   github: navidsharifi/optora
   dates: Apr 2026 - Present
+  featured: true
   description: >
-    <b>GPU-first PyTorch library for distributionally robust optimization (DRO).</b> Provides five ambiguity sets (KL, phi-divergence, chi-square, total variation, Wasserstein) behind one `AmbiguitySet` contract, with convex-dual and closed-form solvers verified against known mathematics.<br>
-    <span style="color:#888">PyTorch · Distributionally Robust Optimization · Convex Optimization · Python</span>
+    **GPU-first PyTorch library for distributionally robust optimization (DRO).** Provides five ambiguity sets
+    (KL, phi-divergence, chi-square, total variation, Wasserstein) behind one `AmbiguitySet` contract,
+    with convex-dual and closed-form solvers verified against known mathematics.
+  tags: [PyTorch, DRO, Convex Optimization, Python]
 
-- layout: left
-  name: Fleet Management & Inventory Control System
+- name: Fleet Management & Inventory Control System
+  dates: 2024
   description: >
-    <b>End-to-end fleet management and inventory control system for a carrier and storage tanks.</b> Implemented fleet tracking, mathematical modelling for cost functions, EOQ inventory control, and KPI dashboards.<br>
-    <span style="color:#888">Primavera P6 · GAMS · Power BI · Excel VBA · Trello</span>
+    **End-to-end fleet management and inventory control system for a carrier and storage tanks.**
+    Fleet tracking, mathematical modelling for cost functions, EOQ inventory control, and KPI dashboards.
+  tags: [Primavera P6, GAMS, Power BI, Excel VBA]
 
-- layout: left
-  name: EPC Crusher Plant Project Control
+- name: EPC Crusher Plant Project Control
+  dates: 2020 - 2022
   description: >
-    <b>Project control for large-scale EPC crusher plant project.</b> Delivered weekly progress reports, managed S-Curve tracking, PMBOK compliance, delay analysis, and claim management for Foolad Mobarake of Isfahan.<br>
-    <span style="color:#888">Microsoft Project · Power BI · PMBOK · Primavera P6</span>
+    **Project control for a large-scale EPC crusher plant project.** Weekly progress reports, S-Curve tracking,
+    PMBOK compliance, delay analysis, and claim management for Foolad Mobarake of Isfahan.
+  tags: [Microsoft Project, Power BI, PMBOK, Primavera P6]
 
-- layout: left
-  name: Sina Hospital Data Analytics
+- name: Sina Hospital Data Analytics
+  dates: 2018 - 2019
   description: >
-    <b>Design and implementation of interactive BI dashboards.</b> KPI monitoring, sales data analysis, ETL processes, data preprocessing, feature engineering, and data mining for healthcare analytics.<br>
-    <span style="color:#888">Power BI · Python · SQL Server · Scrum</span>
+    **Design and implementation of interactive BI dashboards.** KPI monitoring, sales data analysis, ETL
+    processes, data preprocessing, feature engineering, and data mining for healthcare analytics.
+  tags: [Power BI, Python, SQL Server, Scrum]
 
-- layout: left
-  name: Startup Success Prediction
+- name: Startup Success Prediction
+  dates: 2017 - 2018
   description: >
-    <b>BSc thesis — predicting startup success using machine learning and network analysis.</b> Leveraged crunchbase.com data, applied network analysis for feature selection, achieving 13% accuracy improvement.<br>
-    <span style="color:#888">Machine Learning · Network Analysis · Python</span>
+    **BSc thesis — predicting startup success using machine learning and network analysis.** Leveraged
+    crunchbase.com data and network analysis for feature selection, achieving a 13% accuracy improvement.
+  tags: [Machine Learning, Network Analysis, Python]
 
-- layout: left
-  name: Newroz Hotel MIS
+- name: Newroz Hotel MIS
+  dates: 2017
   description: >
-    <b>Management Information System development for Newroz Hotel.</b> Database design, process modelling, and reporting dashboards.<br>
-    <span style="color:#888">Microsoft Access · Visio · Power BI · Process Maker</span>
+    **Management Information System development for Newroz Hotel.** Database design, process modelling,
+    and reporting dashboards.
+  tags: [Microsoft Access, Visio, Power BI, Process Maker]

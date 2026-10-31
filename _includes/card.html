@@ -1,0 +1,58 @@
+{%- comment -%}
+  Generic card used by blog and project listing pages.
+  Params:
+    title, url (optional), external (bool), image, excerpt, date (string), kicker (string),
+    cta (string), links (array of {platform,url}), tags (array), variant ("feature"|"list"), contain (bool), icon (symbol id)
+{%- endcomment -%}
+{%- assign variant = include.variant | default: "list" -%}
+<article class="{% if variant == 'feature' %}feature-card{% else %}list-card{% endif %}" data-reveal>
+  {%- if include.image and include.image != "" %}
+  <div class="card-media{% if include.contain %} is-contain{% endif %}">
+    {%- assign img = include.image -%}
+    {%- unless img contains "://" -%}{%- assign img = img | relative_url -%}{%- endunless -%}
+    {%- if img contains '.mp4' or img contains '.webm' %}
+    <video class="lazy-video" loop muted playsinline data-autoplay preload="none"><source data-src="{{ img }}" type="video/mp4"></video>
+    {%- else %}
+    <img src="{{ img }}" alt="{{ include.title | escape }}" loading="lazy" decoding="async">
+    {%- endif %}
+  </div>
+  {%- else %}
+  <div class="card-media is-placeholder" aria-hidden="true"><svg><use href="#{{ include.icon | default: 'i-file' }}"/></svg></div>
+  {%- endif %}
+
+  <div class="card-body">
+    {%- if include.date or include.kicker %}
+    <div class="card-meta">
+      {%- if include.date %}<span>{{ include.date }}</span>{%- endif %}
+      {%- if include.kicker %}<span>{{ include.kicker }}</span>{%- endif %}
+    </div>
+    {%- endif %}
+
+    <h3 class="card-title">
+      {%- if include.url -%}
+      <a href="{{ include.url }}"{% if include.external %} target="_blank" rel="noopener"{% endif %}>{{ include.title }}</a>
+      {%- else -%}
+      {{ include.title }}
+      {%- endif -%}
+    </h3>
+
+    {%- if include.excerpt %}<p class="card-excerpt">{{ include.excerpt }}</p>{%- endif %}
+
+    {%- if include.url or include.links or include.tags %}
+    <div class="card-foot">
+      {%- if include.tags %}
+      <div class="chips">{%- for tag in include.tags limit:3 %}<span class="chip">{{ tag }}</span>{%- endfor %}</div>
+      {%- elsif include.links %}
+      <div class="card-links">
+        {%- for link in include.links %}
+        <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.platform }} <svg aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        {%- endfor %}
+      </div>
+      {%- else %}<span></span>{%- endif %}
+      {%- if include.url %}
+      <span class="card-cta">{{ include.cta | default: "Read" }} <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span>
+      {%- endif %}
+    </div>
+    {%- endif %}
+  </div>
+</article>

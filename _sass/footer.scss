@@ -1,0 +1,66 @@
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+.site-footer {
+  margin-top: auto;
+  padding: 3rem 0 2.5rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.88rem;
+  color: var(--text-2);
+}
+
+.footer-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem 2rem;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  .brand { font-size: 1rem; }
+  p { margin: 0; color: var(--text-3); }
+  a { color: var(--text-2); &:hover { color: var(--text); } }
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0;
+    color: var(--text-2);
+    font-weight: 500;
+
+    svg { width: 15px; height: 15px; }
+    &:hover { color: var(--text); }
+  }
+}
+
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--text-3);
+
+  a { color: inherit; &:hover { color: var(--text); } }
+}

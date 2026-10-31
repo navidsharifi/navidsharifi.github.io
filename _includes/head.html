@@ -1,54 +1,58 @@
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-site-verification" content="iy_Kc5UEJ0ls_AP4oXtSSr8F3Vudo6LP933qWL3Tnfk" />
   <meta name="google-site-verification" content="X36l-RB7V-87ghFwPneHzY9ubJ_GkVdCKPlND3V1xbw" />
   <!-- Citation style for academic referencing (apa, ieee, chicago, vancouver) -->
   <meta name="citation-style" content="{{ site.citation_style | default: 'apa' }}">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="color-scheme" content="dark light">
 
-  <!-- Performance optimizations -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <!-- Theme: apply saved preference before first paint (default: dark) -->
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      var saved = null;
+      try { saved = localStorage.getItem('darkMode'); } catch (e) {}
+      var isDark = saved === null ? true : saved === 'true';
+      var q = /[?&]theme=(light|dark)/.exec(location.search);
+      if (q) { isDark = q[1] === 'dark'; d.setAttribute('data-theme-override', q[1]); }
+      d.classList.toggle('dark', isDark);
+      d.classList.toggle('light', !isDark);
+      d.style.colorScheme = isDark ? 'dark' : 'light';
+    })();
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://maxcdn.bootstrapcdn.com" crossorigin>
-  <link rel="preconnect" href="https://ajax.googleapis.com" crossorigin>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-  <link rel="dns-prefetch" href="//fonts.googleapis.com">
-  <link rel="dns-prefetch" href="//fonts.gstatic.com">
-  <link rel="dns-prefetch" href="//maxcdn.bootstrapcdn.com">
-  <link rel="dns-prefetch" href="//ajax.googleapis.com">
-  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <!-- Fonts: Roboto for body, Fira Code for code -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <title>{{ site.name }} | {{ site.title }}</title>
+  <title>{% if page.title and page.url != "/" %}{{ page.title }} · {{ site.name }}{% else %}{{ site.name }} | {{ site.title }}{% endif %}</title>
   {%- seo title=false -%}
 
-  <!-- Bootstrap CSS - loaded directly for reliability on GitHub Pages -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
+  <!-- Font Awesome (kept for icons used inside post content) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+
   <!-- Main CSS -->
   <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}">
   <link rel="shortcut icon" type="image/x-icon" href="{{ site.favicon | default: '/assets/favicon.ico' | relative_url }}">
 
-  <!-- Centralized Color Palette (from _config.yml) -->
+  <!-- Centralized colour palette (from _config.yml) -->
   {%- include palette.html -%}
 
   <!-- Early media interceptor: prevents browser from fetching off-screen videos/images
-       before the main lazy-media.js IntersectionObserver can take over. Runs in <head>
-       so the MutationObserver catches elements as they enter the DOM during parsing. -->
+       before the main lazy-media.js IntersectionObserver can take over. -->
   <script>
   (function(){
     if(!window.MutationObserver)return;
-    // Skip navbar/header elements — only intercept inside page-content
-    var SKIP='.navbar,.site-header,header,[role="banner"]';
+    var SKIP='.site-header,header,[role="banner"]';
     function inSkipZone(el){for(var p=el;p;p=p.parentElement){if(p.matches&&p.matches(SKIP))return true}return false}
     function interceptVideo(v){
-      if(v.classList.contains('lazy-video'))return;// already handled by template
+      if(v.classList.contains('lazy-video'))return;
       if(inSkipZone(v))return;
       if(v.hasAttribute('autoplay')){v.setAttribute('data-autoplay','');v.removeAttribute('autoplay')}
       v.setAttribute('preload','none');v.classList.add('lazy-video');
@@ -74,16 +78,12 @@
       })});
     });
     mo.observe(document.documentElement,{childList:true,subtree:true});
-    // Store ref so lazy-media.js can disconnect it after taking over
     window.__lazyMediaEarlyMO=mo;
   })();
   </script>
 
-  <!-- MathJax Configuration for Math Rendering -->
-  <!-- 
-    Note: kramdown with math_engine: mathjax outputs <script type="math/tex"> tags (MathJax v2 format)
-    This configuration adds compatibility for MathJax v3 to process these legacy tags
-  -->
+  {%- if page.layout == "post" or page.math == true -%}
+  <!-- MathJax (only on post pages) -->
   <script>
     window.MathJax = {
       tex: {
@@ -93,10 +93,7 @@
         processEnvironments: true,
         processRefs: true,
         tags: 'ams',
-        autoload: {
-          color: [],
-          colorV2: ['color']
-        },
+        autoload: { color: [], colorV2: ['color'] },
         packages: {'[+]': ['noerrors']}
       },
       options: {
@@ -117,71 +114,15 @@
           }, '']
         }
       },
-      chtml: {
-        scale: 1,
-        minScale: 0.5,
-        matchFontHeight: true,
-        mtextInheritFont: true
-      },
-      svg: {
-        scale: 1,
-        minScale: 0.5
-      },
-      loader: {
-        load: ['[tex]/noerrors']
-      },
-      startup: {
-        pageReady: function() {
-          return MathJax.startup.defaultPageReady();
-        }
-      }
+      chtml: { scale: 1, minScale: 0.5, matchFontHeight: true, mtextInheritFont: true },
+      loader: { load: ['[tex]/noerrors'] }
     };
   </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script>
-    // Ensure MathJax processes math after page load
-    document.addEventListener('DOMContentLoaded', function() {
-      if (window.MathJax && window.MathJax.typesetPromise) {
-        window.MathJax.typesetPromise().catch(function(err) {
-          console.error('MathJax typeset failed: ' + err.message);
-        });
-      }
-    });
-  </script>
-
-  <!-- Preload critical JavaScript -->
-  <link rel="preload" href="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" as="script">
-  <link rel="preload" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" as="script">
-  <link rel="preload" href="{{ '/assets/js/index.js' | relative_url }}" as="script">
-
-  <!-- jQuery required for Bootstrap -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" defer></script>
-  <!-- Bootstrap JavaScript for navigation functionality -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" defer></script>
-  <!-- Bibliography/citations (dependency-free) for blog posts -->
+  <!-- Bibliography/citations and academic numbering (dependency-free) -->
   <script src="{{ '/assets/js/citations.js' | relative_url }}" defer></script>
-  <!-- Academic numbering system (figures, tables, equations) for blog posts -->
   <script src="{{ '/assets/js/academic-numbering.js' | relative_url }}" defer></script>
-
-  <!-- Resource hints for better performance -->
-  <meta name="theme-color" content="#0f0f0f">
-  <meta name="color-scheme" content="dark light">
-  
-  <!-- Early dark mode script to prevent flash of light theme -->
-  <script>
-    (function() {
-      var saved = localStorage.getItem('darkMode');
-      // Default to dark mode unless explicitly set to light
-      var isDark = saved === null ? true : saved === 'true';
-      if (isDark) {
-        document.documentElement.classList.add('dark');
-        document.documentElement.classList.remove('light');
-      } else {
-        document.documentElement.classList.remove('dark');
-        document.documentElement.classList.add('light');
-      }
-    })();
-  </script>
+  {%- endif -%}
 
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
   {%- include google-analytics.html -%}
@@ -192,5 +133,4 @@
   {%- if jekyll.environment == 'production' and site.gtag -%}
   {%- include gtag.html -%}
   {%- endif -%}
-
 </head>

@@ -4,23 +4,27 @@ layout: default
 permalink: "/categories.html"
 ---
 
-<div class="container listrecent">
-    {% assign displayed_posts = "" | split: "," %}
+<header class="container page-header">
+  <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Browse</p>
+  <h1>Categories</h1>
+</header>
 
-    {% for category in site.categories %}
-        <div class="section-title col-md-12 mt-4">
-            <h2 id="{{ category[0] | replace: " ","-" }}">Category <span class="text-capitalize"><a href="/category/{{ category[0] | slugify }}">{{ category[0] }}</a></span></span></h2>
-        </div>
-
-        {% for post in category[1] %}
-            {% unless displayed_posts contains post.url %}
-                {% if post.title != null %}
-                {% if group == null or group == post.group %}
-                    {% include postbox.html %}
-                    {% assign displayed_posts = displayed_posts | push: post.url %}
-                {% endif %}
-                {% endif %}
-            {% endunless %}
-        {% endfor %}
-    {% endfor %}
+<div class="container listing">
+  {%- assign all_posts = site.blog_posts | concat: site.posts | where_exp: "post", "post.hidden != true" -%}
+  {%- assign categories = all_posts | map: "categories" | join: "," | split: "," | uniq | sort -%}
+  {%- for category in categories -%}
+  {%- if category == "" -%}{%- continue -%}{%- endif -%}
+  {%- assign posts_in = all_posts | where_exp: "post", "post.categories contains category" | sort: "date" | reverse -%}
+  {%- if posts_in.size == 0 -%}{%- continue -%}{%- endif -%}
+  <section class="listing-section" id="{{ category | replace: ' ', '-' }}">
+    <h2 class="listing-title">{{ category }}</h2>
+    <div class="list-cards">
+      {%- for post in posts_in -%}
+      {%- assign _excerpt = post.excerpt | strip_html | truncatewords: 40 -%}
+      {%- assign _date = post.date | date: "%b %-d, %Y" -%}
+      {%- include card.html variant="list" title=post.title url=post.url image=post.image excerpt=_excerpt date=_date tags=post.categories cta="Read" -%}
+      {%- endfor -%}
+    </div>
+  </section>
+  {%- endfor -%}
 </div>

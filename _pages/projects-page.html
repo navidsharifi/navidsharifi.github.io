@@ -5,194 +5,46 @@ permalink: /projects-page
 comments: false
 ---
 
-<style>
-/* Projects Page Clean Grid Styling */
+{%- assign all_projects = site.data["projects-page"] -%}
+{%- assign featured_projects = all_projects | where: "featured", true -%}
 
-/* Featured Section Grid Alignment */
-.featured-posts {
-    margin-bottom: 4rem;
-}
+<header class="container page-header">
+  <p class="eyebrow" data-reveal><span class="dot" aria-hidden="true"></span>Work</p>
+  <h1 data-reveal>Projects</h1>
+  <p data-reveal>{{ site.projects_description | default: "Selected research software, analytics and project-delivery work." }}</p>
+</header>
 
-.featured-posts .row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
-    margin: 0 -15px;
-    gap: 0;
-}
+<div class="container listing">
 
-.featured-posts .row > [class*="col-"] {
-    display: flex;
-    align-items: stretch;
-    padding: 0 15px;
-}
-
-/* Ensure proper grid spacing */
-.featured-posts .mb-30px {
-    margin-bottom: 30px !important;
-}
-
-/* All Projects Section */
-.recent-posts {
-    margin-top: 2rem;
-}
-
-.recent-posts .row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
-    margin: 0 -15px;
-    gap: 0;
-}
-
-.recent-posts .row > [class*="col-"] {
-    display: flex;
-    align-items: stretch;
-    padding: 0 15px;
-}
-
-/* Ensure proper grid spacing for all projects */
-.recent-posts .mb-30px {
-    margin-bottom: 30px !important;
-}
-
-/* Responsive grid adjustments for featured items */
-@media (max-width: 1199.98px) and (min-width: 992px) {
-    /* Large tablets - 2 columns for featured */
-    .featured-posts .row > .col-lg-4 {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-    
-    /* Keep 3 columns for all projects on large tablets */
-    .recent-posts .row > .col-lg-4 {
-        flex: 0 0 33.333333%;
-        max-width: 33.333333%;
-    }
-}
-
-@media (max-width: 991.98px) and (min-width: 768px) {
-    /* Medium tablets - 2 columns for both */
-    .featured-posts .row > .col-lg-4,
-    .featured-posts .row > .col-md-6,
-    .recent-posts .row > .col-lg-4,
-    .recent-posts .row > .col-md-6 {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-}
-
-@media (max-width: 767.98px) and (min-width: 576px) {
-    /* Small tablets - 2 columns */
-    .featured-posts .row > .col-lg-4,
-    .featured-posts .row > .col-md-6,
-    .featured-posts .row > .col-sm-6,
-    .recent-posts .row > .col-lg-4,
-    .recent-posts .row > .col-md-6,
-    .recent-posts .row > .col-sm-6 {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-}
-
-@media (max-width: 575.98px) {
-    /* Mobile phones - single column */
-    .featured-posts .row > .col-lg-4,
-    .featured-posts .row > .col-md-6,
-    .featured-posts .row > .col-sm-6,
-    .recent-posts .row > .col-lg-4,
-    .recent-posts .row > .col-md-6,
-    .recent-posts .row > .col-sm-6 {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-}
-
-/* Optora logo is a wide banner - contain instead of crop so the full mark is visible */
-.blog-card-image img[alt="Optora"],
-.blog-featured-image img[alt="Optora"] {
-    object-fit: contain;
-    background: #000;
-    padding: 0.75rem;
-}
-</style>
-
-{% assign featured_projects = site.data["projects-page"] | where: "featured", true %}
-{% assign all_projects = site.data["projects-page"] %}
-
-{% if featured_projects.size > 0 %}
-<section class="container featured-posts blog-listing-container">
-    <h3 class="section-title">Featured</h3>
-    <div class="blog-featured-grid">
-        {% for project in featured_projects %}
-        {% if project.link %}
-        <a href="{{ project.link }}" class="blog-featured-card-link">
-        {% endif %}
-        <article class="blog-featured-card blog-featured-card-external">
-            {% if project.image %}
-            <div class="blog-featured-image">
-                <img src="{% if project.image contains '://' %}{{ project.image }}{% else %}{{ project.image | relative_url }}{% endif %}" alt="{{ project.name }}" loading="lazy" decoding="async">
-            </div>
-            {% endif %}
-            <div class="blog-featured-content">
-                <h5 class="blog-featured-title">{{ project.name }}</h5>
-                <p class="blog-featured-excerpt">{{ project.description | strip_html | truncatewords: 35 }}</p>
-                {% if project.year %}
-                <div class="blog-featured-meta">
-                    <span class="blog-post-date">{{ project.year }}</span>
-                </div>
-                {% endif %}
-            </div>
-        </article>
-        {% if project.link %}
-        </a>
-        {% endif %}
-        {% endfor %}
+  {%- if featured_projects.size > 0 %}
+  <section class="listing-section" aria-labelledby="featured-projects-title">
+    <h2 class="listing-title" id="featured-projects-title">Featured</h2>
+    <div class="featured-grid">
+      {%- for project in featured_projects %}
+      {%- assign is_external = false -%}{%- if project.link contains "://" -%}{%- assign is_external = true -%}{%- endif -%}
+      {%- assign _excerpt = project.description | strip_html | truncatewords: 35 -%}
+      {%- include card.html variant="feature" title=project.name url=project.link external=is_external image=project.image contain=project.contain excerpt=_excerpt date=project.year cta="Open project" icon="i-code" -%}
+      {%- endfor %}
     </div>
-</section>
-{% endif %}
+  </section>
+  {%- endif %}
 
-<div class="container recent-posts blog-listing-container">
-    <h3 class="section-title">All Projects</h3>
-    <div class="blog-posts-list">
-        {% for project in all_projects %}
-        {% if project.link %}
-        <a href="{{ project.link }}" class="blog-card-link">
-        {% endif %}
-        <article class="blog-card blog-card-external">
-            {% if project.image %}
-            <div class="blog-card-image">
-                <img src="{% if project.image contains '://' %}{{ project.image }}{% else %}{{ project.image | relative_url }}{% endif %}" alt="{{ project.name }}" loading="lazy" decoding="async">
-            </div>
-            {% else %}
-            <div class="blog-card-image blog-card-image-placeholder">
-                <i class="fa fa-code-branch"></i>
-            </div>
-            {% endif %}
-            <div class="blog-card-content">
-                <div class="blog-card-header">
-                    <h5 class="blog-card-title">{{ project.name }}</h5>
-                </div>
-                <p class="blog-card-excerpt">{{ project.description | strip_html | truncatewords: 55 }}</p>
-                {% if project.link %}
-                <div class="blog-card-footer">
-                    <span class="blog-read-more">Open project <i class="fa fa-arrow-right"></i></span>
-                </div>
-                {% endif %}
-            </div>
-        </article>
-        {% if project.link %}
-        </a>
-        {% endif %}
-        {% endfor %}
+  <section class="listing-section" aria-labelledby="all-projects-title">
+    <h2 class="listing-title" id="all-projects-title">All projects</h2>
+    {%- if all_projects.size > 0 %}
+    <div class="list-cards">
+      {%- for project in all_projects %}
+      {%- assign is_external = false -%}{%- if project.link contains "://" -%}{%- assign is_external = true -%}{%- endif -%}
+      {%- assign _excerpt = project.description | strip_html | truncatewords: 55 -%}
+      {%- include card.html variant="list" title=project.name url=project.link external=is_external image=project.image contain=project.contain excerpt=_excerpt date=project.year tags=project.tags cta="Open project" icon="i-code" -%}
+      {%- endfor %}
     </div>
-</div>
+    {%- else %}
+    <div class="empty-state">
+      <h3>No projects listed yet</h3>
+      <p>Projects will appear here.</p>
+    </div>
+    {%- endif %}
+  </section>
 
-<!-- Pagination
-================================================== -->
-<div class="bottompagination">
-    <div class="pointerup"><i class="fa fa-caret-up"></i></div>
-    <span class="navigation" role="navigation">
-    {% include pagination.html %}
-</span>
 </div>

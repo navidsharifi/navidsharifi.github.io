@@ -1,0 +1,44 @@
+{%- comment -%}
+  Timeline entry used by education / experience sections.
+  Expects include.item with: name|company, qualification|job_title, dates, description, link, github, badge, tags
+{%- endcomment -%}
+{%- assign title = include.item.name | default: include.item.company -%}
+{%- assign subtitle = include.item.qualification | default: include.item.job_title -%}
+<article class="entry" data-reveal>
+  <div class="entry-meta">
+    {%- if include.item.dates %}<span class="entry-dates">{{ include.item.dates }}</span>{%- endif %}
+  </div>
+  <div class="entry-main">
+    <h3 class="entry-title">
+      {%- if include.item.link -%}
+        <a href="{{ include.item.link }}" target="_blank" rel="noopener">{{ title }}</a>
+      {%- else -%}
+        {{ title }}
+      {%- endif -%}
+      {%- if include.item.badge %} {{ include.item.badge }}{% endif -%}
+    </h3>
+    {%- if subtitle %}<p class="entry-subtitle">{{ subtitle }}</p>{%- endif %}
+    {%- for job in include.item.jobs %}
+    <p class="entry-subtitle">{{ job.title }} <span class="mono muted">· {{ job.dates }}</span></p>
+    {%- endfor %}
+    {%- if include.item.quote %}<p class="entry-subtitle"><em>{{ include.item.quote }}</em></p>{%- endif %}
+    {%- if include.item.description %}
+    <div class="entry-desc">{{ include.item.description | strip | markdownify }}</div>
+    {%- endif %}
+    {%- if include.item.tags %}
+    <div class="chips">
+      {%- for tag in include.item.tags %}<span class="chip">{{ tag }}</span>{%- endfor %}
+    </div>
+    {%- endif %}
+    {%- if include.item.github or include.item.link %}
+    <div class="entry-links no-print">
+      {%- if include.item.github %}
+      <a href="https://github.com/{{ include.item.github }}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-github"/></svg> {{ include.item.github }}</a>
+      {%- endif %}
+      {%- if include.item.link %}
+      <a href="{{ include.item.link }}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-external"/></svg> {{ include.item.link | replace: "https://", "" | replace: "http://", "" }}</a>
+      {%- endif %}
+    </div>
+    {%- endif %}
+  </div>
+</article>

@@ -155,8 +155,8 @@ pre {
 }
 
 /* Light mode adjustments */
-body:not(.dark) .copy-button,
-html:not(.dark) .copy-button {
+html:not(.dark) .copy-button,
+html.light .copy-button {
   background-color: rgba(0, 0, 0, 0.05);
   color: var(--pre-code-color, #24292e);
   

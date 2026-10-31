@@ -1,10 +1,49 @@
-<div class="container projects-container">
-  <div class="row clearfix">
-    <div class="col-xs-12 col-sm-offset-4 col-sm-8 col-md-offset-3 col-md-9 col-print-12">
-      <h3 class="section-title">{{ site.projects_title | default: "Projects" }}</h3>
+<section class="section" id="projects" aria-labelledby="projects-title">
+  <div class="container section-grid">
+    <aside class="section-label" data-reveal>
+      <span class="section-index">05</span>
+      <h2 id="projects-title">{{ site.projects_title | default: "Projects" }}</h2>
+      <p><a class="link-arrow" href="{{ '/projects-page.html' | relative_url }}">All projects <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></a></p>
+    </aside>
+    <div class="section-body project-grid">
+      {%- for project in site.data.projects %}
+      <article class="project-card{% if project.featured %} is-featured{% endif %}" data-reveal>
+        <div class="project-card-head">
+          <div>
+            <h3 class="project-card-title">
+              {%- if project.link -%}
+                <a href="{{ project.link }}"{% if project.link contains '://' %} target="_blank" rel="noopener"{% endif %}>{{ project.name }}</a>
+              {%- else -%}
+                {{ project.name }}
+              {%- endif -%}
+              {%- if project.badge %} {{ project.badge }}{% endif -%}
+            </h3>
+            {%- if project.dates %}<div class="project-card-dates">{{ project.dates }}</div>{%- endif %}
+          </div>
+          {%- if project.link %}
+          <svg class="project-card-arrow" aria-hidden="true"><use href="#i-arrow-up-right"/></svg>
+          {%- endif %}
+        </div>
+
+        {%- if project.quote %}<p class="project-card-desc"><em>{{ project.quote }}</em></p>{%- endif %}
+        {%- if project.description %}
+        <div class="project-card-desc">{{ project.description | strip | markdownify }}</div>
+        {%- endif %}
+
+        {%- if project.tags or project.github %}
+        <div class="project-card-foot">
+          <div class="chips">
+            {%- for tag in project.tags %}<span class="chip">{{ tag }}</span>{%- endfor %}
+          </div>
+          {%- if project.github %}
+          <div class="project-card-links">
+            <a href="https://github.com/{{ project.github }}" target="_blank" rel="noopener" aria-label="{{ project.name | strip_html }} on GitHub" title="GitHub"><svg aria-hidden="true"><use href="#i-github"/></svg></a>
+          </div>
+          {%- endif %}
+        </div>
+        {%- endif %}
+      </article>
+      {%- endfor %}
     </div>
   </div>
-  {% for project in site.data.projects %}
-    {% include {{ project.layout | default: 'left' | append: ".html" }} item=project %}
-  {% endfor %}
-</div>
+</section>

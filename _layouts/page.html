@@ -2,93 +2,14 @@
 layout: default
 ---
 
-<div class="container">
-    {% for skill_category in site.data.skills %}
-    <div class="skills-container">
+<header class="container page-header">
+  {%- if page.eyebrow %}<p class="eyebrow"><span class="dot" aria-hidden="true"></span>{{ page.eyebrow }}</p>{%- endif %}
+  <h1>{{ page.title }}</h1>
+  {%- if page.description %}<p>{{ page.description }}</p>{%- endif %}
+</header>
 
-        {%- if site.data.publication.size > 0 -%}
-        {%- include publication.html -%}
-        {%- endif -%}
-
-<!--        {%- if site.data.publication.size > 0 -%}-->
-<!--        {%- include publication.html -%}-->
-<!--        {%- endif -%}-->
-        {% if skill_category.category %}
-        <h3 class="section-title">{{ skill_category.category }}</h3>
-        {% endif %}
-
-        {% if skill_category.title %}
-
-        {% endif %}
-
-        {% case skill_category.layout %}
-        {% when 'list' %}
-        <div class="layout">
-            <div class="details">
-
-                {% if skill_category.items %}
-
-                    {% for item in skill_category.items %}
-                        <h4>{{ item.category }}</h4>
-                        {% for single_item in item.items %}
-                            <div class="skill-item">
-                                <p>
-                                    <b>{{ single_item.name }}</b>
-                                    {% if single_item.description %}
-                                    - {{ single_item.description }}
-                                    {% endif %}
-                                </p>
-                            </div>
-                        {% endfor %}
-                    {% endfor %}
-                {% endif %}
-            </div>
-        </div>
-
-        {% when 'project' %}
-        <div class="layout">
-            <div class="details">
-                {% for project in skill_category.projects %}
-                <div class="project-item">
-                    <h4>{{ project.name }}</h4>
-                    <p>{{ project.description | markdownify }}</p>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        {% when 'writing' %}
-        <div class="layout">
-            <div class="details">
-                {% for item in skill_category.writing-items %}
-                {% if item.type == 'other' %}
-                <p>{{ item.content }}</p>
-                {% elsif item.type == 'article' %}
-                {% for article in item.items %}
-                <p>
-                    <a href="{{ article.url }}" target="_blank">{{ article.name }}</a>
-                    {% if article.description %}
-                    - {{ article.description }}
-                    {% endif %}
-                </p>
-                {% endfor %}
-                {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-
-        {% when 'languages' %}
-        <div class="layout">
-            <div class="details">
-                {% for language in skill_category.languages %}
-                <p><b>{{ language.name }}</b> - {{ language.level }}</p>
-                {% endfor %}
-                {% if skill_category.interests %}
-                <p class="quote">{{ skill_category.interests }}</p>
-                {% endif %}
-            </div>
-        </div>
-        {% endcase %}
-    </div>
-    {% endfor %}
+<div class="container container--narrow listing">
+  <div class="article-post">
+    {{ content }}
+  </div>
 </div>

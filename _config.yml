@@ -23,8 +23,23 @@ repository: https://github.com/navidsharifi/navidsharifi.github.io
 
 # Personal info
 name: Navid Sharifi
-title: Business Analyst - Research Project Collaborator
+title: Business Analyst · Research Project Collaborator
 email: navid.shr.ba@gmail.com
+
+# Hero (home page header)
+hero_eyebrow: Open to research collaborations
+hero_tagline: >-
+  Robust decision-making under uncertainty — distributionally robust optimization,
+  optimal transport and operations analytics, grounded in years of real-world project delivery.
+hero_facts:
+  - label: Focus
+    value: Distributionally robust optimization
+  - label: Background
+    value: Industrial engineering · EPC project control
+  - label: Currently
+    value: MSc Business Analytics · University of Essex
+  - label: Interests
+    value: Optimal transport · Forecasting · Inventory control
 #phone: Your phone number (optional)
 #website: https://navidsharifi.github.io
 
@@ -88,7 +103,7 @@ darkmode: true
 # // =========================================================================
   
 palette:
-  dark_bg: "slate"      # Dark mode background
+  dark_bg: "pure-black" # Dark mode background (pure-black | near-black | charcoal)
   light_bg: "white"          # Light mode background  
   accent: "yellow"        # Accent color (used for highlights, links hover, etc.)
   navbar: "darker"             # Navbar style
@@ -127,44 +142,18 @@ linkedin_username: navid-sharifi-22647b100
 # about_title: About Me (Use this to override about section title)
 about_profile_image: images/profile.png #Directory of profile image (eg. images/profile.jpg)
 about_content: | # this will include new lines to allow paragraphs
-  
-  <section>
-    <h3>About</h3>
-  <p>
-  With a background in <strong>industrial engineering</strong>, I bring hands-on experience in <strong>EPC project management for large-scale industrial systems</strong>, <strong>business and system analysis in fleet management projects</strong>, and <strong>IT project management using agile methodology</strong>, alongside a growing focus on how data-driven and analytical methods can improve business operations and support better decision-making — combining practical project management experience with rigorous analytical and modelling techniques to bridge theory and real-world operational challenges.
-  </p>
-  </section>
-  
-  <section>
-    <h3>Research Interests</h3>
-    <p>
-      I work on robust decision-making under distributional uncertainty, where the interesting part is not the nominal model but the ambiguity around it. I use distributionally robust optimization (DRO) with &phi;-divergence and Wasserstein ambiguity sets, optimal transport and Sinkhorn divergences as the geometric backbone, convex duality for tractable worst-case reformulations, and minimax/saddle-point methods to solve the resulting robust-adversarial games at scale.
-    </p>
-    <p>
-      <strong>Current focus:</strong> A unified, GPU-native treatment of Wasserstein-based DRO as a differentiable optimization layer &mdash; connecting convex duality, saddle-point solvers, and optimal transport geometry into a single scalable framework for decision-making that stays reliable when the data-generating distribution shifts.
-    </p>
-  </section>
-  
-#        I am a Master's student pursuing a specialization in Artificial Intelligence at the University of Essex.
-#      With over three years of hands-on experience, my passion lies in the realm of deep learning and autonomous agents.
-#
-#      I am eager to explore the potential of attention mechanisms in enhancing the performance of multimodal models in
-#      representation learning, reasoning, and zero-shot learning within uncertain environments.
-#
-#      Parallel to this, I have actively engaged in freelance work and collaborated with research teams, and have made
-#      contributions to the open-source community.
+  With a background in **industrial engineering**, I bring hands-on experience in **EPC project management for large-scale industrial systems**, **business and system analysis in fleet management projects**, and **IT project management using agile methodology** — alongside a growing focus on how data-driven and analytical methods can improve business operations and support better decision-making.
 
-#  ### Academic accomplishments<br>
-#
-#
-#
-#  <br>
+  I combine practical project management experience with rigorous analytical and modelling techniques to bridge theory and real-world operational challenges.
 
-#  You can even add paragraphs by using empty lines like this and add anything else markdown supports such as
-#    - Lists
-#    - Tables
-#    - <a href="google.com">Links</a>
-#    - Images
+# Research Section (shown below About on the home page)
+research_title: Research
+research_subtitle: Decision-making under distributional uncertainty
+research_content: |
+  I work on robust decision-making under distributional uncertainty, where the interesting part is not the nominal model but the ambiguity around it. I use **distributionally robust optimization (DRO)** with &phi;-divergence and Wasserstein ambiguity sets, **optimal transport** and Sinkhorn divergences as the geometric backbone, **convex duality** for tractable worst-case reformulations, and **minimax / saddle-point methods** to solve the resulting robust-adversarial games at scale.
+
+  ### Current focus
+  A unified, GPU-native treatment of Wasserstein-based DRO as a differentiable optimization layer &mdash; connecting convex duality, saddle-point solvers, and optimal transport geometry into a single scalable framework for decision-making that stays reliable when the data-generating distribution shifts.
 
 # Projects Section
 # projects_title: Projects #(Use this to override about projects section title)
@@ -174,6 +163,8 @@ about_content: | # this will include new lines to allow paragraphs
 
 # Education Section
 education_title: Education #(Use this to override about education section title)
+blog_description: Notes on optimisation, forecasting and decision-making under uncertainty.
+projects_description: Selected research software, analytics and project-delivery work.
 publication_title: Publications
 skills_title: Skills
 # More Section

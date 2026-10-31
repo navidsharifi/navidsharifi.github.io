@@ -60,10 +60,16 @@ darkmode: true  # true | false | never
 
 # Color palette
 palette:
-  dark_bg: "near-black"    # near-black | pure-black | charcoal | slate | midnight
+  dark_bg: "pure-black"    # pure-black | near-black | charcoal
   light_bg: "white"        # white | snow | cream | cool-gray
-  accent: "crimson"        # vivid-red | crimson | coral | rose | ruby
-  navbar: "darker"         # dark | darker | pure-black | slate
+  accent: "yellow"         # yellow | vivid-red | crimson | coral | rose | ruby | purple | emerald | sky
+
+# Hero (home page header)
+hero_eyebrow: Open to research collaborations
+hero_tagline: One-sentence summary shown under your role.
+hero_facts:
+  - label: Focus
+    value: What you work on
 
 # Citation style for blog posts
 citation_style: "apa"      # apa | ieee | chicago | vancouver
