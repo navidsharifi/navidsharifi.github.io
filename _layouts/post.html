@@ -92,6 +92,9 @@ layout: default
         {%- endif -%}
       </footer>
     </article>
+{%- if page.anim %}
+    <script src="{{ '/assets/js/dro-anim.js' | relative_url }}" defer></script>
+{%- endif %}
 
   </div>
 </div>

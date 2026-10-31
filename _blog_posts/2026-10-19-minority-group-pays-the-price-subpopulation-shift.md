@@ -7,6 +7,7 @@ image: images/optora-subpop-cover.svg
 featured: true
 hidden: false
 comments: true
+anim: true
 categories: Distributionally-Robust-Optimisation Machine-Learning Fairness Optora
 excerpt: "A model trained on a population that is 90 percent one group and 10 percent another will serve the majority well and the minority badly. This post trains a regression on a Kullback-Leibler ball instead of the empirical distribution, measures exactly when the robust model wins as the minority share grows, and shows what the adversary does and does not find."
 ---
@@ -107,6 +108,15 @@ The ridge control is worse than ERM at every share. Shrinkage pulls the slope to
 The population-optimal model for a test share $\pi$ has slope $w^{\star}(\pi) = (1 - \pi) a_A + \pi a_B$, a straight path in weight space between the two group slopes. <a href="#fig-tradeoff" class="ref"></a> draws the risks of that path as a curve in the plane of $(R_A, R_B)$. The three robust models sit on it. Each radius corresponds to a point further along, which is to say to a model that is optimal for some larger minority share. The ridge model sits above the curve, worse on both groups. This is the strongest evidence that sample-level DRO is doing the right kind of thing. Without ever seeing a group label, it has found models that lie on the frontier a label-aware oracle would trace.
 
 ## What the Adversary Finds
+
+<figure class="academic-figure" id="fig-interactive">
+<div class="dro-anim" data-anim="subpop" data-src="{{ '/assets/data/dro-subpop.json' | relative_url }}" data-title="Interactive: sweep the KL radius">
+<noscript>Enable JavaScript to see the interactive figure.</noscript>
+</div>
+<figcaption data-caption="Interactive view of one training set as the KL radius moves from 0 to 0.5 through 21 trained models. Left: the 400 training points, with the minority group in red, plotted by the feature on which the groups differ against the label with the shared feature removed. Each point is sized by its worst-case weight. The green line is the fitted slope on that feature and the dashed line is the ERM fit. Right: the exact test-risk line of the current model against the fixed ERM line, with the crossing point marked. The readout gives the group risks, the minority mass used by the adversary and the crossing share."></figcaption>
+</figure>
+
+<a href="#fig-interactive" class="ref"></a> shows the whole mechanism in motion. As the radius grows the minority points swell, the fitted slope rotates toward the minority, and the risk line tilts so that it crosses ERM at a smaller share.
 
 <figure class="academic-figure" id="fig-weights">
 <img src="{{ '/images/optora-subpop-weights.svg' | relative_url }}" alt="Left: histogram of worst-case weights for majority and minority points. Right: minority mass used by the adversary against the maximum the ball allows." style="max-width: 100%; display: block; margin: 0 auto;">

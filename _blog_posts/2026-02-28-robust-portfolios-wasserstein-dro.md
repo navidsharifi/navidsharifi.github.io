@@ -7,6 +7,7 @@ image: images/optora-portfolio-cover.svg
 featured: true
 hidden: false
 comments: true
+anim: true
 categories: Distributionally-Robust-Optimisation Portfolio-Optimisation Optora
 excerpt: "A ten-year sample is a poor crystal ball. This post builds a long-only portfolio on a Wasserstein ball around the empirical return distribution, shows how the radius turns a single bet into a diversified book, and tests the result in a stress regime the optimiser never saw."
 ---
@@ -91,6 +92,15 @@ for _ in range(2000):
 Two details deserve a comment. First, `worst_case_expectation` takes the per-scenario losses, not their mean. The inner supremum is solved exactly inside the call by bisection on the dual of the finite-support transport problem, and gradients flow through it. Second, the worst-case distribution itself is available for free. By Danskin's theorem the gradient of the worst-case value with respect to the loss vector is the maximising distribution $q^{\star}$, so `loss.grad` after a backward pass is the adversary's choice of weights on the 120 months.
 
 ## What the Radius Does to the Weights
+
+<figure class="academic-figure" id="fig-interactive">
+<div class="dro-anim" data-anim="portfolio" data-src="{{ '/assets/data/dro-portfolio.json' | relative_url }}" data-title="Interactive: sweep the Wasserstein radius">
+<noscript>Enable JavaScript to see the interactive figure.</noscript>
+</div>
+<figcaption data-caption="Interactive view of the trained portfolios. The slider moves the Wasserstein radius from 0 to 0.08 through 25 trained solutions. Left: the weights of the six assets. Right: the 120 training months, each sized and coloured by the weight the worst-case distribution gives it relative to its nominal weight of 1 in 120. The readout shows the annualised in-sample, normal-regime and stress-regime returns of the current portfolio."></figcaption>
+</figure>
+
+<a href="#fig-interactive" class="ref"></a> lets you move the radius yourself and watch the weights and the adversary respond together. The static figures that follow pick out the frames worth discussing.
 
 <figure class="academic-figure" id="fig-weights">
 <img src="{{ '/images/optora-portfolio-weights.svg' | relative_url }}" alt="Stacked area chart of portfolio weights against the Wasserstein radius" style="max-width: 100%; display: block; margin: 0 auto;">

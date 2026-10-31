@@ -7,6 +7,7 @@ image: images/optora-energy-cover.svg
 featured: true
 hidden: false
 comments: true
+anim: true
 categories: Distributionally-Robust-Optimisation Energy-Systems Stochastic-Programming Optora
 excerpt: "A grid with a lot of wind and solar has to schedule firm capacity a day ahead against a net load it cannot forecast well. This post schedules that capacity on a year of scenarios, robustifies the decision with KL, Wasserstein and CVaR ambiguity sets, and then tests every schedule in a low-wind, high-demand year it never saw."
 ---
@@ -132,6 +133,15 @@ The Wasserstein and CVaR schedules trace the same frontier. A Wasserstein radius
 </figure>
 
 ## What the Adversary Is Worried About
+
+<figure class="academic-figure" id="fig-interactive">
+<div class="dro-anim" data-anim="energy" data-src="{{ '/assets/data/dro-energy.json' | relative_url }}" data-title="Interactive: sweep the KL radius">
+<noscript>Enable JavaScript to see the interactive figure.</noscript>
+</div>
+<figcaption data-caption="Interactive view of the KL-robust schedules. The slider moves the radius from 0 to 0.5 through 21 trained schedules. Left: the training-year net-load bands with the stress-year 95 percent quantile, the current schedule in green, and the training days that the adversary upweights drawn in red with opacity proportional to their worst-case weight. Right: the 365 training days placed by wind capacity factor and peak net load, sized and coloured by worst-case weight. The readout gives the committed energy and the normal-year and stress-year outcomes of the current schedule."></figcaption>
+</figure>
+
+Before the static picture, <a href="#fig-interactive" class="ref"></a> lets you move the radius and watch the schedule rise as the adversary singles out the still, high-demand days.
 
 The worst-case distribution is a diagnostic as much as a device. For the KL ball, Optora returns it as the gradient of the worst-case value with respect to the loss vector, and it is a set of weights on the 365 training days. <a href="#fig-adversary" class="ref"></a> plots each day by its mean wind capacity factor and its peak net load, with the worst-case weight as colour and size.
 

@@ -7,6 +7,7 @@ image: images/optora-lipschitz-cover.svg
 featured: true
 hidden: false
 comments: true
+anim: true
 categories: Distributionally-Robust-Optimisation Optimal-Transport Machine-Learning Optora
 excerpt: "The worst-case loss over a Wasserstein ball equals the empirical loss plus the radius times a Lipschitz constant, at least for small radii. This post measures exactly when that identity holds, when it bends, and when it breaks, using a fixed loss and a trained regression model."
 ---
@@ -96,7 +97,14 @@ The right panel shows the three curves for $n = 64$ on the scale of the loss its
 <figcaption data-caption="The worst-case distribution for n equals 64, shown as the ratio of worst-case weight to nominal weight at each support point. At radius 0.01 the adversary moves a little mass from the second-largest point to the largest one. At radius 0.1 it drains the upper part of the support into the largest point. At radius 0.5 it empties every point above about 0.4 and the largest point carries 23 times its nominal weight."></figcaption>
 </figure>
 
-<a href="#fig-transport" class="ref"></a> makes the mechanism visible. The gradient of the worst-case value with respect to the loss vector is the worst-case distribution, so a single backward pass through `worst_case_expectation` returns it. At a small radius the adversary moves mass only between the two largest support points, because that is where the loss rises fastest per unit of distance. As the radius grows it drains successively more of the right tail into the single largest point. Mass to the left of zero, where the loss is flat, is never touched. This is the picture behind the word "Lipschitz": the adversary pays per unit of transport and is paid per unit of loss increase, so it moves mass where the ratio of the two is highest.
+<figure class="academic-figure" id="fig-interactive">
+<div class="dro-anim" data-anim="lipschitz" data-src="{{ '/assets/data/dro-lipschitz.json' | relative_url }}" data-title="Interactive: watch the adversary move mass as the radius grows">
+<noscript>Enable JavaScript to see the interactive figure.</noscript>
+</div>
+<figcaption data-caption="Interactive view of the finite-support ball for n equals 64. The slider moves the radius from 0.001 to 4 on a logarithmic scale. Top: the worst-case weight at each support point relative to nominal, on a square-root scale; red bars have gained mass and grey bars have lost it. Bottom: the exact worst case against the two Lipschitz surrogates, with a marker at the current radius. The readout gives the exact value, the surrogate, the normalised gap and the share of all probability mass that now sits on the single largest support point."></figcaption>
+</figure>
+
+<a href="#fig-interactive" class="ref"></a> lets you move the radius yourself and watch the three regimes arrive in turn. <a href="#fig-transport" class="ref"></a> makes the mechanism visible. The gradient of the worst-case value with respect to the loss vector is the worst-case distribution, so a single backward pass through `worst_case_expectation` returns it. At a small radius the adversary moves mass only between the two largest support points, because that is where the loss rises fastest per unit of distance. As the radius grows it drains successively more of the right tail into the single largest point. Mass to the left of zero, where the loss is flat, is never touched. This is the picture behind the word "Lipschitz": the adversary pays per unit of transport and is paid per unit of loss increase, so it moves mass where the ratio of the two is highest.
 
 ## Part Two: A Trained Model
 

@@ -1,0 +1,122 @@
+/* =====================================================
+   Interactive DRO figures (assets/js/dro-anim.js)
+   ===================================================== */
+
+.dro-anim {
+  margin: 0 0 0.75rem;
+  padding: 1rem 1rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-elev);
+  text-align: left;
+}
+
+.dro-anim__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.dro-anim__title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.dro-anim__hint {
+  font-size: 0.78rem;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+.dro-anim__svg svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+
+  text {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    fill: var(--text-2);
+    pointer-events: none;
+  }
+
+  .title { font-size: 12px; font-weight: 600; fill: var(--text); }
+  .muted { fill: var(--text-3); }
+  .value { font-size: 11px; font-weight: 600; fill: var(--text); }
+  .legend { font-size: 10.5px; font-weight: 500; }
+  .grid { stroke: var(--border); stroke-width: 1; }
+  .axis { stroke: var(--border-strong); stroke-width: 1; }
+  .track { fill: var(--surface); }
+}
+
+.dro-anim__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 0.75rem;
+}
+
+.dro-anim__play {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+
+  svg { width: 14px; height: 14px; fill: currentColor; }
+  .ic-pause { display: none; }
+  &:hover { border-color: var(--text); background: var(--surface-2); }
+}
+
+.dro-anim.is-playing .dro-anim__play {
+  .ic-play { display: none; }
+  .ic-pause { display: block; }
+}
+
+.dro-anim__range {
+  flex: 1;
+  min-width: 0;
+  accent-color: var(--accent-color);
+  cursor: pointer;
+}
+
+.dro-anim__value {
+  flex: 0 0 auto;
+  min-width: 8.5ch;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text);
+}
+
+.dro-anim__readout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.1rem;
+  margin-top: 0.7rem;
+  font-size: 0.82rem;
+  color: var(--text-3);
+
+  b { color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
+}
+
+.dro-anim__error { margin: 0; color: var(--text-3); font-size: 0.9rem; }
+
+@media (max-width: 600px) {
+  .dro-anim { padding: 0.75rem 0.6rem 0.7rem; }
+  .dro-anim__hint { display: none; }
+  .dro-anim__svg svg text { font-size: 13px; }
+}
