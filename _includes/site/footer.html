@@ -17,6 +17,9 @@
         {%- if site.twitter_username %}
         <li><a href="https://x.com/{{ site.twitter_username }}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-x"/></svg>X</a></li>
         {%- endif %}
+        {%- if site.orcid_username %}
+        <li><a href="https://orcid.org/{{ site.orcid_username }}" target="_blank" rel="noopener me"><svg aria-hidden="true"><use href="#i-orcid"/></svg>ORCID</a></li>
+        {%- endif %}
         {%- if site.googlescholar_username %}
         <li><a href="https://scholar.google.com/citations?user={{ site.googlescholar_username }}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-scholar"/></svg>Scholar</a></li>
         {%- endif %}

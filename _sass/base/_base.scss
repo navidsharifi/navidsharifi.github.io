@@ -225,6 +225,11 @@ button {
   padding: 0;
 }
 
+.btn--orcid:hover,
+.btn--orcid:focus-visible {
+  color: #a6ce39; /* ORCID brand green */
+}
+
 /* Chips (tags) */
 .chip {
   display: inline-flex;

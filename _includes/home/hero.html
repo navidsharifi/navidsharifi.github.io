@@ -44,13 +44,13 @@
             <svg aria-hidden="true"><use href="#i-x"/></svg>
           </a>
           {%- endif %}
-          {%- if site.googlescholar_username %}
-          <a class="btn btn--icon" href="https://scholar.google.com/citations?user={{ site.googlescholar_username | cgi_escape | escape }}" target="_blank" rel="noopener" aria-label="Google Scholar" title="Google Scholar">
-            <svg aria-hidden="true"><use href="#i-scholar"/></svg>
+          {%- if site.orcid_username %}
+          <a class="btn btn--icon btn--orcid" href="https://orcid.org/{{ site.orcid_username | cgi_escape | escape }}" target="_blank" rel="noopener me" aria-label="ORCID" title="ORCID">
+            <svg aria-hidden="true"><use href="#i-orcid"/></svg>
           </a>
           {%- endif %}
-          {%- if site.orcid_username %}
-          <a class="btn btn--icon" href="https://orcid.org/{{ site.orcid_username | escape }}" target="_blank" rel="noopener" aria-label="ORCID" title="ORCID">
+          {%- if site.googlescholar_username %}
+          <a class="btn btn--icon" href="https://scholar.google.com/citations?user={{ site.googlescholar_username | cgi_escape | escape }}" target="_blank" rel="noopener" aria-label="Google Scholar" title="Google Scholar">
             <svg aria-hidden="true"><use href="#i-scholar"/></svg>
           </a>
           {%- endif %}
