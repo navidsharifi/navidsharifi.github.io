@@ -1,38 +1,31 @@
 ---
 layout: post
-title: "Probabilistic Demand Forecasting + Stochastic Optimisation for Inventory Control"
+title: "Probabilistic Demand Forecasting and Stochastic Optimisation for Inventory Control"
 author: Navid Sharifi
-image: assets/images/figure2-blog1.jpg
+image: images/inv-cover.svg
 featured: true
 hidden: false
 comments: true
+anim: true
 categories: Supply-Chain Forecasting Stochastic-Optimisation
-excerpt: "A complete route from uncertainty-aware demand forecasting to inventory decisions using stochastic optimisation, robust policies, and KPI-based evaluation."
+excerpt: "A forecast is only useful if it changes an order. This post follows one product from a quantile forecast to a weekly replenishment decision, simulates a year of trading under three forecasters, and shows why two models with the same point accuracy can leave very different amounts of money on the shelf."
 ---
 
-## The Forecast-Decision Gap
+## The Gap Between the Forecast and the Order
 
-Forecasting and inventory control are often treated as separate tasks. A demand analyst builds the best possible model, hands over point predictions, and a planner plugs them into a replenishment rule. In practice, this separation is costly. A model with excellent RMSE can still produce poor replenishment decisions if it underestimates tail risk. The right question is not only "How accurate is my forecast?" but also "How much operational cost does my forecast induce?"
+In most companies the forecast and the order are made by different people. An analyst fits a model and sends over one number per week. A planner takes that number, adds a safety margin, and orders. Both are doing their job well by the measures they are given. The analyst is judged on accuracy. The planner is judged on stock-outs and inventory value. Nobody is judged on whether the forecast was the right input for the order.
 
-The goal of this post is to trace an end-to-end route from **probabilistic demand forecasting** to **stochastic inventory optimisation**. Along the way, I will cover the core ideas that make this connection possible.
+I think this is the most expensive handover in supply chain analytics. A model can have the best mean error in the building and still cause stock-outs every time a promotion runs, because it says nothing about how wide the demand distribution is in a promotion week. The planner's safety margin cannot fix this. It is one number for every week, and the weeks are not alike.
 
-We begin with the problem of forecasting demand as a full probability distribution, not a single number <cite data-key="deepar_2019"></cite>. We then examine how that distribution feeds into classical and modern inventory decisions through the lens of the **newsvendor model** and its multi-period, scenario-based extensions. We will see how **distributionally robust optimisation** <cite data-key="dro_newsvendor_2020"></cite> protects against model misspecification. We will look at proper scoring rules <cite data-key="gneiting_raftery_2007"></cite> that ensure our forecasts are honest before we optimise over them. And we will connect forecast quality to operational KPIs, showing why a model that wins on RMSE can lose on total inventory cost.
+This post follows one product from a demand forecast to a replenishment rule and then through a simulated year of trading. The forecast is a distribution, not a point, scored with proper scoring rules <cite data-key="gneiting_raftery_2007"></cite>. The decision is the newsvendor's critical fractile, which reads the quantile it needs from that distribution <cite data-key="zipkin_2000"></cite>. The test is a Monte Carlo simulation of inventory cost. Along the way I compare three forecasters that share the same point forecast quality and find that their inventory costs are not the same. The idea that a model should be judged by the decision it feeds, rather than by its error alone, has a growing literature under the names decision-focused learning and prescriptive analytics <cite data-key="elmachtoub_grigas_2022, bertsimas_kallus_2020"></cite>. This post is a small, concrete instance of it.
 
-Throughout, I will try to connect these developments. The recurring theme is that *a forecast is only as good as the decisions it enables*, and different modelling choices make different tradeoffs in this conversion.
+## Why a Point Forecast Is the Wrong Input
 
+Inventory costs are asymmetric. Running out of a product that sells for a good margin costs far more per unit than holding one unit for an extra week. A symmetric error measure such as root mean squared error (RMSE) treats a shortfall of ten units and a surplus of ten units as equal mistakes. The warehouse does not.
 
+A replenishment rule needs a quantile. If a lost sale costs nine times what a week of holding costs, the rule should carry enough stock to cover demand nine times out of ten. That is a statement about the 90th percentile of demand, not about its mean. A point forecast plus one standard deviation can produce a 90th percentile only if demand is roughly normal with the same spread every week. For most retail products neither holds. Demand is skewed to the right, it is more variable when its level is high, and it is far more variable in promotion weeks <cite data-key="kolassa_2016"></cite>.
 
-## Why Point Forecasts Fail Inventory Systems
-
-Suppose two models have similar MAE on a holdout set. If one underestimates upper-tail demand, stockouts surge whenever a promotion or a seasonality shock occurs. Inventory policies are fundamentally asymmetric: under-forecasting and over-forecasting do not carry equal costs. A shortage penalty of <span>$</span>50 per unit and a holding cost of <span>$</span>2 per unit create a 25:1 asymmetry. A symmetric loss function like MSE is blind to this.
-
-The problem deepens when we consider that most replenishment rules consume a single number. A base-stock policy sets the order-up-to level at the forecast plus some multiple of forecast error. But the "forecast error" is typically a symmetric standard deviation. If the true demand distribution is skewed, heavy-tailed, or multimodal, the symmetric safety-stock formula breaks down.
-
-The fix is conceptually simple. Instead of predicting a point $\hat{d}$, predict the entire conditional distribution of demand. Then let the inventory policy read whichever quantile it needs from that distribution.
-
-## Demand as a Distribution
-
-Consider one SKU first, then extend to many. Let $D_{t+h}$ be random demand at forecast origin $t$ and horizon $h$. Let $\mathcal{X}_t$ denote all available information at time $t$: sales history, price, promotions, calendar effects, and macro context. We seek a predictive distribution:
+The fix is to forecast the whole conditional distribution and let the policy read whichever quantile it needs. Writing $D_{t+h}$ for demand $h$ weeks after the forecast origin $t$ and $\mathcal{X}_t$ for everything known at $t$, the object we want is
 
 <div class="academic-equation" id="eq-forecast-dist">
 
@@ -40,242 +33,184 @@ $$D_{t+h} \sim \hat{F}_{t+h}(\cdot \mid \mathcal{X}_t)$$
 
 </div>
 
-where $\hat{F}_{t+h}$ may come from parametric models (Gaussian, negative binomial), non-parametric quantile regressors, or deep generative models. The critical requirement is that this distribution is **calibrated**: the predicted $\tau$-quantile should be exceeded with probability $1 - \tau$ in realised demand.
+The one property this distribution must have is calibration: of all the weeks in which the forecast said demand would stay below its 90th percentile, about 90 percent should actually do so <cite data-key="gneiting_balabdaoui_raftery_2007"></cite>. A distribution can be sharp and still badly calibrated. In inventory control that is the worst combination, because it gives confident safety stocks that are wrong.
 
-The inventory position evolves according to the standard balance equation:
+## One Product, Three Years
 
-<div class="academic-equation" id="eq-inventory-dynamics">
+To keep everything checkable I simulate the product rather than borrow a dataset. Weekly demand follows a seasonal pattern around 120 units, with a 60 percent uplift in promotion weeks, which happen about one week in six. The noise is negative binomial, so demand is skewed and its variance rises with its level. This is the standard choice for retail count data <cite data-key="kolassa_2016"></cite>. The first 104 weeks are used for fitting and the last 52 for testing. Promotion dates are known in advance, as they are in practice.
 
-$$I_{t+1} = I_t + Q_t - D_t$$
+Three forecasters share one seasonal regression and differ only in how they describe uncertainty.
 
-</div>
+- **Forecaster A** uses the promotion-aware regression for the mean and a normal distribution with one residual standard deviation for every week.
+- **Forecaster B** uses the same mean, but describes uncertainty with the empirical distribution of the ratio of actual to fitted demand over the training years. Its spread therefore scales with the level, and its shape is whatever the data say it is.
+- **Forecaster C** is the same as A but without the promotion feature, which is what a model fed only sales history would see.
 
-where $Q_t$ is the order quantity placed at time $t$ and $I_t$ is net inventory before demand. In settings with lead time $L$, the order placed at $t$ arrives at $t + L$. The balance equation still holds with delayed receipt terms.
+A and B produce identical point forecasts. Their RMSE on the test year is the same to the last digit. Anything that separates them is coming from the tails.
 
-## Scoring Probabilistic Forecasts
+<figure class="academic-figure" id="fig-fan">
+<img src="{{ '/images/inv-fan-chart.svg' | relative_url }}" alt="Two years of weekly demand followed by a one-year quantile forecast with 10 to 90 and 25 to 75 percent bands and realised demand" style="max-width: 100%; display: block; margin: 0 auto;">
+<figcaption data-caption="Two years of weekly demand followed by the test year. The bands are forecaster B's 10 to 90 percent and 25 to 75 percent intervals, the blue line is its median and the red line is what actually happened. Shaded columns are promotion weeks. The bands widen in promotion weeks because the forecaster's spread scales with the level of demand."></figcaption>
+</figure>
 
-Before optimising inventory against a predictive distribution, we must verify that the distribution itself is trustworthy. This is where **proper scoring rules** enter.
+<a href="#fig-fan" class="ref"></a> shows the test year through forecaster B's eyes. Two things are worth noticing. The intervals are wide, because weekly demand for a single product is noisy and the forecaster is honest about it. And they are not equally wide. In promotion weeks the 90th percentile sits far above the median, which is exactly where forecaster A, with its single standard deviation, will be too low.
 
-For quantile forecasts, the standard metric is the **pinball loss** (also called the quantile loss or tick loss):
+## Scoring the Distribution Before Using It
+
+A quantile forecast is scored with the pinball loss. For a quantile level $\tau$, a forecast $\hat{q}_\tau$ and an outcome $y$,
 
 <div class="academic-equation" id="eq-pinball">
 
-$$L_{\tau}(y, \hat{q}_{\tau}) = (\tau - \mathbf{1}\{y < \hat{q}_{\tau}\})(y - \hat{q}_{\tau})$$
+$$L_\tau(y, \hat{q}_\tau) = \big(\tau - \mathbf{1}\{y < \hat{q}_\tau\}\big)\,(y - \hat{q}_\tau)$$
 
 </div>
 
-This loss penalises underestimation and overestimation asymmetrically, with the asymmetry controlled by $\tau$. When averaged over multiple quantile levels, the pinball loss approximates the **Continuous Ranked Probability Score (CRPS)**, which is a proper scoring rule for the full cumulative distribution. CRPS measures the integrated squared difference between the predictive CDF and the empirical step function at the observed value.
+The loss is small when the forecast quantile is at the right place and it charges more for being too low than too high when $\tau$ is above one half. Averaged over all quantile levels it becomes the continuous ranked probability score (CRPS), which scores the whole distribution at once <cite data-key="gneiting_raftery_2007"></cite>. Both are proper: a forecaster minimises them in expectation by reporting its true belief, so there is no incentive to hedge. The M5 uncertainty competition used exactly this family of scores to rank distributional forecasts of retail demand <cite data-key="m5_uncertainty_2022"></cite>.
 
-A proper scoring rule has a key property: it is uniquely minimised when the forecaster reports the true conditional distribution <cite data-key="gneiting_raftery_2007"></cite>. This prevents a common failure mode where a model produces sharp but miscalibrated predictions. Sharpness without calibration is dangerous in inventory control, because it creates false confidence in safety-stock calculations.
+<div class="academic-table" id="tab-scores" data-caption="Forecast scores on the 52 test weeks. Pinball loss is reported at the two quantile levels the inventory policy will consume. Coverage is the share of test weeks in which demand stayed at or below the forecast quantile; the target values are 0.90 and 0.95." markdown="1">
 
-<figure class="academic-figure" id="fig-calibration" style="text-align: center; margin: 2rem auto; display: block;">
-<img src="{{ '/images/fig3-calibration-curve.svg' | relative_url }}" alt="Calibration curve: predicted quantile level versus empirical coverage" style="max-width: 80%; display: block; margin: 0 auto;">
-<figcaption data-caption="Calibration diagnostics. The x-axis is the nominal quantile level and the y-axis is the empirical coverage. A well-calibrated model lies on the diagonal. Deviations above the diagonal indicate underconfidence; below indicates overconfidence."></figcaption>
+| Forecaster | RMSE | MAE | CRPS | Pinball at 0.90 | Pinball at 0.95 | Coverage at 0.90 | Coverage at 0.95 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| A: normal, promotion-aware | 48.7 | 36.9 | 27.2 | 10.7 | 7.0 | 0.85 | 0.90 |
+| B: empirical quantiles, promotion-aware | 48.7 | 36.9 | 26.4 | 9.6 | 6.1 | 0.88 | 0.90 |
+| C: normal, promotion-blind | 58.0 | 40.5 | 30.6 | 13.4 | 9.7 | 0.88 | 0.90 |
+
+</div>
+
+<a href="#tab-scores" class="ref"></a> says what RMSE cannot. A and B tie on every point measure and separate on the pinball loss at the 90th and 95th percentiles, where B is about ten percent better. Those two levels are the only part of the distribution the ordering rule will ever look at. Forecaster C is worse on everything, which is the honest price of not knowing when promotions happen.
+
+<figure class="academic-figure" id="fig-calibration">
+<img src="{{ '/images/inv-calibration.svg' | relative_url }}" alt="Calibration curves for the three forecasters: nominal quantile level against empirical coverage" style="max-width: 72%; display: block; margin: 0 auto;">
+<figcaption data-caption="Calibration on the test year. For every quantile level on the horizontal axis, the vertical axis shows the share of test weeks in which demand was at or below that forecast quantile. A calibrated forecaster lies on the dotted diagonal. All three run below the diagonal above the 80th percentile, meaning their upper tails are a little too low, and forecaster A is the lowest at the 90th percentile."></figcaption>
 </figure>
 
-The calibration plot above checks whether nominal quantiles match realised frequencies. For example, the 0.9 quantile should be exceeded about 10% of the time. If we observe systematic offsets, **post-hoc recalibration** (isotonic regression on the PIT histogram, or conformal prediction wrappers) can correct the distribution before it reaches the optimiser.
+<a href="#fig-calibration" class="ref"></a> is the diagnostic I would ask for before any forecast is allowed near an order. With 52 test weeks the curves are jagged, and all three forecasters are a little overconfident in the upper tail. The differences are small on this plot. They will not be small in the warehouse.
 
-## Probabilistic Forecasting Methods
+## The Newsvendor: Where the Forecast Becomes an Order
 
-A practical hierarchy of methods exists, roughly ordered by complexity and data requirements.
-
-At the simplest level, **Croston-family** methods handle intermittent demand by separately modelling inter-arrival times and demand sizes <cite data-key="croston_1972"></cite>. For smooth or seasonal series, **ETS** and **ARIMA** models with prediction intervals provide calibrated Gaussian or bootstrapped distributions. These classical methods remain competitive baselines.
-
-At the deep learning end, **DeepAR** <cite data-key="deepar_2019"></cite> trains an autoregressive recurrent network on a large collection of related time series. At each timestep, the network outputs the parameters of a chosen distribution family (Gaussian, negative binomial, beta). The key innovation is that training across thousands of related series enables the model to learn shared patterns—seasonality, holiday effects, cross-series correlations—that a per-series statistical model cannot exploit.
-
-For interpretable multi-horizon forecasting, the **Temporal Fusion Transformer (TFT)** <cite data-key="tft_2021"></cite> uses attention mechanisms to learn temporal relationships at multiple scales. It handles the full range of inputs common in demand forecasting: static covariates (store type, product category), known future inputs (promotions, holidays), and historical time-varying features. The attention weights provide interpretability, revealing which past timesteps and which features drive the forecast.
-
-For **intermittent demand**, where the series consists mostly of zeros with occasional positive values, **Deep Renewal Processes** <cite data-key="deep_renewal_2019"></cite> model the demand process as a marked point process. The model jointly predicts when the next non-zero demand will occur and how large it will be. This avoids the pathological behaviour of continuous-distribution models on zero-inflated data.
-
-<figure class="academic-figure" id="fig-fan-chart" style="text-align: center; margin: 2rem auto; display: block;">
-<img src="{{ '/images/fig2-fan-chart.svg' | relative_url }}" alt="Quantile fan chart showing P10, P50, P90 demand trajectories" style="max-width: 85%; display: block; margin: 0 auto;">
-<figcaption data-caption="Quantile fan chart showing demand uncertainty widening with forecast horizon. The dark band is the P25–P75 interval; the light band is P10–P90. The black line is realised demand. Where actuals frequently fall outside the P10–P90 band, the model underestimates uncertainty."></figcaption>
-</figure>
-
-The fan chart above is the minimum diagnostic for any probabilistic forecast. If actuals frequently fall outside P10–P90, uncertainty is underestimated and stockouts will be worse than expected. If intervals are too wide, safety stock will be inflated and holding costs will rise unnecessarily.
-
-## The Newsvendor: Connecting Forecasts to Orders
-
-The simplest and most important model linking a demand distribution to an ordering decision is the **newsvendor problem**. A retailer must decide how many units to stock before observing demand. Unsold units incur an overage cost $c_o$ (waste, markdowns, holding). Unmet demand incurs an underage cost $c_u$ (lost profit, contractual penalties, customer churn).
-
-The expected cost as a function of order quantity $q$ is:
+The simplest model that turns a distribution into an order is the newsvendor. Stock $q$ units before demand $D$ is known. Each unit left over costs $c_o$ and each unit of unmet demand costs $c_u$. The order that minimises expected cost solves
 
 <div class="academic-equation" id="eq-newsvendor">
 
-$$\min_q \; \mathbb{E}\left[c_o(q - D)^+ + c_u(D - q)^+\right]$$
+$$\min_q \; \mathbb{E}\left[c_o\,(q - D)^{+} + c_u\,(D - q)^{+}\right]$$
 
 </div>
 
-The first-order condition yields the celebrated **critical fractile** solution:
+and the answer is a quantile of the demand distribution <cite data-key="zipkin_2000"></cite>:
 
 <div class="academic-equation" id="eq-critical-fractile">
 
-$$q^* = F_D^{-1}\left(\frac{c_u}{c_u + c_o}\right)$$
+$$q^{\star} = F_D^{-1}\!\left(\frac{c_u}{c_u + c_o}\right)$$
 
 </div>
 
-This result is profound in its simplicity. The optimal order quantity is the quantile of the demand distribution whose level equals the critical ratio $c_u / (c_u + c_o)$. When stockout penalty dominates holding cost, the ratio approaches 1 and we order a high quantile. When holding cost dominates, we order conservatively.
+The ratio $c_u / (c_u + c_o)$ is the critical fractile. With a lost sale costing nine times a week of holding, it is 0.9 and the order is the 90th percentile of demand. If a forecaster reports the full distribution, the planner reads that quantile straight off it. There is no safety-stock formula, no assumption of normality, and no separate error model. This is also why the median is almost never the right order. The median is optimal only when $c_u = c_o$.
 
-The connection to probabilistic forecasting is immediate. If our forecast model outputs the full predictive CDF $\hat{F}$, we simply read off the quantile at the critical ratio. No safety-stock formula, no normality assumption, no separate error distribution. The forecast *is* the decision input, directly.
-
-This equation also reveals why point forecasts are insufficient. A point forecast gives us at best the median or mean of the distribution. But the newsvendor solution demands a *specific quantile* that depends on the cost structure. The median is optimal only when $c_u = c_o$, which almost never holds in practice.
-
-## Multi-Period Stochastic Optimisation
-
-Real inventory systems are not single-period. Orders are placed repeatedly, lead times create delay, and the inventory carried from one period affects the next. The multi-period objective generalises <a href="#eq-newsvendor" class="eqref"></a>:
-
-<div class="academic-equation" id="eq-multi-period-cost">
-
-$$\min_{\{Q_t\}} \; \mathbb{E}\left[\sum_{t=1}^{T} h(I_t)^+ + b(-I_t)^+ + cQ_t\right]$$
-
+<figure class="academic-figure" id="fig-newsvendor-interactive">
+<div class="dro-anim" data-anim="newsvendor" data-src="{{ '/assets/data/dro-newsvendor.json' | relative_url }}" data-title="Interactive: move the critical fractile">
+<noscript>Enable JavaScript to see the interactive figure.</noscript>
 </div>
-
-subject to capacity, minimum order quantity, lead-time, and service-level constraints. Here $h$ is the holding-cost coefficient, $b$ is the backorder or lost-sales penalty, and $c$ is the per-unit ordering cost.
-
-Solving this exactly requires dynamic programming over continuous states, which is intractable for realistic problem sizes. The practical approach is **scenario-based stochastic programming**. At each decision point, we sample $S$ demand paths from the predictive distribution $\hat{F}$ and solve the optimisation against these scenarios:
-
-<div class="academic-equation" id="eq-scenario-program">
-
-$$\min_{\{Q_t\}} \; \sum_{s=1}^{S} p_s \sum_{t=1}^{T}\left[h(I_{t,s})^+ + b(-I_{t,s})^+ + cQ_t\right]$$
-
-</div>
-
-subject to inventory transitions $I_{t+1,s} = I_{t,s} + Q_t - D_{t,s}$ per scenario and operational constraints. Each scenario index $s = 1, \dots, S$ carries probability $p_s$ (uniform if scenarios are Monte Carlo draws).
-
-The quality of this solution depends directly on the quality of the sampled scenarios, which depends on the quality of the predictive distribution. Miscalibrated forecasts generate unrealistic scenarios, leading to policies that are optimal for a world that does not exist.
-
-## Distributionally Robust Inventory Policies
-
-Forecast errors and regime shifts make pure stochastic programs fragile. A model trained on 2019 data may produce a distribution that does not account for the demand volatility of a supply-chain crisis. One robust alternative is to optimise worst-case expected cost over an **ambiguity set** $\mathcal{P}$ around the nominal demand law:
-
-<div class="academic-equation" id="eq-dro">
-
-$$\min_{\pi \in \Pi} \; \sup_{\mathbb{P} \in \mathcal{P}} \mathbb{E}_{\mathbb{P}}\big[C(\pi, D)\big]$$
-
-</div>
-
-where $\pi$ is a replenishment policy (for example a base-stock level) and $\mathcal{P}$ is defined by constraints on the demand distribution—matching known moments <cite data-key="dro_newsvendor_2020"></cite>, staying within a Wasserstein ball around the empirical distribution, or satisfying unimodality and symmetry conditions <cite data-key="dro_heavytail_2018"></cite>.
-
-The distributionally robust newsvendor has a clean analytic solution for moment-based ambiguity sets. When only the mean $\mu$ and variance $\sigma^2$ of demand are assumed known:
-
-<div class="academic-equation" id="eq-dro-newsvendor-solution">
-
-$$q^*_{\text{DRO}} = \mu + \sigma \sqrt{\frac{c_u}{c_o}}$$
-
-</div>
-
-This is a **Scarf-type bound** <cite data-key="scarf_1958"></cite>. It provides a distribution-free guarantee: the expected cost under *any* demand distribution with the given mean and variance is bounded. When the true distribution is far from the assumed one (heavy tails, skewness, regime changes), the distributionally robust solution can dramatically outperform the nominal newsvendor.
-
-<figure class="academic-figure" id="fig-frontier" style="text-align: center; margin: 2rem auto; display: block;">
-<img src="{{ '/images/fig4-cost-service-frontier.svg' | relative_url }}" alt="Cost-service frontier across policy-model combinations" style="max-width: 85%; display: block; margin: 0 auto;">
-<figcaption data-caption="Trade-off frontier between service level and total expected cost. Each point represents a different combination of forecasting model and inventory policy. The Pareto-efficient frontier reveals which combinations dominate. Distributionally robust policies tend to occupy the high-service, moderate-cost region."></figcaption>
+<figcaption data-caption="Interactive view of the newsvendor decision for one promotion week in the test year. The slider sets the critical fractile from 0.5 to 0.99, which fixes the cost ratio. Top: the true demand distribution for the week, with the order quantity read from forecaster B's quantile in green, the units expected to be left over shaded blue and the demand expected to go unmet shaded red. The purple dot is the order a forecaster with perfect knowledge of the distribution would place. Bottom: expected cost against order quantity for the current cost ratio, with the chosen order marked. The readout includes the distribution-free Scarf quantity for comparison."></figcaption>
 </figure>
 
-The figure above visualises the service-cost trade-off from competing policies. Points below and to the right dominate. The key insight is that the best forecast model and the best inventory policy are not independent choices. They must be evaluated as a pair.
+<a href="#fig-newsvendor-interactive" class="ref"></a> lets you move the fractile and watch the order slide up the distribution. At 0.5 the order sits at the median and the red shortfall region is large. As the ratio climbs, the order moves into the right tail, the cost curve becomes steep on the left and shallow on the right, and the penalty for ordering too little grows faster than the penalty for ordering too much. The green order from forecaster B tracks the purple true optimum closely across the range, which is what calibration buys.
 
-## When Better Forecasts Produce Worse Decisions
-
-This is the central paradox motivating the entire post. Suppose Model A has lower RMSE than Model B, but poorer calibration near the upper quantiles. Under a service-level target of 95%, Model A's underestimated P95 quantile triggers frequent shortage penalties. Model B, despite higher point-error, produces a well-calibrated P95 that matches the policy's needs. Total inventory cost under Model B is lower.
-
-The mechanism is straightforward. Point error metrics like RMSE compress the full distributional error into a single number. They weight under-prediction and over-prediction equally. But inventory cost structures are asymmetric. A model that is slightly biased upward may actually produce lower expected cost than an unbiased model with higher variance, depending on the cost ratio.
-
-This disconnect has practical consequences. If you select models by RMSE, you may be choosing the wrong model for your inventory system. **Decision-aware evaluation**—ranking models by the operational cost they induce—preserves the asymmetry that matters.
-
-<figure class="academic-figure" id="fig-kpi-boxplots" style="text-align: center; margin: 2rem auto; display: block;">
-<img src="{{ '/images/fig5-kpi-boxplots.svg' | relative_url }}" alt="KPI boxplots from Monte Carlo simulation" style="max-width: 88%; display: block; margin: 0 auto;">
-<figcaption data-caption="Distribution of inventory KPIs from Monte Carlo policy simulation. Each boxplot shows stockout rate, holding cost, and total cost across 1,000 demand scenarios. The model with lower RMSE (left group) produces higher total cost due to poor upper-tail calibration."></figcaption>
+<figure class="academic-figure" id="fig-newsvendor-curve">
+<img src="{{ '/images/inv-newsvendor-curve.svg' | relative_url }}" alt="Expected newsvendor cost against order quantity for three cost ratios, with optimal orders marked" style="max-width: 100%; display: block; margin: 0 auto;">
+<figcaption data-caption="Expected cost against order quantity for the same promotion week under three cost ratios. The optimum moves from the median at a ratio of one to well above the mean at a ratio of nine. The curve is asymmetric: ordering 100 units too few at the high ratio costs about five times as much as ordering 100 units too many."></figcaption>
 </figure>
 
-## Evaluation: Forecast KPIs Meet Inventory KPIs
+## From One Period to a Year
 
-A credible study of this forecast-to-decision pipeline requires dual evaluation. On the forecasting side, report:
+Real replenishment is repeated. Orders placed this week arrive next week, stock carried over affects next week's order, and a lost sale is lost for good. The objective over a horizon of $T$ weeks is
 
-- **Pinball loss** at the quantile levels consumed by the inventory policy.
-- **CRPS** as a summary of full distributional quality.
-- **Coverage error** at P90 and P95, because these quantiles drive safety stock.
+<div class="academic-equation" id="eq-multi-period">
 
-On the inventory side, simulate the replenishment policy under realised demand and report:
+$$\min_{\{Q_t\}} \; \mathbb{E}\left[\sum_{t=1}^{T} h\,(I_t)^{+} + b\,(-I_t)^{+}\right], \qquad I_{t+1} = I_t + Q_{t-L} - D_t$$
 
-- **Total cost** (holding + shortage + ordering).
-- **Fill rate** and **stockout frequency**.
-- **Average on-hand inventory** (capital tied up).
-- **Cost volatility** across scenarios (risk exposure).
+</div>
 
-The backtesting protocol should use **rolling-origin evaluation**: multiple forecast origins, fixed horizon, realistic retraining cadence. At each origin, draw $S$ demand paths from the predictive distribution, solve the scenario program from <a href="#eq-scenario-program" class="eqref"></a>, and simulate forward.
+with holding cost $h$ per unit per week, shortage cost $b$ per unit, and lead time $L$. Solving this exactly means dynamic programming over a continuous state, which is not practical for thousands of products. The usual approach is a base-stock policy: at each review, order up to a level $S_t$ chosen so that stock covers demand over the lead time plus the review period with the probability given by the critical fractile <cite data-key="zipkin_2000"></cite>. When the demand distribution is not standard, the level comes from sampled demand paths and a scenario programme, in the manner of stochastic programming <cite data-key="shapiro_2009"></cite>.
 
-## Implementation Route
+Here the lead time is one week, so the policy protects two weeks of demand. Each forecaster supplies its own order-up-to level: the two-week median plus its own estimate of the two-week spread at the target fractile. The rule is identical across forecasters. Only the distribution it reads from differs.
 
-The end-to-end pipeline has five stages.
+<figure class="academic-figure" id="fig-inventory-interactive">
+<div class="dro-anim" data-anim="inventory" data-src="{{ '/assets/data/dro-inventory.json' | relative_url }}" data-title="Interactive: replay the test year">
+<noscript>Enable JavaScript to see the interactive figure.</noscript>
+</div>
+<figcaption data-caption="Replay of the actual test year under forecasters A and B at a critical fractile of 0.9. The slider moves through the 52 weeks. Left: weekly demand as bars, with promotion weeks in orange, the order-up-to level of each policy as a dashed line, the stock on hand after sales as a solid line, and a dot under the axis in every week with lost sales. Right: cumulative cost. The readout tracks stock, lost sales and cost for both policies."></figcaption>
+</figure>
 
-**Data and feature engineering.** Include promotions, holidays, price, and stockout flags. Crucially, separate true zero demand from censored demand caused by stockouts. If a product was out of stock for three days, observed sales are zero but true demand was not. Treating censored zeros as real zeros biases the forecast downward.
+<a href="#fig-inventory-interactive" class="ref"></a> replays the test year. Watch the promotion weeks. Forecaster B raises its order-up-to level before each one, because its spread scales with the level. Forecaster A raises it by less and is more often caught short. Over the realised year B finishes with a cost of 7,671 against 8,188 for A, a saving of six percent, while also losing fewer sales. One year is one draw, though. The next section asks whether that holds on average.
 
-**Probabilistic model training.** Train at least one statistical baseline (ETS, Croston) and one deep probabilistic model (DeepAR, TFT). Tune for probabilistic objectives—pinball loss from <a href="#eq-pinball" class="eqref"></a> or CRPS—not only MAE or RMSE.
+## Monte Carlo: What the Policy Costs on Average
 
-**Calibration checks.** Produce the fan chart and calibration plot shown earlier. Recalibrate quantiles if systematic bias appears. Conformal prediction provides a model-agnostic wrapper that guarantees finite-sample coverage.
+I simulate 400 fresh test years from the true demand process and run every policy through each of them. The policies are the three forecasters at nine target fractiles from 0.5 to 0.99, plus a distribution-free policy that uses only the mean and standard deviation. That last one is Scarf's rule <cite data-key="scarf_1958"></cite>, as restated by Gallego and Moon <cite data-key="gallego_moon_1993"></cite>:
 
-**Optimisation.** Convert calibrated distributions to ordering decisions via the critical fractile from <a href="#eq-critical-fractile" class="eqref"></a> for single-period problems or the scenario program from <a href="#eq-scenario-program" class="eqref"></a> for multi-period ones. Add the distributionally robust variant from <a href="#eq-dro" class="eqref"></a> for stress testing.
+<div class="academic-equation" id="eq-scarf">
 
-**Simulation and decision report.** Simulate policies over historical rolling windows. Plot the cost-service frontier and KPI boxplots. Select the policy by expected cost plus risk tolerance.
+$$q_{\text{Scarf}} = \mu + \frac{\sigma}{2}\left(\sqrt{\frac{c_u}{c_o}} - \sqrt{\frac{c_o}{c_u}}\right)$$
 
-## Practical Pitfalls
+</div>
 
-Several failure modes recur in practice.
+It is the order that minimises the worst expected cost over every distribution with that mean and variance, and it needs no assumption about the shape. Natarajan, Sim and Uichanco extend this family to sets that also fix the asymmetry of demand <cite data-key="natarajan_sim_uichanco_2018"></cite>, and Das, Dhara and Natarajan show how heavy the implied worst-case tails are <cite data-key="das_dhara_natarajan_2021"></cite>. I include Scarf's rule because it is a useful yardstick: it is what you can do when you trust the first two moments and nothing else.
 
-**Leakage in feature engineering.** Using information that was not available at forecast origin (for example, actual promotional uplift that was unknown before the event) inflates forecast quality artificially and collapses at deployment.
+<div class="academic-table" id="tab-mc" data-caption="Monte Carlo results over 400 simulated years at a critical fractile of 0.9. Cost is in units of the weekly holding cost of one unit. Fill rate is the share of demand met from stock. The best fractile is the target that gives each forecaster its lowest mean cost." markdown="1">
 
-**Ignoring stockout censorship.** Observed sales understate true demand whenever the product is out of stock. Models trained on censored data systematically underpredict, creating a vicious cycle of understocking.
+| Policy | Mean annual cost | 95th percentile of cost | Fill rate | Units short per year | Weeks with lost sales | Best fractile | Cost at best fractile |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| A: normal, promotion-aware | 8,118 | 10,705 | 93.8% | 442 | 7.7 | 0.90 | 8,118 |
+| B: empirical quantiles, promotion-aware | 7,961 | 10,054 | 94.8% | 367 | 7.0 | 0.90 | 7,961 |
+| C: normal, promotion-blind | 9,079 | 11,960 | 92.6% | 523 | 8.3 | 0.95 | 9,052 |
+| Scarf, mean and variance only | 8,108 | 10,655 | 94.0% | 426 | 7.3 | | |
 
-**Evaluating forecasts without operations.** Reporting CRPS alone is insufficient. The same CRPS can correspond to very different cost outcomes depending on which part of the distribution is miscalibrated.
+</div>
 
-**Overfitting quantile models.** Deep quantile regressors can overfit to noise in training tails. Cross-validate and check calibration on holdout horizons, not just in-sample.
+<a href="#tab-mc" class="ref"></a> is the result the whole post is built around. Forecasters A and B have identical point accuracy. Over 400 simulated years B costs two percent less, loses 17 percent fewer sales, and has a 95th percentile of annual cost six percent lower. The whole difference comes from the upper tail of the forecast in promotion weeks. Forecaster C costs twelve percent more than B, which is roughly what it costs to not know the promotion calendar. Scarf's rule, which knows nothing about shape, lands on top of forecaster A. That is no accident. A normal distribution with a fixed standard deviation carries exactly the information Scarf's rule uses, and no more.
 
-**No stress testing.** A policy that performs well under normal demand variability may collapse under demand shocks or lead-time disruptions. Always evaluate under perturbed scenarios.
+<figure class="academic-figure" id="fig-frontier">
+<img src="{{ '/images/inv-frontier.svg' | relative_url }}" alt="Mean annual cost against fill rate for each forecaster across target fractiles, with the Scarf policy marked" style="max-width: 100%; display: block; margin: 0 auto;">
+<figcaption data-caption="Mean annual cost against fill rate as the target fractile rises from 0.5 to 0.99 for each forecaster. Every curve is U-shaped in cost. The minimum is at the critical fractile of 0.9 for A and B and at 0.95 for C, which needs to over-target to make up for what it does not know. B's curve lies below A's everywhere above a fill rate of 90 percent. The purple diamond is Scarf's rule."></figcaption>
+</figure>
 
-## Conclusion
+<a href="#fig-frontier" class="ref"></a> shows the same thing across all targets. Each forecaster traces a curve as the target fractile rises: cost falls, reaches a minimum near the critical fractile, and climbs again as holding cost takes over. Two things stand out. B's curve sits below A's throughout the region any retailer would operate in. And the minimum of each curve lands where the theory says it should, at 0.9, except for C, whose best target is 0.95. A forecaster that does not know about promotions has to carry extra stock all year to survive them.
 
-The central message is simple. Forecast uncertainty is only useful when it changes decisions.
+<figure class="academic-figure" id="fig-kpi">
+<img src="{{ '/images/inv-kpi.svg' | relative_url }}" alt="Violin plots of annual cost, fill rate and units short across 400 simulated years for the four policies" style="max-width: 100%; display: block; margin: 0 auto;">
+<figcaption data-caption="Distribution of annual cost, fill rate and units short over 400 simulated years at a critical fractile of 0.9. Forecaster B has the lowest median cost and the tightest cost distribution. Forecaster C has the widest. The Scarf policy is almost indistinguishable from forecaster A."></figcaption>
+</figure>
 
-The demand distribution from <a href="#eq-forecast-dist" class="eqref"></a>, scored by the pinball loss in <a href="#eq-pinball" class="eqref"></a>, provides the uncertainty input. The newsvendor from <a href="#eq-newsvendor" class="eqref"></a> and its multi-period extension in <a href="#eq-scenario-program" class="eqref"></a> convert that uncertainty into ordering actions. The distributionally robust formulation in <a href="#eq-dro" class="eqref"></a> protects against distributional misspecification.
+<a href="#fig-kpi" class="ref"></a> shows the spread, which matters as much as the mean. A policy that is cheap on average and ruinous one year in twenty is not a good policy. B's cost distribution is the tightest of the four. Its upper tail is where the gain is, because the bad years are the ones with several large promotion weeks in a row, and those are the weeks in which B carries more stock.
 
-If your final model selection is based on expected inventory cost and service reliability rather than only RMSE, you are doing demand forecasting in the way supply chains actually need.
+## Why Two Models With the Same RMSE Cost Different Amounts
+
+The mechanism is simple once the numbers are on the table. Forecaster A uses one standard deviation, about 44 units, for every week. In an ordinary week the true standard deviation is close to that. In a promotion week, with mean demand near 200, it is closer to 75. A's 90th percentile in those weeks is therefore too low by around 40 units, and at nine units of penalty per lost sale that is where the extra cost comes from. Forecaster B learned the spread as a proportion of the level, so its 90th percentile moves with the mean.
+
+Nothing in RMSE can see this. RMSE averages squared errors of the mean forecast, and the two mean forecasts are the same. The pinball loss at the 90th percentile sees it immediately, because that is the quantity being scored. This is the practical content of decision-focused evaluation: score the forecast on the part of the distribution the decision consumes <cite data-key="elmachtoub_grigas_2022"></cite>. Ban and Rudin make the point from the other direction, learning the order quantity directly from features and showing that it can beat forecasting and then optimising when the forecast is misspecified <cite data-key="ban_rudin_2019"></cite>.
+
+## What to Report, and in What Order
+
+A credible study of this pipeline reports two sets of numbers and keeps them in that order.
+
+1. **Forecast scores at the levels the policy uses.** Pinball loss at the critical fractile and at one level above it, CRPS as a summary, and coverage at those same levels. A calibration plot like <a href="#fig-calibration" class="ref"></a>.
+2. **Inventory outcomes from a rolling simulation.** Total cost split into holding and shortage, fill rate, weeks with lost sales, average stock on hand, and the spread of cost across simulated years. A frontier like <a href="#fig-frontier" class="ref"></a>, so that the trade-off is visible rather than summarised.
+
+The simulation should use rolling origins, a fixed horizon, and a realistic retraining schedule, and it should be run on perturbed demand as well as on the fitted distribution, because the forecaster will be wrong in ways the training years did not show. A moment-based rule such as <a href="#eq-scarf" class="eqref"></a> is a sensible companion for that stress test.
+
+## Pitfalls I Keep Meeting
+
+- **Censored demand.** Sales are zero when the shelf is empty, but demand is not. A model trained on sales learns to under-forecast exactly the weeks it most needs to get right, and the stock-outs then feed the next training set. Flag stock-out weeks and treat them as censored.
+- **Intermittent products.** Most items in a long tail sell nothing in most weeks. Croston's method and its corrections remain the baseline <cite data-key="croston_1972, syntetos_boylan_2005"></cite>, and count distributions such as the negative binomial handle the zeros where a normal model cannot <cite data-key="kolassa_2016"></cite>.
+- **Leakage.** A promotion uplift that was only known after the event is not a feature. It is a leak that inflates every score and vanishes at deployment.
+- **Scoring the whole distribution when the decision uses one quantile.** CRPS is a fine summary, but two forecasters with the same CRPS can differ badly at the 95th percentile. Look at the levels you use.
+- **Picking the target fractile by hand.** The critical fractile is a cost ratio, not a service-level preference. If the business insists on a 98 percent fill rate, it is implicitly stating that a lost sale costs fifty times a week of holding. Say so, and check whether anyone believes it.
+
+## Closing
+
+A forecast is a claim about the future. An order is a bet on it. The only test of a demand forecast that matters to a supply chain is whether the bets it supports pay off. In this study two forecasters made identical claims about the mean and different claims about the tail, and the one with the better tail saved two percent of annual cost and a sixth of lost sales without holding more stock on average. The point accuracy measures could not tell them apart. The pinball loss at the 90th percentile could, and so could the simulated warehouse.
+
+Score the distribution, read the quantile the cost structure asks for, and simulate the policy. Model selection by RMSE alone is choosing a forecaster for a job it was never asked to do.
 
 <div class="bibliography-data" style="display:none;">
-@article{deepar_2019,
-  author    = {Salinas, David and Flunkert, Valentin and Gasthaus, Jan and Januschowski, Tim},
-  title     = {DeepAR: Probabilistic Forecasting with Autoregressive Recurrent Networks},
-  journal   = {International Journal of Forecasting},
-  volume    = {36},
-  number    = {3},
-  pages     = {1181--1191},
-  year      = {2020},
-  doi       = {10.1016/j.ijforecast.2019.07.001},
-  note      = {Preprint: arXiv:1704.04110}
-}
-@article{tft_2021,
-  author    = {Lim, Bryan and Arık, Sercan Ö. and Loeff, Nicolas and Pfister, Tomas},
-  title     = {Temporal Fusion Transformers for Interpretable Multi-horizon Time Series Forecasting},
-  journal   = {International Journal of Forecasting},
-  volume    = {37},
-  number    = {4},
-  pages     = {1748--1764},
-  year      = {2021},
-  doi       = {10.1016/j.ijforecast.2021.03.012},
-  note      = {Preprint: arXiv:1912.09363}
-}
-@inproceedings{nbeats_2020,
-  author    = {Oreshkin, Boris N. and Carpov, Dmitri and Chapados, Nicolas and Bengio, Yoshua},
-  title     = {N-BEATS: Neural Basis Expansion Analysis for Interpretable Time Series Forecasting},
-  booktitle = {ICLR},
-  year      = {2020},
-  note      = {Preprint: arXiv:1905.10437}
-}
-@inproceedings{deep_renewal_2019,
-  author    = {Türkmen, Ali Caner and Wang, Yuyang and Smola, Alexander J.},
-  title     = {Intermittent Demand Forecasting with Deep Renewal Processes},
-  booktitle = {NeurIPS Time Series Workshop},
-  year      = {2019},
-  note      = {Preprint: arXiv:1911.10416}
-}
 @article{gneiting_raftery_2007,
   author    = {Gneiting, Tilmann and Raftery, Adrian E.},
   title     = {Strictly Proper Scoring Rules, Prediction, and Estimation},
@@ -286,28 +221,117 @@ If your final model selection is based on expected inventory cost and service re
   year      = {2007},
   doi       = {10.1198/016214506000001437}
 }
-@article{dro_newsvendor_2020,
-  author    = {Zhang, Yifan and Shen, Siqian and Mathieu, Johanna L.},
-  title     = {Distributionally Robust Newsvendor with Moment Constraints},
-  journal   = {arXiv preprint arXiv:2010.16369},
+@article{gneiting_balabdaoui_raftery_2007,
+  author    = {Gneiting, Tilmann and Balabdaoui, Fadoua and Raftery, Adrian E.},
+  title     = {Probabilistic Forecasts, Calibration and Sharpness},
+  journal   = {Journal of the Royal Statistical Society: Series B},
+  volume    = {69},
+  number    = {2},
+  pages     = {243--268},
+  year      = {2007},
+  doi       = {10.1111/j.1467-9868.2007.00587.x}
+}
+@book{zipkin_2000,
+  author    = {Zipkin, Paul H.},
+  title     = {Foundations of Inventory Management},
+  publisher = {McGraw-Hill},
+  year      = {2000}
+}
+@article{elmachtoub_grigas_2022,
+  author    = {Elmachtoub, Adam N. and Grigas, Paul},
+  title     = {Smart ``Predict, then Optimize''},
+  journal   = {Management Science},
+  volume    = {68},
+  number    = {1},
+  pages     = {9--26},
+  year      = {2022},
+  doi       = {10.1287/mnsc.2020.3922}
+}
+@article{bertsimas_kallus_2020,
+  author    = {Bertsimas, Dimitris and Kallus, Nathan},
+  title     = {From Predictive to Prescriptive Analytics},
+  journal   = {Management Science},
+  volume    = {66},
+  number    = {3},
+  pages     = {1025--1044},
   year      = {2020},
-  note      = {Preprint}
+  doi       = {10.1287/mnsc.2018.3253}
 }
-@article{dro_heavytail_2018,
-  author    = {Natarajan, Karthik and Sim, Melvyn and Uichanco, Joline},
-  title     = {On the Heavy-tail Behavior of the Distributionally Robust Newsvendor},
-  journal   = {Operations Research},
-  year      = {2018},
-  doi       = {10.1287/opre.2018.1725},
-  note      = {Preprint: arXiv:1806.05379}
+@article{kolassa_2016,
+  author    = {Kolassa, Stephan},
+  title     = {Evaluating Predictive Count Data Distributions in Retail Sales Forecasting},
+  journal   = {International Journal of Forecasting},
+  volume    = {32},
+  number    = {3},
+  pages     = {788--803},
+  year      = {2016},
+  doi       = {10.1016/j.ijforecast.2015.12.004}
 }
-@article{scarf_1958,
+@article{m5_uncertainty_2022,
+  author    = {Makridakis, Spyros and Spiliotis, Evangelos and Assimakopoulos, Vassilios and Chen, Zhi and Gaba, Anil and Tsetlin, Ilia and Winkler, Robert L.},
+  title     = {The M5 Uncertainty Competition: Results, Findings and Conclusions},
+  journal   = {International Journal of Forecasting},
+  volume    = {38},
+  number    = {4},
+  pages     = {1365--1385},
+  year      = {2022},
+  doi       = {10.1016/j.ijforecast.2021.10.009}
+}
+@book{shapiro_2009,
+  author    = {Shapiro, Alexander and Dentcheva, Darinka and Ruszczy{\'n}ski, Andrzej},
+  title     = {Lectures on Stochastic Programming: Modeling and Theory},
+  publisher = {SIAM},
+  year      = {2009},
+  doi       = {10.1137/1.9780898718751}
+}
+@incollection{scarf_1958,
   author    = {Scarf, Herbert},
   title     = {A Min-Max Solution of an Inventory Problem},
-  journal   = {Studies in the Mathematical Theory of Inventory and Production},
+  booktitle = {Studies in the Mathematical Theory of Inventory and Production},
+  editor    = {Arrow, Kenneth J. and Karlin, Samuel and Scarf, Herbert},
+  publisher = {Stanford University Press},
   pages     = {201--209},
-  year      = {1958},
-  publisher = {Stanford University Press}
+  year      = {1958}
+}
+@article{gallego_moon_1993,
+  author    = {Gallego, Guillermo and Moon, Ilkyeong},
+  title     = {The Distribution Free Newsboy Problem: Review and Extensions},
+  journal   = {Journal of the Operational Research Society},
+  volume    = {44},
+  number    = {8},
+  pages     = {825--834},
+  year      = {1993},
+  doi       = {10.1057/jors.1993.141}
+}
+@article{natarajan_sim_uichanco_2018,
+  author    = {Natarajan, Karthik and Sim, Melvyn and Uichanco, Joline},
+  title     = {Asymmetry and Ambiguity in Newsvendor Models},
+  journal   = {Management Science},
+  volume    = {64},
+  number    = {7},
+  pages     = {3146--3167},
+  year      = {2018},
+  doi       = {10.1287/mnsc.2017.2773}
+}
+@article{das_dhara_natarajan_2021,
+  author    = {Das, Bikramjit and Dhara, Anulekha and Natarajan, Karthik},
+  title     = {On the Heavy-Tail Behavior of the Distributionally Robust Newsvendor},
+  journal   = {Operations Research},
+  volume    = {69},
+  number    = {4},
+  pages     = {1077--1099},
+  year      = {2021},
+  doi       = {10.1287/opre.2020.2091}
+}
+@article{ban_rudin_2019,
+  author    = {Ban, Gah-Yi and Rudin, Cynthia},
+  title     = {The Big Data Newsvendor: Practical Insights from Machine Learning},
+  journal   = {Operations Research},
+  volume    = {67},
+  number    = {1},
+  pages     = {90--108},
+  year      = {2019},
+  doi       = {10.1287/opre.2018.1757}
 }
 @article{croston_1972,
   author    = {Croston, J. D.},
@@ -319,11 +343,14 @@ If your final model selection is based on expected inventory cost and service re
   year      = {1972},
   doi       = {10.2307/3007885}
 }
-@article{combining_intermittent_2023,
-  author    = {Özer, Melike and Armbruster, Dieter and Levi, Retsef},
-  title     = {Combining Probabilistic Forecasts of Intermittent Demand},
-  journal   = {arXiv preprint arXiv:2304.03092},
-  year      = {2023},
-  note      = {Preprint}
+@article{syntetos_boylan_2005,
+  author    = {Syntetos, Aris A. and Boylan, John E.},
+  title     = {The Accuracy of Intermittent Demand Estimates},
+  journal   = {International Journal of Forecasting},
+  volume    = {21},
+  number    = {2},
+  pages     = {303--314},
+  year      = {2005},
+  doi       = {10.1016/j.ijforecast.2004.10.001}
 }
 </div>

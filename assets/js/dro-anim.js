@@ -346,7 +346,136 @@
     ui.set(0);
   }
 
-  var BUILDERS = { portfolio: portfolio, lipschitz: lipschitz, energy: energy, subpop: subpop };
+  /* ---------- 5. Newsvendor: the critical fractile on a real demand distribution ---------- */
+  function newsvendor(root, d) {
+    var levels = [], qB = [];
+    for (var i = 0; i < d.levels.length; i++) if (d.levels[i] >= 0.5 - 1e-9) { levels.push(d.levels[i]); qB.push(d.model_B_q[i]); }
+    var n = levels.length, W = 760, H = 360;
+    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': 'Demand distribution with the order quantity, and expected cost against order quantity' });
+    var gT = el('g', {}, svg), gB = el('g', {}, svg);
+    var sup = d.support, pmf = d.pmf, N = sup.length;
+    var cdf = [], acc = 0; for (var k = 0; k < N; k++) { acc += pmf[k]; cdf.push(acc); }
+    var xmax = sup[N - 1];
+    label(gT, 20, 22, 'Demand distribution for test week ' + d.week + (d.promo ? ' (a promotion week)' : '') + ' and the order quantity', 'start', 'title');
+    var qx = lin(0, xmax, 50, 740), pmax = Math.max.apply(null, pmf), py = lin(0, pmax * 1.08, 190, 40);
+    var xt = [0, 100, 200, 300, 400, 500, 600, 700].filter(function (v) { return v <= xmax; });
+    ticksX(gT, qx, xt, 190);
+    var xs = sup.map(qx), ys = pmf.map(py);
+    var over = el('path', { fill: PAL[0], 'fill-opacity': 0.25 }, gT), under = el('path', { fill: PAL[1], 'fill-opacity': 0.35 }, gT);
+    el('path', { d: polyline(xs, ys), fill: 'none', stroke: PAL[0], 'stroke-width': 2 }, gT);
+    el('line', { x1: qx(d.mean), x2: qx(d.mean), y1: 40, y2: 190, 'class': 'grid', 'stroke-dasharray': '3 3' }, gT);
+    label(gT, qx(d.mean) + 4, 52, 'mean', 'start', 'muted');
+    var qLine = el('line', { y1: 36, y2: 190, stroke: PAL[2], 'stroke-width': 3 }, gT);
+    var qText = label(gT, 0, 34, '', 'middle', 'value');
+    var trueDot = el('circle', { cy: 190, r: 5, fill: PAL[3], stroke: '#fff', 'stroke-width': 1.5 }, gT);
+    label(gT, 470, 60, 'blue area: units left over (overage)', 'start', 'legend').setAttribute('fill', PAL[0]);
+    label(gT, 470, 74, 'red area: demand not met (underage)', 'start', 'legend').setAttribute('fill', PAL[1]);
+    label(gT, 470, 88, 'green: forecast order; purple dot: true optimum', 'start', 'legend').setAttribute('fill', PAL[2]);
+    var costPath = el('path', { fill: 'none', stroke: PAL[1], 'stroke-width': 2.2 }, gB);
+    var costDot = el('circle', { r: 5.5, fill: PAL[2], stroke: '#fff', 'stroke-width': 1.5 }, gB);
+    label(gB, 20, 222, 'Expected cost against order quantity (units of the overage cost)', 'start', 'title');
+    ticksX(gB, qx, xt, 345);
+    var gridG = el('g', {}, gB);
+    function expCost(q, cu) {
+      var o = 0, u = 0;
+      for (var j = 0; j < N; j++) { var diff = q - sup[j]; if (diff > 0) o += diff * pmf[j]; else u -= diff * pmf[j]; }
+      return { over: o, under: u, cost: o + cu * u };
+    }
+    function areaPath(from, to) {
+      var pth = 'M' + qx(sup[from]).toFixed(1) + ',' + py(0).toFixed(1);
+      for (var j = from; j <= to; j++) pth += 'L' + xs[j].toFixed(1) + ',' + ys[j].toFixed(1);
+      return pth + 'L' + qx(sup[to]).toFixed(1) + ',' + py(0).toFixed(1) + 'Z';
+    }
+    var ui = controls(root, n, frame, function (p) { return '\u03c4 = ' + fmt(at(levels, p), 2); });
+    ui.host.appendChild(svg);
+    var cR = chip(ui.readout, 'Cost ratio c\u1d64 / c\u2092'), cQ = chip(ui.readout, 'Order quantity'), cT = chip(ui.readout, 'True optimum'), cO = chip(ui.readout, 'Expected units left over'), cU = chip(ui.readout, 'Expected units short'), cC = chip(ui.readout, 'Expected cost'), cS = chip(ui.readout, 'Scarf quantity');
+    function frame(p) {
+      var tau = at(levels, p), q = at(qB, p), cu = tau / (1 - tau);
+      var idx = clamp(Math.round(q), 0, N - 1);
+      over.setAttribute('d', areaPath(0, idx)); under.setAttribute('d', areaPath(idx, N - 1));
+      qLine.setAttribute('x1', qx(q)); qLine.setAttribute('x2', qx(q)); qText.setAttribute('x', qx(q)); qText.textContent = 'order ' + Math.round(q);
+      var tq = 0; while (tq < N - 1 && cdf[tq] < tau) tq++;
+      trueDot.setAttribute('cx', qx(sup[tq]));
+      var grid = [], costs = [], cmax = 0, stepq = Math.max(1, Math.round(xmax / 90));
+      for (var g = 0; g <= xmax; g += stepq) { var e = expCost(g, cu); grid.push(g); costs.push(e.cost); if (e.cost > cmax) cmax = e.cost; }
+      var cyy = lin(0, cmax * 1.05, 345, 232);
+      costPath.setAttribute('d', polyline(grid.map(qx), costs.map(cyy)));
+      var here = expCost(q, cu);
+      costDot.setAttribute('cx', qx(q)); costDot.setAttribute('cy', cyy(here.cost));
+      while (gridG.firstChild) gridG.removeChild(gridG.firstChild);
+      var step = Math.pow(10, Math.floor(Math.log(cmax) / Math.LN10)); if (cmax / step < 2.5) step /= 2;
+      for (var v = step; v < cmax * 1.05; v += step) { el('line', { x1: 50, x2: 740, y1: cyy(v), y2: cyy(v), 'class': 'grid' }, gridG); el('text', { x: 44, y: cyy(v) + 4, 'text-anchor': 'end' }, gridG).textContent = Math.round(v); }
+      var scarf = d.mean + d.sd / 2 * (Math.sqrt(cu) - 1 / Math.sqrt(cu));
+      cR.textContent = fmt(cu, 1); cQ.textContent = Math.round(q) + ' units'; cT.textContent = sup[tq] + ' units';
+      cO.textContent = fmt(here.over, 1); cU.textContent = fmt(here.under, 1); cC.textContent = fmt(here.cost, 1); cS.textContent = Math.round(scarf) + ' units';
+    }
+    ui.set(0);
+  }
+
+  /* ---------- 6. Inventory playback: one simulated year under two forecasters ---------- */
+  function inventory(root, d) {
+    var T = d.demand.length, n = T, W = 760, H = 340;
+    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': 'Weekly demand, order-up-to levels and on-hand inventory for two forecasters, with cumulative cost' });
+    var defs = el('defs', {}, svg);
+    var cid = 'inv-clip-' + Math.random().toString(36).slice(2, 7);
+    var clip = el('clipPath', { id: cid }, defs), clipRect = el('rect', { x: 0, y: 0, width: 0, height: H }, clip);
+    var clip2 = el('clipPath', { id: cid + 'b' }, defs), clipRect2 = el('rect', { x: 0, y: 0, width: 0, height: H }, clip2);
+    var gL = el('g', {}, svg), gR = el('g', {}, svg);
+    var keys = Object.keys(d.policies), cols = {}; cols[keys[0]] = PAL[1]; cols[keys[1]] = PAL[0];
+    label(gL, 20, 22, 'Demand, order-up-to level and stock on hand, week by week', 'start', 'title');
+    label(gR, 520, 22, 'Cumulative cost', 'start', 'title');
+    var ymax = 0; d.demand.forEach(function (v) { if (v > ymax) ymax = v; });
+    keys.forEach(function (k) { d.policies[k].S.forEach(function (v) { if (v > ymax) ymax = v; }); });
+    var wx = lin(0, T - 1, 50, 480), vy = lin(0, ymax * 1.08, 300, 84);
+    gridY(gL, vy, [100, 200, 300, 400, 500].filter(function (v) { return v < ymax * 1.08; }), 50, 480);
+    ticksX(gL, wx, [0, 12, 25, 38, 51], 300, function (t) { return 'wk ' + (t + 1); });
+    var bw = (wx(1) - wx(0)) * 0.7;
+    var gClip = el('g', { 'clip-path': 'url(#' + cid + ')' }, gL);
+    d.demand.forEach(function (v, t) {
+      el('rect', { x: wx(t) - bw / 2, y: vy(v), width: bw, height: vy(0) - vy(v), fill: d.promo[t] ? PAL[4] : PAL[5], 'fill-opacity': d.promo[t] ? 0.6 : 0.35 }, gClip);
+    });
+    var ws = []; for (var t = 0; t < T; t++) ws.push(wx(t));
+    keys.forEach(function (k, i) {
+      var pol = d.policies[k];
+      el('path', { d: polyline(ws, pol.S.map(vy)), fill: 'none', stroke: cols[k], 'stroke-width': 1.4, 'stroke-dasharray': '4 3' }, gClip);
+      el('path', { d: polyline(ws, pol.onhand.map(vy)), fill: 'none', stroke: cols[k], 'stroke-width': 2.4 }, gClip);
+      pol.short.forEach(function (s, t) { if (s > 0) el('circle', { cx: wx(t), cy: vy(0) + 7 + 7 * i, r: 3, fill: cols[k] }, gClip); });
+    });
+    var cursor = el('line', { y1: 84, y2: 300, 'class': 'axis' }, gL);
+    label(gL, 54, 44, 'bars: weekly demand (orange = promotion week)', 'start', 'muted');
+    label(gL, 54, 58, 'dashed: order-up-to level; solid: stock on hand after sales', 'start', 'muted');
+    label(gL, 54, 72, 'dots under the axis: weeks with lost sales', 'start', 'muted');
+    var cum = {}, cmax = 0;
+    keys.forEach(function (k) {
+      var pol = d.policies[k], c = 0, arr = [];
+      for (var t = 0; t < T; t++) { c += d.h * pol.onhand[t] + d.b * pol.short[t]; arr.push(c); }
+      cum[k] = arr; if (c > cmax) cmax = c;
+    });
+    var cx = lin(0, T - 1, 530, 740), cyv = lin(0, cmax * 1.05, 300, 84);
+    gridY(gR, cyv, [2000, 4000, 6000, 8000, 10000].filter(function (v) { return v < cmax * 1.05; }), 530, 740, function (v) { return (v / 1000) + 'k'; });
+    ticksX(gR, cx, [0, 25, 51], 300, function (t) { return 'wk ' + (t + 1); });
+    var gClip2 = el('g', { 'clip-path': 'url(#' + cid + 'b)' }, gR);
+    keys.forEach(function (k) { el('path', { d: polyline(ws.map(function (_, t) { return cx(t); }), cum[k].map(cyv)), fill: 'none', stroke: cols[k], 'stroke-width': 2.4 }, gClip2); });
+    keys.forEach(function (k, i) { label(gR, 534, 44 + 14 * i, k + ': ' + d.policies[k].name, 'start', 'legend').setAttribute('fill', cols[k]); });
+    var ui = controls(root, n, frame, function (p) { return 'week ' + (Math.floor(p) + 1); });
+    ui.host.appendChild(svg);
+    var chips = {};
+    keys.forEach(function (k) { chips[k] = { oh: chip(ui.readout, k + ' on hand'), sh: chip(ui.readout, k + ' lost sales so far'), c: chip(ui.readout, k + ' cost so far') }; });
+    var cD = chip(ui.readout, 'Demand this week');
+    function frame(p) {
+      var t = Math.floor(p);
+      clipRect.setAttribute('width', (wx(t) + bw / 2 + 1).toFixed(1)); clipRect2.setAttribute('width', (cx(p) + 1).toFixed(1));
+      cursor.setAttribute('x1', wx(t)); cursor.setAttribute('x2', wx(t));
+      cD.textContent = d.demand[t] + ' units';
+      keys.forEach(function (k) {
+        var pol = d.policies[k], sh = 0; for (var j = 0; j <= t; j++) sh += pol.short[j];
+        chips[k].oh.textContent = Math.round(pol.onhand[t]); chips[k].sh.textContent = Math.round(sh) + ' units'; chips[k].c.textContent = Math.round(cum[k][t]).toLocaleString('en-GB');
+      });
+    }
+    ui.set(0);
+  }
+
+  var BUILDERS = { portfolio: portfolio, lipschitz: lipschitz, energy: energy, subpop: subpop, newsvendor: newsvendor, inventory: inventory };
 
   function init() {
     document.querySelectorAll('.dro-anim[data-anim]').forEach(function (root) {
