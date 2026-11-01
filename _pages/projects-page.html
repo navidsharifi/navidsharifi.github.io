@@ -23,7 +23,7 @@ comments: false
       {%- for project in featured_projects %}
       {%- assign is_external = false -%}{%- if project.link contains "://" -%}{%- assign is_external = true -%}{%- endif -%}
       {%- assign _excerpt = project.description | strip_html | truncatewords: 35 -%}
-      {%- include card.html variant="feature" title=project.name url=project.link external=is_external image=project.image contain=project.contain excerpt=_excerpt date=project.year cta="Open project" icon="i-code" -%}
+      {%- include components/card.html variant="feature" title=project.name url=project.link external=is_external image=project.image contain=project.contain excerpt=_excerpt date=project.year cta="Open project" icon="i-code" -%}
       {%- endfor %}
     </div>
   </section>
@@ -36,7 +36,7 @@ comments: false
       {%- for project in all_projects %}
       {%- assign is_external = false -%}{%- if project.link contains "://" -%}{%- assign is_external = true -%}{%- endif -%}
       {%- assign _excerpt = project.description | strip_html | truncatewords: 55 -%}
-      {%- include card.html variant="list" title=project.name url=project.link external=is_external image=project.image contain=project.contain excerpt=_excerpt date=project.year tags=project.tags cta="Open project" icon="i-code" -%}
+      {%- include components/card.html variant="list" title=project.name url=project.link external=is_external image=project.image contain=project.contain excerpt=_excerpt date=project.year tags=project.tags cta="Open project" icon="i-code" -%}
       {%- endfor %}
     </div>
     {%- else %}

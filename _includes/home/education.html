@@ -1,0 +1,13 @@
+<section class="section" id="education" aria-labelledby="education-title">
+  <div class="container section-grid">
+    <aside class="section-label" data-reveal>
+      <span class="section-index">03</span>
+      <h2 id="education-title">{{ site.education_title | default: "Education" }}</h2>
+    </aside>
+    <div class="section-body entries">
+      {%- for education in site.data.education %}
+      {%- include components/entry.html item=education %}
+      {%- endfor %}
+    </div>
+  </div>
+</section>

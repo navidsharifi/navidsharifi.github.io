@@ -1,278 +1,99 @@
-# Academic Portfolio Template
+# navidsharifi.github.io
 
-A Jekyll-based academic portfolio and blog for researchers. Features publications with citations, project showcases, technical blog posts with LaTeX support, and a configurable dark/light theme.
+Source of [navidsharifi.github.io](https://navidsharifi.github.io), the personal website and research blog of Navid Sharifi. The site is built with [Jekyll](https://jekyllrb.com) and served by GitHub Pages from the `master` branch.
 
-**Example:** [soran-ghaderi.github.io](https://soran-ghaderi.github.io)
+## Running locally
 
-## Features
-
-- **Academic Publications** — CSL-JSON citations, venue/year/author metadata, paper/code/website links
-- **Project Showcase** — GitHub badges, descriptions, and categorization
-- **Technical Blog** — MathJax/KaTeX support, syntax highlighting, featured posts
-- **Custom Citation System** — GitHub Pages–compatible BibTeX citations with APA/IEEE/Chicago/Vancouver styles
-- **Academic Numbering** — Auto-numbered figures, tables, equations, and algorithms with cross-references
-- **Theming** — Configurable dark/light mode with customizable color palettes
-- **SEO** — Built-in `jekyll-seo-tag` support
-
----
-
-## Quick Start
-
-### 1. Fork or Clone
-
-```bash
-git clone https://github.com/soran-ghaderi/soran-ghaderi.github.io.git my-portfolio
-cd my-portfolio
-```
-
-### 2. Run Locally
-
-**With Docker (recommended):**
-```bash
-docker-compose up
-```
-
-**With Ruby/Jekyll:**
 ```bash
 bundle install
 bundle exec jekyll serve --livereload
 ```
 
-Site available at `http://localhost:4000`
+The site is then available at `http://localhost:4000`.
 
-### 3. Deploy
+## Project structure
 
-Push to a GitHub repository named `<username>.github.io` for automatic GitHub Pages deployment.
-
----
-
-## Configuration
-
-### `_config.yml`
-
-Core settings:
-
-```yaml
-name: Your Name
-title: Your Title
-email: your@email.com
-darkmode: true  # true | false | never
-
-# Color palette
-palette:
-  dark_bg: "pure-black"    # pure-black | near-black | charcoal
-  light_bg: "white"        # white | snow | cream | cool-gray
-  accent: "yellow"         # yellow | vivid-red | crimson | coral | rose | ruby | purple | emerald | sky
-
-# Hero (home page header)
-hero_eyebrow: Open to research collaborations
-hero_tagline: One-sentence summary shown under your role.
-hero_facts:
-  - label: Focus
-    value: What you work on
-
-# Citation style for blog posts
-citation_style: "apa"      # apa | ieee | chicago | vancouver
-
-# Social links
-github_username: your-username
-twitter_username: your-handle
-linkedin_username: your-profile
-orcid_username: 0000-0000-0000-0000
+```
+.
+├── _config.yml                 Site settings, home-page content and build options
+├── index.md                    Home page (uses the homepage layout)
+│
+├── _pages/                     Standalone pages: blog, projects, publications, skills, Optora
+├── _blog_posts/                Blog posts, one Markdown file per post (YYYY-MM-DD-slug.md)
+├── _data/                      Structured content edited as YAML
+│   ├── navigation.yml          Header and footer menu
+│   ├── education.yml
+│   ├── experience.yml
+│   ├── projects.yml            Projects shown on the home page
+│   ├── projects-page.yml       Projects shown on the projects page
+│   ├── publication.yml
+│   ├── skills.yml
+│   └── blog_posts.yml          Posts published on external platforms
+│
+├── _layouts/                   Page templates (default, homepage, page, post, tags, categories)
+├── _includes/                  Template partials, grouped by role
+│   ├── site/                   Head, colour palette, navbar, footer, icon sprite
+│   ├── home/                   Home-page sections: hero, about, education, experience, projects
+│   ├── components/             Reusable blocks: card, timeline entry, table of contents
+│   └── analytics/              Google Analytics and Tag Manager snippets
+│
+├── _sass/                      Stylesheet partials, imported by assets/css/main.scss
+│   ├── base/                   Design tokens and base typography
+│   ├── layout/                 Navbar and footer
+│   ├── components/             Cards, code blocks, interactive figures
+│   └── pages/                  Home page, article body, academic figures and tables
+│
+└── assets/
+    ├── css/main.scss           Stylesheet entry point
+    ├── js/                     Site behaviour, citations, figure numbering, interactive figures
+    ├── data/blog/<post-slug>/  Data files that drive a post's interactive figures
+    ├── images/
+    │   ├── profile/            Profile photo
+    │   ├── projects/           Project thumbnails and logos
+    │   └── blog/<post-slug>/   Figures for one blog post
+    └── favicon.ico
 ```
 
----
+## Adding content
 
-## Content Structure
-
-All content is driven by YAML files in `_data/`:
-
-| File | Purpose |
-|------|---------|
-| `publication.yml` | Research papers with citations |
-| `projects.yml` | Open-source projects |
-| `experience.yml` | Work history |
-| `education.yml` | Academic background |
-| `skills.yml` | Technical skills |
-
-### Publications
+**A blog post.** Create `_blog_posts/YYYY-MM-DD-slug.md` with this front matter:
 
 ```yaml
-# _data/publication.yml
-- layout: left-publication
-  title: "Paper Title"
-  venue: "Conference/Journal"
-  year: 2024
-  publication_type: "Conference Paper"
-  authors:
-    - Your Name
-    - Co-Author Name
-  paper: https://doi.org/...
-  code: https://github.com/...
-  website: https://project-page.com
-  image: /images/paper-figure.png
-```
-
-### Projects
-
-```yaml
-# _data/projects.yml
-- layout: left
-  name: Project Name
-  github: username/repo
-  link: github.com/username/repo
-  description: >
-    <b>Short description.</b><br>
-    <span style="color:#888">Python · PyTorch</span><br>
-    <img alt="Stars" src="https://img.shields.io/github/stars/username/repo?style=social">
-```
-
----
-
-## Blog Posts
-
-Create posts in `_posts/` with filename `YYYY-MM-DD-slug.md`:
-
-```markdown
 ---
 layout: post
-title: "Post Title"
-author: Your Name
-image: https://example.com/featured.png
-featured: true
+title: "Post title"
+author: Navid Sharifi
+date: YYYY-MM-DD
+image: assets/images/blog/slug/cover.svg
+featured: false
+hidden: false
+comments: true
+categories: Topic-One Topic-Two
+excerpt: "One or two sentences shown on the blog page."
 ---
-
-Inline math: $E = mc^2$
-
-Block math:
-$$p(x) = \frac{e^{-E(x)}}{Z}$$
 ```
 
-### Citations
+Put the post's figures in `assets/images/blog/slug/`. If the post has interactive figures, add `anim: true` to the front matter and put their data in `assets/data/blog/slug/`.
 
-Use the built-in citation system (no plugins required):
+**Figures, tables, equations and citations.** Posts support automatic numbering and cross-references:
 
-```markdown
-As shown in prior work <cite data-key="smith2024"></cite>, the method...
-
-<!-- At end of post -->
-<div class="bibliography-data" style="display:none;">
-@article{smith2024,
-  author = {Smith, John},
-  title = {Paper Title},
-  year = {2024},
-  url = {https://...}
-}
-</div>
-```
-
-Multiple citations: `<cite data-key="key1, key2, key3"></cite>` → `[1, 2, 3]`
-
-### Academic Numbering
-
-Figures, tables, equations, and algorithms are auto-numbered:
-
-```markdown
-<figure class="academic-figure" id="fig-arch">
-  <img src="/images/architecture.png" alt="Architecture">
-  <figcaption data-caption="Model architecture overview"></figcaption>
+```html
+<figure class="academic-figure" id="fig-example">
+  <img src="{{ '/assets/images/blog/slug/example.svg' | relative_url }}" alt="Description">
+  <figcaption data-caption="Caption text."></figcaption>
 </figure>
 
-As shown in <a href="#fig-arch" class="ref"></a>...
-
-<div class="academic-equation" id="eq-loss">
-
-$$\mathcal{L} = \mathbb{E}[\|x - \hat{x}\|^2]$$
-
-</div>
-
-Using <a href="#eq-loss" class="eqref"></a>...  <!-- renders as "(1)" -->
+As <a href="#fig-example" class="ref"></a> shows ...   <!-- renders as "Figure 1" -->
 ```
 
----
+Citations use `<cite data-key="key"></cite>` in the text and a hidden BibTeX block at the end of the post inside `<div class="bibliography-data" style="display:none;">`. The reference list is generated automatically.
 
-## Directory Structure
+**A project.** Add an entry to `_data/projects-page.yml` and its thumbnail to `assets/images/projects/`.
 
-```
-├── _config.yml          # Site configuration
-├── _data/               # YAML content files
-│   ├── publication.yml
-│   ├── projects.yml
-│   ├── experience.yml
-│   ├── education.yml
-│   └── skills.yml
-├── _posts/              # Blog posts
-├── _layouts/            # Page templates
-├── _includes/           # Reusable components
-├── _sass/               # SCSS stylesheets
-├── assets/
-│   ├── js/
-│   │   ├── citations.js         # Citation system
-│   │   └── academic-numbering.js
-│   └── main.scss
-└── images/              # Static images
-```
+## Styling
 
----
-
-## Customization
-
-### Styling
-
-Edit `assets/main.scss` or add partials in `_sass/`:
-
-```scss
-// assets/main.scss
-@import 'modern-resume-theme';
-
-// Your custom styles
-.custom-class {
-  color: var(--accent-color);
-}
-```
-
-### Section Titles
-
-Override in `_config.yml`:
-
-```yaml
-education_title: Education
-publication_title: Selected Publications
-skills_title: Technical Skills
-```
-
----
-
-## Development
-
-### Local Build
-
-```bash
-bundle exec jekyll build
-```
-
-Output in `_site/`.
-
-### Adding Pages
-
-Create in `_pages/`:
-
-```yaml
----
-layout: page
-title: New Page
-permalink: /new-page/
----
-```
-
----
+Colours, fonts and spacing are defined as CSS custom properties in `_sass/base/_tokens.scss`. The dark-mode background and accent colour are set under `palette` in `_config.yml`. New partials go in the matching folder under `_sass/` and are added to the import list in `assets/css/main.scss`.
 
 ## License
 
-MIT License. See [LICENSE](LICENSE).
-
----
-
-## Credits
-
-Originally forked from [modern-resume-theme](https://github.com/sproogen/modern-resume-theme) by James Grant.
+Released under the MIT License. See [LICENSE](LICENSE).

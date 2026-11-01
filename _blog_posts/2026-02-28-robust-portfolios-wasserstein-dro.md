@@ -3,7 +3,7 @@ layout: post
 title: "Robust Portfolios Without the Crystal Ball: Wasserstein DRO for Asset Allocation"
 author: Navid Sharifi
 date: 2026-02-28
-image: images/optora-portfolio-cover.svg
+image: assets/images/blog/robust-portfolios-wasserstein-dro/cover.svg
 featured: true
 hidden: false
 comments: true
@@ -94,7 +94,7 @@ Two details deserve a comment. First, `worst_case_expectation` takes the per-sce
 ## What the Radius Does to the Weights
 
 <figure class="academic-figure" id="fig-interactive">
-<div class="dro-anim" data-anim="portfolio" data-src="{{ '/assets/data/dro-portfolio.json' | relative_url }}" data-title="Interactive: sweep the Wasserstein radius">
+<div class="dro-anim" data-anim="portfolio" data-src="{{ '/assets/data/blog/robust-portfolios-wasserstein-dro/portfolio.json' | relative_url }}" data-title="Interactive: sweep the Wasserstein radius">
 <noscript>Enable JavaScript to see the interactive figure.</noscript>
 </div>
 <figcaption data-caption="Interactive view of the trained portfolios. The slider moves the Wasserstein radius from 0 to 0.08 through 25 trained solutions. Left: the weights of the six assets. Right: the 120 training months, each sized and coloured by the weight the worst-case distribution gives it relative to its nominal weight of 1 in 120. The readout shows the annualised in-sample, normal-regime and stress-regime returns of the current portfolio."></figcaption>
@@ -103,7 +103,7 @@ Two details deserve a comment. First, `worst_case_expectation` takes the per-sce
 <a href="#fig-interactive" class="ref"></a> lets you move the radius yourself and watch the weights and the adversary respond together. The static figures that follow pick out the frames worth discussing.
 
 <figure class="academic-figure" id="fig-weights">
-<img src="{{ '/images/optora-portfolio-weights.svg' | relative_url }}" alt="Stacked area chart of portfolio weights against the Wasserstein radius" style="max-width: 100%; display: block; margin: 0 auto;">
+<img src="{{ '/assets/images/blog/robust-portfolios-wasserstein-dro/weights.svg' | relative_url }}" alt="Stacked area chart of portfolio weights against the Wasserstein radius" style="max-width: 100%; display: block; margin: 0 auto;">
 <figcaption data-caption="Portfolio weights as a function of the Wasserstein radius. At small radii the solution is the sample-optimal corner, all in emerging-market equity. Beyond a radius of about 0.01 the book diversifies, and government bonds become the largest holding."></figcaption>
 </figure>
 
@@ -125,7 +125,7 @@ The two rows track each other to within a few percent. The gap is the price of a
 ## What the Radius Costs and What It Buys
 
 <figure class="academic-figure" id="fig-returns">
-<img src="{{ '/images/optora-portfolio-returns.svg' | relative_url }}" alt="Annualised returns against the Wasserstein radius for the training sample, the worst-case value, the normal regime and the stress regime" style="max-width: 100%; display: block; margin: 0 auto;">
+<img src="{{ '/assets/images/blog/robust-portfolios-wasserstein-dro/returns.svg' | relative_url }}" alt="Annualised returns against the Wasserstein radius for the training sample, the worst-case value, the normal regime and the stress regime" style="max-width: 100%; display: block; margin: 0 auto;">
 <figcaption data-caption="Annualised return of the robust portfolios. The in-sample mean falls as the radius grows. The out-of-sample return in the normal regime falls more slowly. The return in the stress regime improves sharply. The dashed line is the worst-case value inside the ball, which turns negative at a radius of 0.02."></figcaption>
 </figure>
 
@@ -155,7 +155,7 @@ The two rows track each other to within a few percent. The gap is the price of a
 The equal-weight portfolio is a useful yardstick. In the normal regime it returns 7.2 percent, close to the Wasserstein book at $\rho = 0.04$. In the stress regime it loses 10.1 percent, close to that same book. The robust optimiser has, in effect, discovered a 1/N-like portfolio from the data, but it has also tilted it toward the assets that hurt least when the adversary moves the mass. That tilt is visible in the bond weight.
 
 <figure class="academic-figure" id="fig-stress-hist">
-<img src="{{ '/images/optora-portfolio-stress-hist.svg' | relative_url }}" alt="Histograms of monthly returns in the stress regime for the sample-average, robust and equal-weight portfolios" style="max-width: 100%; display: block; margin: 0 auto;">
+<img src="{{ '/assets/images/blog/robust-portfolios-wasserstein-dro/stress-hist.svg' | relative_url }}" alt="Histograms of monthly returns in the stress regime for the sample-average, robust and equal-weight portfolios" style="max-width: 100%; display: block; margin: 0 auto;">
 <figcaption data-caption="Distribution of monthly portfolio returns in the stress regime. The sample-average portfolio has a wide, left-skewed distribution. The robust book at radius 0.04 is narrower and its left tail is shorter than that of the equal-weight portfolio."></figcaption>
 </figure>
 
@@ -164,7 +164,7 @@ The equal-weight portfolio is a useful yardstick. In the normal regime it return
 The worst-case distribution is not an abstraction. It is a reweighting of the 120 training months, and it can be plotted. <a href="#fig-adversary" class="ref"></a> shows each month by the return of its equity basket and its bond basket. The colour and size of a point show how much weight the adversary gives it relative to its nominal weight of 1/120.
 
 <figure class="academic-figure" id="fig-adversary">
-<img src="{{ '/images/optora-portfolio-adversary.svg' | relative_url }}" alt="Scatter plots of training months weighted by the worst-case distribution at two radii" style="max-width: 100%; display: block; margin: 0 auto;">
+<img src="{{ '/assets/images/blog/robust-portfolios-wasserstein-dro/adversary.svg' | relative_url }}" alt="Scatter plots of training months weighted by the worst-case distribution at two radii" style="max-width: 100%; display: block; margin: 0 auto;">
 <figcaption data-caption="The worst-case distribution over the training months at two radii. Each point is a month, placed by the mean return of the two equity assets and of the two bond assets. Larger, redder points carry more worst-case weight. At radius 0.005 the adversary concentrates on four months. At radius 0.04 it spreads over seventeen months in the lower-left corner, where equities and bonds fall together."></figcaption>
 </figure>
 

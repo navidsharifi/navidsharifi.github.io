@@ -1,19 +1,20 @@
 source "https://rubygems.org"
-gemspec
 
+# Static site generator
+gem "jekyll", "~> 4.3"
 
-# gem 'beautiful-jekyll-theme'
-# gem 'mediumish-theme-jekyll'
-
-gem 'webrick'
-gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+# Plugins enabled in _config.yml (all supported by GitHub Pages)
 group :jekyll_plugins do
-    gem 'jekyll-feed'
-    gem 'jekyll-sitemap'
-    gem 'jekyll-paginate'
-    gem 'jekyll-seo-tag'
-    gem 'jekyll-archives'
-    gem 'kramdown'
-    gem 'kramdown-parser-gfm'
-    gem 'rouge'
+  gem "jekyll-seo-tag"
+  gem "jekyll-feed"
+  gem "jekyll-sitemap"
 end
+
+# Markdown and syntax highlighting
+gem "kramdown"
+gem "kramdown-parser-gfm"
+gem "rouge"
+
+# Local development server
+gem "webrick"
+gem "wdm", ">= 0.1.0", platforms: [:windows]

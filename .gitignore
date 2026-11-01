@@ -1,34 +1,87 @@
-*.gem
-.bundle
-.sass-cache
-_site
-*.code-workspace
-vendor
-.idea
-.github/copilot-instructions.md
-# AI assistant configuration, memory and session files (never publish these)
+# =====================================================================
+# Personal material: plans, roadmaps, notes, CVs and drafts.
+# Keep these in private/ (or anywhere below); they are never published.
+# =====================================================================
+private/
+
+# Loose documents in the repository root are treated as personal notes.
+# The site's own root files are re-included explicitly.
+/*.md
+!/README.md
+!/index.md
+/*.txt
+/*.tex
+/*.pdf
+/*.doc
+/*.docx
+/*.zip
+
+# Name patterns that mark planning or preparation documents anywhere.
+*roadmap*
+*Roadmap*
+*interview-prep*
+*Interview-Prep*
+*-plan.md
+*-notes.md
+*research-report*
+*research-trends*
+
+# Published content is always tracked, even if a slug matches a pattern above.
+!/_blog_posts/**
+!/_pages/**
+!/_data/**
+!/assets/**
+
+# =====================================================================
+# AI assistant configuration, memory and session files.
+# No AI tooling or attribution is ever published with this site.
+# =====================================================================
 CLAUDE.md
 CLAUDE.local.md
 .claude/
 .claude.json
+AGENTS.md
+GEMINI.md
+.gemini/
+.codex/
 .cursor/
 .cursorrules
 .cursorignore
-.codex/
-.gemini/
-GEMINI.md
-AGENTS.md
-.aider*
 .windsurf/
 .windsurfrules
 .continue/
 .roo/
+.aider*
 .github/copilot-instructions.md
 *.chatgpt*
 *.copilot*
 
-# Local Python environments and scratch output
+# =====================================================================
+# Build output and dependency caches
+# =====================================================================
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+.bundle/
+vendor/
+node_modules/
+*.gem
+
+# Python environments used for figure generation
 .venv/
 venv/
 __pycache__/
 *.pyc
+
+# =====================================================================
+# Editor and operating-system files
+# =====================================================================
+.vscode/
+.idea/
+*.code-workspace
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+.env

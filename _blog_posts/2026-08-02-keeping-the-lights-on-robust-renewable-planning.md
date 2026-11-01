@@ -3,7 +3,7 @@ layout: post
 title: "Keeping the Lights On: Distributionally Robust Planning for Renewable Energy"
 author: Navid Sharifi
 date: 2026-08-02
-image: images/optora-energy-cover.svg
+image: assets/images/blog/keeping-the-lights-on-robust-renewable-planning/cover.svg
 featured: true
 hidden: false
 comments: true
@@ -51,7 +51,7 @@ The training year is 365 synthetic days with a realistic structure. Demand has a
 The stress year changes three things at once, in the way that a cold, still winter does. The wind capacity factor falls to 0.30, a drop of 27 percent. The cloud factor is heavier, which cuts solar by a quarter. Demand rises by 4 percent overall and by a further 160 megawatts at the evening peak. The mean daily peak of net load rises to 1,914 megawatts. Nothing in the training year says that such a year is possible.
 
 <figure class="academic-figure" id="fig-schedules">
-<img src="{{ '/images/optora-energy-schedules.svg' | relative_url }}" alt="Hourly net-load quantile bands for the training year with the SAA, KL and Wasserstein schedules overlaid, plus the stress-year 95 percent quantile" style="max-width: 100%; display: block; margin: 0 auto;">
+<img src="{{ '/assets/images/blog/keeping-the-lights-on-robust-renewable-planning/schedules.svg' | relative_url }}" alt="Hourly net-load quantile bands for the training year with the SAA, KL and Wasserstein schedules overlaid, plus the stress-year 95 percent quantile" style="max-width: 100%; display: block; margin: 0 auto;">
 <figcaption data-caption="Hourly net load in the training year, shown as the 5 to 95 percent and 25 to 75 percent bands with the median, and the 95 percent quantile of the stress year. The black line is the sample-average schedule, which is the hourly critical fractile. The green and purple lines are the KL schedule at radius 0.2 and the Wasserstein schedule at radius 30 megawatts. The robust schedules sit above the sample-average one everywhere, and the margin is widest where the net-load band is widest."></figcaption>
 </figure>
 
@@ -121,21 +121,21 @@ Now read down the KL column. The calibrated radius of 0.0053 is the one a statis
 The Wasserstein and CVaR schedules trace the same frontier. A Wasserstein radius of 30 megawatts lands almost exactly on the KL schedule at radius 0.2, and a CVaR level of 0.10 lands on the KL schedule at radius 0.5. This is not a coincidence. For a loss that is monotone in net load, every one of these adversaries does the same thing: it moves probability toward the days with the highest net load, and the schedule rises to meet them. The geometries differ in how they price that move, but on this problem the price schedules are close enough that the frontiers overlap.
 
 <figure class="academic-figure" id="fig-frontier">
-<img src="{{ '/images/optora-energy-frontier.svg' | relative_url }}" alt="Mean daily cost against unserved energy in the stress year for all schedules" style="max-width: 100%; display: block; margin: 0 auto;">
+<img src="{{ '/assets/images/blog/keeping-the-lights-on-robust-renewable-planning/frontier.svg' | relative_url }}" alt="Mean daily cost against unserved energy in the stress year for all schedules" style="max-width: 100%; display: block; margin: 0 auto;">
 <figcaption data-caption="Mean daily cost against unserved energy in the stress year. The sample-average schedule is the isolated point at the top right. Every robust schedule, whichever ambiguity set produced it, lies on one curve that runs down and to the left. In the stress year robustness reduces both cost and shortfall at the same time, because the shortfall penalty dominates."></figcaption>
 </figure>
 
 <a href="#fig-frontier" class="ref"></a> is the stress-year picture. Each point is a schedule, placed by its mean cost and its unserved energy. There is no trade-off in this year. Every robust schedule is both cheaper and more reliable than SAA, and the three ambiguity sets lie on a single curve. The trade-off exists only in the normal year, and <a href="#fig-costs" class="ref"></a> shows its size.
 
 <figure class="academic-figure" id="fig-costs">
-<img src="{{ '/images/optora-energy-costs.svg' | relative_url }}" alt="Paired bars of normal-year and stress-year mean daily cost for six schedules" style="max-width: 100%; display: block; margin: 0 auto;">
+<img src="{{ '/assets/images/blog/keeping-the-lights-on-robust-renewable-planning/costs.svg' | relative_url }}" alt="Paired bars of normal-year and stress-year mean daily cost for six schedules" style="max-width: 100%; display: block; margin: 0 auto;">
 <figcaption data-caption="Mean daily cost in the normal year and in the stress year for six schedules. The robust schedules pay a premium of 0 to 5.5 percent in the normal year and save 10 to 13 percent in the stress year. The calibrated KL schedule pays no premium at all."></figcaption>
 </figure>
 
 ## What the Adversary Is Worried About
 
 <figure class="academic-figure" id="fig-interactive">
-<div class="dro-anim" data-anim="energy" data-src="{{ '/assets/data/dro-energy.json' | relative_url }}" data-title="Interactive: sweep the KL radius">
+<div class="dro-anim" data-anim="energy" data-src="{{ '/assets/data/blog/keeping-the-lights-on-robust-renewable-planning/energy.json' | relative_url }}" data-title="Interactive: sweep the KL radius">
 <noscript>Enable JavaScript to see the interactive figure.</noscript>
 </div>
 <figcaption data-caption="Interactive view of the KL-robust schedules. The slider moves the radius from 0 to 0.5 through 21 trained schedules. Left: the training-year net-load bands with the stress-year 95 percent quantile, the current schedule in green, and the training days that the adversary upweights drawn in red with opacity proportional to their worst-case weight. Right: the 365 training days placed by wind capacity factor and peak net load, sized and coloured by worst-case weight. The readout gives the committed energy and the normal-year and stress-year outcomes of the current schedule."></figcaption>
@@ -146,7 +146,7 @@ Before the static picture, <a href="#fig-interactive" class="ref"></a> lets you 
 The worst-case distribution is a diagnostic as much as a device. For the KL ball, Optora returns it as the gradient of the worst-case value with respect to the loss vector, and it is a set of weights on the 365 training days. <a href="#fig-adversary" class="ref"></a> plots each day by its mean wind capacity factor and its peak net load, with the worst-case weight as colour and size.
 
 <figure class="academic-figure" id="fig-adversary">
-<img src="{{ '/images/optora-energy-adversary.svg' | relative_url }}" alt="Scatter of training days by wind capacity factor and peak net load, coloured by worst-case weight" style="max-width: 100%; display: block; margin: 0 auto;">
+<img src="{{ '/assets/images/blog/keeping-the-lights-on-robust-renewable-planning/adversary.svg' | relative_url }}" alt="Scatter of training days by wind capacity factor and peak net load, coloured by worst-case weight" style="max-width: 100%; display: block; margin: 0 auto;">
 <figcaption data-caption="The worst-case distribution of the KL ball at radius 0.2 over the training days. Each day is placed by its mean wind capacity factor and its peak net load. Colour and size give the worst-case weight relative to the nominal weight of 1 in 365. The adversary concentrates on the still, high-demand days in the top-left corner and gives up to three times their nominal weight to about a dozen of them."></figcaption>
 </figure>
 

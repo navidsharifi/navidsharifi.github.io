@@ -3,7 +3,7 @@ layout: post
 title: "Wasserstein Robustness Is Secretly Regularisation: A Hands-On Proof"
 author: Navid Sharifi
 date: 2026-05-15
-image: images/optora-lipschitz-cover.svg
+image: assets/images/blog/wasserstein-robustness-is-regularisation/cover.svg
 featured: true
 hidden: false
 comments: true
@@ -73,7 +73,7 @@ normalised_gap = (surrogate - exact) / radii
 ```
 
 <figure class="academic-figure" id="fig-gap">
-<img src="{{ '/images/optora-lipschitz-gap.svg' | relative_url }}" alt="Left: normalised gap between surrogate and exact worst case against the radius for three sample sizes. Right: exact worst case and two surrogates against the radius for n equals 64." style="max-width: 100%; display: block; margin: 0 auto;">
+<img src="{{ '/assets/images/blog/wasserstein-robustness-is-regularisation/gap.svg' | relative_url }}" alt="Left: normalised gap between surrogate and exact worst case against the radius for three sample sizes. Right: exact worst case and two surrogates against the radius for n equals 64." style="max-width: 100%; display: block; margin: 0 auto;">
 <figcaption data-caption="Left: the normalised gap between the Lipschitz surrogate and the exact worst case, (surrogate minus exact) divided by the radius, for three sample sizes. The dotted lines are the predicted small-radius limits 1 minus L_n. Right: for n equals 64, the exact worst case against the population surrogate and the sample surrogate. The three curves coincide up to a radius of about 0.1 and separate beyond it. The exact curve flattens at the largest loss on the support."></figcaption>
 </figure>
 
@@ -93,12 +93,12 @@ The left panel of <a href="#fig-gap" class="ref"></a> shows the normalised gap, 
 The right panel shows the three curves for $n = 64$ on the scale of the loss itself. They are indistinguishable up to $\rho \approx 0.1$. Beyond that the exact worst case bends away and flattens at 2.50, which is the softplus of the largest support point. This is the third regime. The adversary has moved all the mass it can to the worst point, and no budget can push the expectation higher. The surrogate has no such ceiling. At $\rho = 3.16$ the population surrogate reports a worst case of 3.97, which no distribution on the support can achieve.
 
 <figure class="academic-figure" id="fig-transport">
-<img src="{{ '/images/optora-lipschitz-transport.svg' | relative_url }}" alt="Worst-case weight relative to nominal at each support point for three radii" style="max-width: 100%; display: block; margin: 0 auto;">
+<img src="{{ '/assets/images/blog/wasserstein-robustness-is-regularisation/transport.svg' | relative_url }}" alt="Worst-case weight relative to nominal at each support point for three radii" style="max-width: 100%; display: block; margin: 0 auto;">
 <figcaption data-caption="The worst-case distribution for n equals 64, shown as the ratio of worst-case weight to nominal weight at each support point. At radius 0.01 the adversary moves a little mass from the second-largest point to the largest one. At radius 0.1 it drains the upper part of the support into the largest point. At radius 0.5 it empties every point above about 0.4 and the largest point carries 23 times its nominal weight."></figcaption>
 </figure>
 
 <figure class="academic-figure" id="fig-interactive">
-<div class="dro-anim" data-anim="lipschitz" data-src="{{ '/assets/data/dro-lipschitz.json' | relative_url }}" data-title="Interactive: watch the adversary move mass as the radius grows">
+<div class="dro-anim" data-anim="lipschitz" data-src="{{ '/assets/data/blog/wasserstein-robustness-is-regularisation/lipschitz.json' | relative_url }}" data-title="Interactive: watch the adversary move mass as the radius grows">
 <noscript>Enable JavaScript to see the interactive figure.</noscript>
 </div>
 <figcaption data-caption="Interactive view of the finite-support ball for n equals 64. The slider moves the radius from 0.001 to 4 on a logarithmic scale. Top: the worst-case weight at each support point relative to nominal, on a square-root scale; red bars have gained mass and grey bars have lost it. Bottom: the exact worst case against the two Lipschitz surrogates, with a marker at the current radius. The readout gives the exact value, the surrogate, the normalised gap and the share of all probability mass that now sits on the single largest support point."></figcaption>
@@ -119,7 +119,7 @@ The data are 200 points with $x \in \mathbb{R}^2$ standard normal, $y = x^\top (
 Each is minimised with Adam for twelve radii from 0.001 to 2 in a single batched run, and the fitted models are compared by their norm, their out-of-sample error on 20,000 fresh points, and their exact robust value.
 
 <figure class="academic-figure" id="fig-regression">
-<img src="{{ '/images/optora-lipschitz-regression.svg' | relative_url }}" alt="Left: norm of the fitted model against the radius for the three objectives. Right: test mean absolute error against the radius." style="max-width: 100%; display: block; margin: 0 auto;">
+<img src="{{ '/assets/images/blog/wasserstein-robustness-is-regularisation/regression.svg' | relative_url }}" alt="Left: norm of the fitted model against the radius for the three objectives. Right: test mean absolute error against the radius." style="max-width: 100%; display: block; margin: 0 auto;">
 <figcaption data-caption="Models trained with the exact robust objective, the sample surrogate and the population surrogate. Left: the norm of the fitted (w, minus 1) against the radius. The three paths coincide up to a radius of about 0.06. The two surrogates keep shrinking the model, and the exact objective stops. Right: out-of-sample mean absolute error. Up to a radius of 0.25 all three are within 0.006 of each other. At a radius of 2 the surrogates have shrunk the model so far that their test error is double that of the exact solution."></figcaption>
 </figure>
 
@@ -128,7 +128,7 @@ Each is minimised with Adam for twelve radii from 0.001 to 2 in a single batched
 From $\rho \approx 0.1$ the paths separate. The two surrogates behave like any norm penalty and keep shrinking the model. At $\rho = 2$ the population surrogate has pulled the norm to 1.08 and the test error up to 0.63, three times the error at small radii. The exact objective barely moves. Its norm at $\rho = 2$ is 1.37 and its test error 0.30. The reason is the saturation seen in the fixed-loss study. On 200 points the exact worst case is bounded by the largest loss on the sample, so increasing the radius beyond the point where the adversary has already concentrated on the worst observations does nothing. The surrogate does not know this and continues to charge $\rho$ per unit of norm forever.
 
 <figure class="academic-figure" id="fig-values">
-<img src="{{ '/images/optora-lipschitz-values.svg' | relative_url }}" alt="Exact robust value of each trained model against the radius" style="max-width: 100%; display: block; margin: 0 auto;">
+<img src="{{ '/assets/images/blog/wasserstein-robustness-is-regularisation/values.svg' | relative_url }}" alt="Exact robust value of each trained model against the radius" style="max-width: 100%; display: block; margin: 0 auto;">
 <figcaption data-caption="Each trained model scored by the exact robust objective at its own radius. Up to a radius of 0.25 the three models are within 0.004 of each other in robust value, so the surrogates are near-optimal for the exact problem. Beyond that the surrogate models are far from robust-optimal, because they have been shrunk by a penalty that the exact ball no longer charges."></figcaption>
 </figure>
 

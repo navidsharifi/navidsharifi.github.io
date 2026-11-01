@@ -21,7 +21,7 @@ permalink: "/tags.html"
       {%- for post in posts_in -%}
       {%- assign _excerpt = post.excerpt | strip_html | truncatewords: 40 -%}
       {%- assign _date = post.date | date: "%b %-d, %Y" -%}
-      {%- include card.html variant="list" title=post.title url=post.url image=post.image excerpt=_excerpt date=_date tags=post.tags cta="Read" -%}
+      {%- include components/card.html variant="list" title=post.title url=post.url image=post.image excerpt=_excerpt date=_date tags=post.tags cta="Read" -%}
       {%- endfor -%}
     </div>
   </section>

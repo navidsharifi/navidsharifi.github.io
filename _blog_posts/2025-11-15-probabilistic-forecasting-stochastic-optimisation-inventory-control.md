@@ -2,7 +2,7 @@
 layout: post
 title: "Probabilistic Demand Forecasting and Stochastic Optimisation for Inventory Control"
 author: Navid Sharifi
-image: images/inv-cover.svg
+image: assets/images/blog/probabilistic-forecasting-stochastic-optimisation-inventory-control/cover.svg
 featured: true
 hidden: false
 comments: true
@@ -48,7 +48,7 @@ Three forecasters share one seasonal regression and differ only in how they desc
 A and B produce identical point forecasts. Their RMSE on the test year is the same to the last digit. Anything that separates them is coming from the tails.
 
 <figure class="academic-figure" id="fig-fan">
-<img src="{{ '/images/inv-fan-chart.svg' | relative_url }}" alt="Two years of weekly demand followed by a one-year quantile forecast with 10 to 90 and 25 to 75 percent bands and realised demand" style="max-width: 100%; display: block; margin: 0 auto;">
+<img src="{{ '/assets/images/blog/probabilistic-forecasting-stochastic-optimisation-inventory-control/fan-chart.svg' | relative_url }}" alt="Two years of weekly demand followed by a one-year quantile forecast with 10 to 90 and 25 to 75 percent bands and realised demand" style="max-width: 100%; display: block; margin: 0 auto;">
 <figcaption data-caption="Two years of weekly demand followed by the test year. The bands are forecaster B's 10 to 90 percent and 25 to 75 percent intervals, the blue line is its median and the red line is what actually happened. Shaded columns are promotion weeks. The bands widen in promotion weeks because the forecaster's spread scales with the level of demand."></figcaption>
 </figure>
 
@@ -79,7 +79,7 @@ The loss is small when the forecast quantile is at the right place and it charge
 <a href="#tab-scores" class="ref"></a> says what RMSE cannot. A and B tie on every point measure and separate on the pinball loss at the 90th and 95th percentiles, where B is about ten percent better. Those two levels are the only part of the distribution the ordering rule will ever look at. Forecaster C is worse on everything, which is the honest price of not knowing when promotions happen.
 
 <figure class="academic-figure" id="fig-calibration">
-<img src="{{ '/images/inv-calibration.svg' | relative_url }}" alt="Calibration curves for the three forecasters: nominal quantile level against empirical coverage" style="max-width: 72%; display: block; margin: 0 auto;">
+<img src="{{ '/assets/images/blog/probabilistic-forecasting-stochastic-optimisation-inventory-control/calibration.svg' | relative_url }}" alt="Calibration curves for the three forecasters: nominal quantile level against empirical coverage" style="max-width: 72%; display: block; margin: 0 auto;">
 <figcaption data-caption="Calibration on the test year. For every quantile level on the horizontal axis, the vertical axis shows the share of test weeks in which demand was at or below that forecast quantile. A calibrated forecaster lies on the dotted diagonal. All three run below the diagonal above the 80th percentile, meaning their upper tails are a little too low, and forecaster A is the lowest at the 90th percentile."></figcaption>
 </figure>
 
@@ -106,7 +106,7 @@ $$q^{\star} = F_D^{-1}\!\left(\frac{c_u}{c_u + c_o}\right)$$
 The ratio $c_u / (c_u + c_o)$ is the critical fractile. With a lost sale costing nine times a week of holding, it is 0.9 and the order is the 90th percentile of demand. If a forecaster reports the full distribution, the planner reads that quantile straight off it. There is no safety-stock formula, no assumption of normality, and no separate error model. This is also why the median is almost never the right order. The median is optimal only when $c_u = c_o$.
 
 <figure class="academic-figure" id="fig-newsvendor-interactive">
-<div class="dro-anim" data-anim="newsvendor" data-src="{{ '/assets/data/dro-newsvendor.json' | relative_url }}" data-title="Interactive: move the critical fractile">
+<div class="dro-anim" data-anim="newsvendor" data-src="{{ '/assets/data/blog/probabilistic-forecasting-stochastic-optimisation-inventory-control/newsvendor.json' | relative_url }}" data-title="Interactive: move the critical fractile">
 <noscript>Enable JavaScript to see the interactive figure.</noscript>
 </div>
 <figcaption data-caption="Interactive view of the newsvendor decision for one promotion week in the test year. The slider sets the critical fractile from 0.5 to 0.99, which fixes the cost ratio. Top: the true demand distribution for the week, with the order quantity read from forecaster B's quantile in green, the units expected to be left over shaded blue and the demand expected to go unmet shaded red. The purple dot is the order a forecaster with perfect knowledge of the distribution would place. Bottom: expected cost against order quantity for the current cost ratio, with the chosen order marked. The readout includes the distribution-free Scarf quantity for comparison."></figcaption>
@@ -115,7 +115,7 @@ The ratio $c_u / (c_u + c_o)$ is the critical fractile. With a lost sale costing
 <a href="#fig-newsvendor-interactive" class="ref"></a> lets you move the fractile and watch the order slide up the distribution. At 0.5 the order sits at the median and the red shortfall region is large. As the ratio climbs, the order moves into the right tail, the cost curve becomes steep on the left and shallow on the right, and the penalty for ordering too little grows faster than the penalty for ordering too much. The green order from forecaster B tracks the purple true optimum closely across the range, which is what calibration buys.
 
 <figure class="academic-figure" id="fig-newsvendor-curve">
-<img src="{{ '/images/inv-newsvendor-curve.svg' | relative_url }}" alt="Expected newsvendor cost against order quantity for three cost ratios, with optimal orders marked" style="max-width: 100%; display: block; margin: 0 auto;">
+<img src="{{ '/assets/images/blog/probabilistic-forecasting-stochastic-optimisation-inventory-control/newsvendor-curve.svg' | relative_url }}" alt="Expected newsvendor cost against order quantity for three cost ratios, with optimal orders marked" style="max-width: 100%; display: block; margin: 0 auto;">
 <figcaption data-caption="Expected cost against order quantity for the same promotion week under three cost ratios. The optimum moves from the median at a ratio of one to well above the mean at a ratio of nine. The curve is asymmetric: ordering 100 units too few at the high ratio costs about five times as much as ordering 100 units too many."></figcaption>
 </figure>
 
@@ -134,7 +134,7 @@ with holding cost $h$ per unit per week, shortage cost $b$ per unit, and lead ti
 Here the lead time is one week, so the policy protects two weeks of demand. Each forecaster supplies its own order-up-to level: the two-week median plus its own estimate of the two-week spread at the target fractile. The rule is identical across forecasters. Only the distribution it reads from differs.
 
 <figure class="academic-figure" id="fig-inventory-interactive">
-<div class="dro-anim" data-anim="inventory" data-src="{{ '/assets/data/dro-inventory.json' | relative_url }}" data-title="Interactive: replay the test year">
+<div class="dro-anim" data-anim="inventory" data-src="{{ '/assets/data/blog/probabilistic-forecasting-stochastic-optimisation-inventory-control/inventory.json' | relative_url }}" data-title="Interactive: replay the test year">
 <noscript>Enable JavaScript to see the interactive figure.</noscript>
 </div>
 <figcaption data-caption="Replay of the actual test year under forecasters A and B at a critical fractile of 0.9. The slider moves through the 52 weeks. Left: weekly demand as bars, with promotion weeks in orange, the order-up-to level of each policy as a dashed line, the stock on hand after sales as a solid line, and a dot under the axis in every week with lost sales. Right: cumulative cost. The readout tracks stock, lost sales and cost for both policies."></figcaption>
@@ -168,14 +168,14 @@ It is the order that minimises the worst expected cost over every distribution w
 <a href="#tab-mc" class="ref"></a> is the result the whole post is built around. Forecasters A and B have identical point accuracy. Over 400 simulated years B costs two percent less, loses 17 percent fewer sales, and has a 95th percentile of annual cost six percent lower. The whole difference comes from the upper tail of the forecast in promotion weeks. Forecaster C costs twelve percent more than B, which is roughly what it costs to not know the promotion calendar. Scarf's rule, which knows nothing about shape, lands on top of forecaster A. That is no accident. A normal distribution with a fixed standard deviation carries exactly the information Scarf's rule uses, and no more.
 
 <figure class="academic-figure" id="fig-frontier">
-<img src="{{ '/images/inv-frontier.svg' | relative_url }}" alt="Mean annual cost against fill rate for each forecaster across target fractiles, with the Scarf policy marked" style="max-width: 100%; display: block; margin: 0 auto;">
+<img src="{{ '/assets/images/blog/probabilistic-forecasting-stochastic-optimisation-inventory-control/frontier.svg' | relative_url }}" alt="Mean annual cost against fill rate for each forecaster across target fractiles, with the Scarf policy marked" style="max-width: 100%; display: block; margin: 0 auto;">
 <figcaption data-caption="Mean annual cost against fill rate as the target fractile rises from 0.5 to 0.99 for each forecaster. Every curve is U-shaped in cost. The minimum is at the critical fractile of 0.9 for A and B and at 0.95 for C, which needs to over-target to make up for what it does not know. B's curve lies below A's everywhere above a fill rate of 90 percent. The purple diamond is Scarf's rule."></figcaption>
 </figure>
 
 <a href="#fig-frontier" class="ref"></a> shows the same thing across all targets. Each forecaster traces a curve as the target fractile rises: cost falls, reaches a minimum near the critical fractile, and climbs again as holding cost takes over. Two things stand out. B's curve sits below A's throughout the region any retailer would operate in. And the minimum of each curve lands where the theory says it should, at 0.9, except for C, whose best target is 0.95. A forecaster that does not know about promotions has to carry extra stock all year to survive them.
 
 <figure class="academic-figure" id="fig-kpi">
-<img src="{{ '/images/inv-kpi.svg' | relative_url }}" alt="Violin plots of annual cost, fill rate and units short across 400 simulated years for the four policies" style="max-width: 100%; display: block; margin: 0 auto;">
+<img src="{{ '/assets/images/blog/probabilistic-forecasting-stochastic-optimisation-inventory-control/kpi.svg' | relative_url }}" alt="Violin plots of annual cost, fill rate and units short across 400 simulated years for the four policies" style="max-width: 100%; display: block; margin: 0 auto;">
 <figcaption data-caption="Distribution of annual cost, fill rate and units short over 400 simulated years at a critical fractile of 0.9. Forecaster B has the lowest median cost and the tightest cost distribution. Forecaster C has the widest. The Scarf policy is almost indistinguishable from forecaster A."></figcaption>
 </figure>
 

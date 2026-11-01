@@ -1,0 +1,59 @@
+---
+# Front matter comment to ensure Jekyll properly reads file.
+---
+
+@charset "utf-8";
+
+/* =====================================================
+   SITE STYLESHEET
+   Order matters: tokens → base → components → content
+   ===================================================== */
+
+@import
+  // 1. Base: design tokens, reset and typography
+  "base/tokens",
+  "base/base",
+  // 2. Layout: site chrome shared by every page
+  "layout/nav",
+  "layout/footer",
+  // 3. Components: reusable blocks
+  "components/cards",
+  "components/syntax",
+  "components/interactive-figure",
+  // 4. Pages: styles scoped to one page type
+  "pages/home",
+  "pages/article",
+  "pages/academic";
+
+/* MathJax baseline (used on any page with math) */
+mjx-container[jax="CHTML"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Plain-text / BibTeX code blocks: make text visible in both themes */
+.article-post .language-text .highlight,
+.article-post .language-plaintext .highlight,
+.article-post .language-none .highlight,
+.article-post .language-bibtex .highlight,
+.article-post div.highlighter-rouge:not([class*="language-"]) .highlight {
+  background: var(--pre-bg);
+  color: var(--pre-code-color);
+
+  pre, code, span {
+    color: var(--pre-code-color);
+  }
+
+  .c, .c1, .cm { color: var(--syntax-comment); }
+}
+
+.article-post .highlight pre {
+  white-space: pre;
+}

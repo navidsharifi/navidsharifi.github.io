@@ -1,15 +1,14 @@
 # Site
 
 #description: "Jekyll template, Medium styled, free for bloggers."
-logo: 'images/profile.jpg'
-favicon: 'images/profile.png'
+logo: 'assets/images/profile/profile.png'
+favicon: 'assets/images/profile/profile.png'
 baseurl: '/'
 google_analytics: 'UA-46278016-1'
 #disqus: 'demowebsite'
 #mailchimp-list: 'https://wowthemes.us11.list-manage.com/subscribe/post?u=8aeb20a530e124561927d3bd8&amp;id=8c3d2d214b'
 include:
   - _pages
-  - _static
 #permalink: /:title/
 
 
@@ -19,7 +18,7 @@ include:
 # --------------------------------------------------------------------------------------
 
 repository: https://github.com/navidsharifi/navidsharifi.github.io
-# favicon: Directory of your favicon (eg. images/favicon.ico)(optional)
+# favicon: Path to the favicon (eg. assets/favicon.ico)(optional)
 
 # Personal info
 name: Navid Sharifi
@@ -140,7 +139,7 @@ linkedin_username: navid-sharifi-22647b100
 
 # About Section
 # about_title: About Me (Use this to override about section title)
-about_profile_image: images/profile.png #Directory of profile image (eg. images/profile.jpg)
+about_profile_image: assets/images/profile/profile.png # Path to the profile image
 about_content: | # this will include new lines to allow paragraphs
   With a background in **industrial engineering**, I bring hands-on experience in **EPC project management for large-scale industrial systems**, **business and system analysis in fleet management projects**, and **IT project management using agile methodology** — alongside a growing focus on how data-driven and analytical methods can improve business operations and support better decision-making.
 
@@ -230,16 +229,17 @@ sass:
 
 plugins:
   - jekyll-seo-tag
+  - jekyll-feed
+  - jekyll-sitemap
 
-exclude: [
-  "Gemfile",
-  "Gemfile.lock",
-  "node_modules",
-  "vendor/bundle/",
-  "vendor/cache/",
-  "vendor/gems/",
-  "vendor/ruby/",
-  "lib/",
-  "scripts/",
-  "docker-compose.yml",
-]
+exclude:
+  # Tooling and documentation
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE
+  - node_modules/
+  - vendor/
+  # Local-only material (also listed in .gitignore)
+  - private/
+  - "*.tex"

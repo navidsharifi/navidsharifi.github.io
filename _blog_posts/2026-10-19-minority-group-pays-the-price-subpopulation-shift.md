@@ -3,7 +3,7 @@ layout: post
 title: "When the Minority Group Pays the Price: Robust Regression Under Subpopulation Shift"
 author: Navid Sharifi
 date: 2026-10-19
-image: images/optora-subpop-cover.svg
+image: assets/images/blog/minority-group-pays-the-price-subpopulation-shift/cover.svg
 featured: true
 hidden: false
 comments: true
@@ -76,7 +76,7 @@ After training, one more backward pass through `worst_case_expectation` with the
 ## When Does the Robust Model Win?
 
 <figure class="academic-figure" id="fig-risk-curve">
-<img src="{{ '/images/optora-subpop-risk-curve.svg' | relative_url }}" alt="Test risk against the minority share for ERM, ridge and three KL radii, with crossing points marked" style="max-width: 100%; display: block; margin: 0 auto;">
+<img src="{{ '/assets/images/blog/minority-group-pays-the-price-subpopulation-shift/risk-curve.svg' | relative_url }}" alt="Test risk against the minority share for ERM, ridge and three KL radii, with crossing points marked" style="max-width: 100%; display: block; margin: 0 auto;">
 <figcaption data-caption="Exact test risk as a function of the share of the minority group in the test population, averaged over ten training sets, with one standard deviation shaded. ERM is best at the training share of 0.1 and degrades fastest. The robust models start higher and degrade more slowly. Dots mark the crossing points, where each robust model overtakes ERM. Ridge is worse than ERM everywhere."></figcaption>
 </figure>
 
@@ -101,7 +101,7 @@ The ridge control is worse than ERM at every share. Shrinkage pulls the slope to
 ## Along the Trade-Off, Not Off It
 
 <figure class="academic-figure" id="fig-tradeoff">
-<img src="{{ '/images/optora-subpop-tradeoff.svg' | relative_url }}" alt="Majority-group risk against minority-group risk for each model, with the population-optimal path" style="max-width: 100%; display: block; margin: 0 auto;">
+<img src="{{ '/assets/images/blog/minority-group-pays-the-price-subpopulation-shift/tradeoff.svg' | relative_url }}" alt="Majority-group risk against minority-group risk for each model, with the population-optimal path" style="max-width: 100%; display: block; margin: 0 auto;">
 <figcaption data-caption="Risk on the majority group against risk on the minority group. Small points are individual training sets and large points are means. The dashed curve is the path of population-optimal models for every minority share, obtained by setting the slope to the mixture of the two group slopes. The robust models move along this path as the radius grows. Ridge moves off it, to a point that is worse on both groups."></figcaption>
 </figure>
 
@@ -110,7 +110,7 @@ The population-optimal model for a test share $\pi$ has slope $w^{\star}(\pi) = 
 ## What the Adversary Finds
 
 <figure class="academic-figure" id="fig-interactive">
-<div class="dro-anim" data-anim="subpop" data-src="{{ '/assets/data/dro-subpop.json' | relative_url }}" data-title="Interactive: sweep the KL radius">
+<div class="dro-anim" data-anim="subpop" data-src="{{ '/assets/data/blog/minority-group-pays-the-price-subpopulation-shift/subpopulation.json' | relative_url }}" data-title="Interactive: sweep the KL radius">
 <noscript>Enable JavaScript to see the interactive figure.</noscript>
 </div>
 <figcaption data-caption="Interactive view of one training set as the KL radius moves from 0 to 0.5 through 21 trained models. Left: the 400 training points, with the minority group in red, plotted by the feature on which the groups differ against the label with the shared feature removed. Each point is sized by its worst-case weight. The green line is the fitted slope on that feature and the dashed line is the ERM fit. Right: the exact test-risk line of the current model against the fixed ERM line, with the crossing point marked. The readout gives the group risks, the minority mass used by the adversary and the crossing share."></figcaption>
@@ -119,7 +119,7 @@ The population-optimal model for a test share $\pi$ has slope $w^{\star}(\pi) = 
 <a href="#fig-interactive" class="ref"></a> shows the whole mechanism in motion. As the radius grows the minority points swell, the fitted slope rotates toward the minority, and the risk line tilts so that it crosses ERM at a smaller share.
 
 <figure class="academic-figure" id="fig-weights">
-<img src="{{ '/images/optora-subpop-weights.svg' | relative_url }}" alt="Left: histogram of worst-case weights for majority and minority points. Right: minority mass used by the adversary against the maximum the ball allows." style="max-width: 100%; display: block; margin: 0 auto;">
+<img src="{{ '/assets/images/blog/minority-group-pays-the-price-subpopulation-shift/weights.svg' | relative_url }}" alt="Left: histogram of worst-case weights for majority and minority points. Right: minority mass used by the adversary against the maximum the ball allows." style="max-width: 100%; display: block; margin: 0 auto;">
 <figcaption data-caption="Left: the worst-case weight of each training point relative to its nominal weight, for one training set at radius 0.2. Most majority points are weighted near or below 1, and the minority points carry weights up to 16. Right: the probability mass that the worst-case distribution places on the minority group, against the maximum the ball permits, for each radius. The adversary uses about half of its allowance."></figcaption>
 </figure>
 
@@ -130,7 +130,7 @@ The right panel shows the limit of this. At radius 0.2 the ball permits a minori
 ## The Negative Control: DRO Chases Difficulty, Not Shift
 
 <figure class="academic-figure" id="fig-control">
-<img src="{{ '/images/optora-subpop-control.svg' | relative_url }}" alt="Difference in test risk from ERM against the minority share, when the minority differs only in noise" style="max-width: 100%; display: block; margin: 0 auto;">
+<img src="{{ '/assets/images/blog/minority-group-pays-the-price-subpopulation-shift/control.svg' | relative_url }}" alt="Difference in test risk from ERM against the minority share, when the minority differs only in noise" style="max-width: 100%; display: block; margin: 0 auto;">
 <figcaption data-caption="The same pipeline when the minority has the majority's slope and three times its noise. Each curve is the test risk of a model minus the test risk of ERM, as a function of the minority share. Every curve is flat and positive. The robust models are worse than ERM by a constant 0.004, 0.016 and 0.037, at every share, and ridge is worse by 0.052."></figcaption>
 </figure>
 

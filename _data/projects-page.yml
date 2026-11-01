@@ -4,7 +4,7 @@
 
 - name: Optora
   link: /optora/
-  image: /images/Optora_logo.jpeg
+  image: /assets/images/projects/optora-logo.jpeg
   contain: true
   year: Apr 2026 - Present
   featured: true
@@ -15,7 +15,7 @@
   tags: [DRO, PyTorch, Wasserstein, Convex Optimization]
 
 - name: Fleet Management & Inventory Control System
-  image: /images/Fleet_management_thumb.jpg
+  image: /assets/images/projects/fleet-management.jpg
   year: 2024
   description: >
     End-to-end fleet management and inventory control system. Fleet tracking, cost function
@@ -23,7 +23,7 @@
   tags: [Fleet Management, Inventory Control, GAMS, Power BI, PMBOK]
 
 - name: EPC Crusher Plant Project Control
-  image: /images/epc_thumb.jpg
+  image: /assets/images/projects/epc-project-control.jpg
   year: 2020 - 2022
   description: >
     Project control for a large-scale EPC project. Weekly progress reports, S-Curve tracking,
@@ -31,7 +31,7 @@
   tags: [EPC, Project Control, PMBOK, Primavera P6]
 
 - name: Sina Hospital Data Analytics
-  image: /images/sinahospital_thumb.jpg
+  image: /assets/images/projects/sina-hospital.jpg
   year: 2018 - 2019
   description: >
     Interactive BI dashboards and healthcare analytics. KPI monitoring, sales data analysis, ETL,
@@ -39,7 +39,7 @@
   tags: [Power BI, Python, SQL Server, Data Mining]
 
 - name: Startup Success Prediction (BSc Thesis)
-  image: /images/startup_thumb.jpg
+  image: /assets/images/projects/startup-success-prediction.jpg
   year: 2017 - 2018
   description: >
     Predicting startup success using ML and network analysis. Leveraged crunchbase.com data,
@@ -47,7 +47,7 @@
   tags: [Machine Learning, Network Analysis, Feature Selection]
 
 - name: Newroz Hotel MIS
-  image: /images/mis_thumb.jpg
+  image: /assets/images/projects/management-information-system.jpg
   year: 2016 - 2017
   description: >
     Management Information System for Newroz Hotel. Database design, process modelling,

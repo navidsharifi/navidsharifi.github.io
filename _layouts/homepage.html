@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: 'en' }}" class="dark">
-{%- include head.html -%}
+{%- include site/head.html -%}
 <body class="is-home">
-  {%- include icons.html -%}
-  {%- include menubar.html -%}
+  {%- include site/icons.html -%}
+  {%- include site/navbar.html -%}
 
   <main class="page-content" id="main" aria-label="Content">
     {%- if jekyll.environment == 'production' and site.gtm -%}
-    {%- include gtm_body.html -%}
+    {%- include analytics/gtm-body.html -%}
     {%- endif -%}
 
-    {%- include header.html -%}
-    {%- include about.html -%}
+    {%- include home/hero.html -%}
+    {%- include home/about.html -%}
 
     {%- if site.data.education.size > 0 -%}
-    {%- include education.html -%}
+    {%- include home/education.html -%}
     {%- endif -%}
 
     {%- if site.data.experience.size > 0 -%}
-    {%- include experience.html -%}
+    {%- include home/experience.html -%}
     {%- endif -%}
 
     {%- if site.data.projects.size > 0 -%}
-    {%- include projects.html -%}
+    {%- include home/projects.html -%}
     {%- endif -%}
 
     {{ content }}
   </main>
 
-  {%- include footer.html -%}
+  {%- include site/footer.html -%}
   <script src="{{ '/assets/js/lazy-media.js' | relative_url }}" defer></script>
-  <script src="{{ '/assets/js/index.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/site.js' | relative_url }}" defer></script>
 </body>
 </html>

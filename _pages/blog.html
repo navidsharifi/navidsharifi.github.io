@@ -31,12 +31,12 @@ comments: false
       {%- for post in featured_internal limit:3 %}
       {%- assign kicker = post.categories | first -%}
       {%- assign _date = post.date | date: "%b %Y" -%}
-      {%- include card.html variant="feature" title=post.title url=post.url image=post.image excerpt=post.excerpt date=_date kicker=kicker cta="Read" -%}
+      {%- include components/card.html variant="feature" title=post.title url=post.url image=post.image excerpt=post.excerpt date=_date kicker=kicker cta="Read" -%}
       {%- endfor %}
       {%- for post in featured_external limit:3 %}
       {%- assign cats = post.categories | split: ", " -%}{%- assign kicker = cats | first -%}
       {%- assign first_link = post.links | first -%}
-      {%- include card.html variant="feature" title=post.title url=first_link.url external=true image=post.image excerpt=post.description date=post.display_date kicker=kicker links=post.links cta="Open" -%}
+      {%- include components/card.html variant="feature" title=post.title url=first_link.url external=true image=post.image excerpt=post.description date=post.display_date kicker=kicker links=post.links cta="Open" -%}
       {%- endfor %}
     </div>
   </section>
@@ -49,12 +49,12 @@ comments: false
       {%- for post in internal_posts %}
       {%- assign _excerpt = post.excerpt | strip_html | truncatewords: 40 -%}
       {%- assign _date = post.date | date: "%b %-d, %Y" -%}
-      {%- include card.html variant="list" title=post.title url=post.url image=post.image excerpt=_excerpt date=_date tags=post.categories cta="Read" -%}
+      {%- include components/card.html variant="list" title=post.title url=post.url image=post.image excerpt=_excerpt date=_date tags=post.categories cta="Read" -%}
       {%- endfor %}
       {%- for post in external_posts %}
       {%- assign cats = post.categories | split: ", " -%}{%- assign kicker = cats | first -%}
       {%- assign first_link = post.links | first -%}
-      {%- include card.html variant="list" title=post.title url=first_link.url external=true image=post.image excerpt=post.description date=post.display_date links=post.links cta="Open" icon="i-external" -%}
+      {%- include components/card.html variant="list" title=post.title url=first_link.url external=true image=post.image excerpt=post.description date=post.display_date links=post.links cta="Open" icon="i-external" -%}
       {%- endfor %}
     </div>
     {%- else %}
