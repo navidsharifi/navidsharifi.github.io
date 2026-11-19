@@ -7,11 +7,11 @@ categories: [optimization, machine learning, pytorch]
 tags: [distributionally-robust-optimization, pytorch, optimization, ambiguity-sets, python-library]
 comments: false
 date: 2026-04-01
-excerpt: Optora is a GPU-first PyTorch library for distributionally robust optimization -- ambiguity sets, divergences, and minimax solvers behind one small, composable API.
+excerpt: Optora is a GPU-first PyTorch library for distributionally robust optimization -- ambiguity sets, divergences, and minimax solvers behind one composable API.
 ---
 
 ## Foreword
-<b><a target="_blank" href="https://github.com/navidsharifi/optora">Optora</a></b> is a pre-alpha optimization library built around a small, GPU-first PyTorch core for distributionally robust optimization (DRO), designed to grow toward stochastic methods, differentiable backends, optimal transport, and reinforcement learning under model uncertainty.
+<b><a target="_blank" href="https://github.com/navidsharifi/optora">Optora</a></b> is a pre-alpha optimization library built around a GPU-first PyTorch core for distributionally robust optimization (DRO), designed to grow toward stochastic methods, differentiable backends, optimal transport, and reinforcement learning under model uncertainty.
 
 <div>
 <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/navidsharifi/optora?style=social">
@@ -104,7 +104,7 @@ Every piece above is covered by pytest tests checked against known closed-form r
 
 ## Design Principles
 
-- **Small, component-oriented public API.** No package-level workflow dispatchers (`minimize(...)`, `train(...)`) that hide the method being studied; researchers instantiate the exact algorithm they want.
+- **Component-oriented public API.** No package-level workflow dispatchers (`minimize(...)`, `train(...)`) that hide the method being studied; researchers instantiate the exact algorithm they want.
 - **Mathematical objects separated from numerical solvers.** A divergence, an ambiguity set, and a solver are independent, individually reusable components.
 - **Every extension point is subclassable.** `Divergence`, `AmbiguitySet`, and `Solver` are ABCs, not a closed enumeration -- Optora ships reference implementations, not the full space of methods.
 - **PyTorch-native and accelerator-friendly.** Tensor dtype and device are preserved throughout; the numerical core avoids unnecessary host synchronizations and scalar round-trips so it stays friendly to future GPU-heavy and batched workloads.
